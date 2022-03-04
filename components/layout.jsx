@@ -1,15 +1,18 @@
 import React from 'react'
-import FooterApp from './footer'
-import NavbarApp from './navbar'
+import Navigation from './navigation'
+// import NavbarApp from './navbar'
+import { useRouter } from 'next/router'
 
 
 function Layout({ children }) {
+    const router = useRouter()
     return (
         <>
-            <div className='max-w-screen-sm m-auto'>
-                <NavbarApp />
+            <div className='max-w-screen-sm m-auto font-poppins'>
+                {/* <NavbarApp /> */}
                 <main>{children}</main>
-                <FooterApp />
+                {router.pathname !== "/" ? <></> : (
+                    <Navigation />)}
             </div>
         </>
     )
