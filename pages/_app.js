@@ -1,10 +1,11 @@
+import Layout from '../components/layout'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className='max-w-screen-sm m-auto'>
+    <Layout>
       <Component {...pageProps} />
-    </div>
+    </Layout>
   )
 }
 
