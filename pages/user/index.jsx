@@ -89,7 +89,7 @@ function LoginForm() {
           text: 'Something went wrong!',
         });
       })
-      .finally(() => {});
+      .finally(() => { });
   };
 
   if (loading) {
@@ -220,7 +220,7 @@ function LoginForm() {
           </div>
           <div className="flex justify-center items-center mt-6">
             <p className="flex flex-col items-center justify-center text-center text-md text-gray-500">
-              <span>Don't have an account?</span>
+              <span>Dont have an account?</span>
               <a
                 href="../user/register"
                 className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
