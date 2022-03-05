@@ -6,8 +6,8 @@ function NavbarApp() {
     const [searchTerm, setSearchTerm] = useState('')
     return (
         <>
-            <div className='max-w-full bg-white shadow-md'>
-                <div className='px-10 py-5 flex justify-between items-center'>
+            <div className='max-w-screen bg-white shadow-md'>
+                <div className='px-5 py-5 flex justify-between items-center'>
                     <img src="./images/Logo-healthyapp.png" alt="logo" />
                     {/* Search Input */}
                     <div className='bg-dark-green rounded-full px-5 flex items-center mx-auto relative'>
