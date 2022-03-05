@@ -4,10 +4,89 @@ import { MdEmail } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { BsGenderAmbiguous } from 'react-icons/bs';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 function RegisterForm() {
-  const [gender, setGender] = useState(['Male', 'Female']);
-  const Add = gender.map((Add) => Add);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [gender, setGender] = useState(['Pria', 'Wanita']);
+
+  const router = useRouter();
+
+  const validateSignUp = () => {
+    if (name.trim() === '') {
+      Swal.fire('Name is required', 'Fill your name please', 'info');
+    } else if (/\s/.test(name)) {
+      Swal.fire('Fotrbiden', 'Name contain whites space', 'info');
+    } else if (email === '') {
+      Swal.fire('Email is required', 'Fill your Email please', 'info');
+    } else if (/\s/.test(email)) {
+      Swal.fire('Fotrbiden', 'Email contain whites space', 'info');
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      Swal.fire(
+        'Email is using forbidden character',
+        'Fill your Email with correct format please',
+        'info'
+      );
+    } else if (password < 8) {
+      Swal.fire('Password is required', 'Fill your Password please', 'info');
+    } else if (/\s/.test(password)) {
+      Swal.fire('Fotrbiden', 'Password contain whites space', 'info');
+    } else {
+      handleSign();
+    }
+  };
+
+  const handleSign = () => {
+    const body = {
+      name: name,
+      email: email,
+      password: password,
+      gender: gender,
+    };
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Please check again the required field',
+      icon: 'question',
+      confirmButtonText: 'Yes, create it!',
+      confirmButtonColor: '#3085d6',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post('https://aaryadewangga.cloud.okteto.net/users/register', body)
+          .then(({ data }) => {
+            // console.log(data.data.token);
+            localStorage.setItem('token', data.data.token);
+            setTimeout(() => {
+              router.push('/user');
+            }, 1500);
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+            console.log('cek error', error);
+          })
+          .finally(() => {});
+        Swal.fire(
+          'Account Created!',
+          'Login to accsess full experience.',
+          'success'
+        );
+      } else if (result.isDismissed) {
+        Swal.fire('Check again ?', 'We are waiting you inside', 'question');
+      }
+    });
+  };
+
   return (
     <div>
       <div
@@ -70,6 +149,7 @@ function RegisterForm() {
                     border-gray-300 
                     focus:outline-none 
                     focus:border-lime-500"
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
               </div>
@@ -93,6 +173,7 @@ function RegisterForm() {
                     border-gray-300 
                     focus:outline-none 
                     focus:border-lime-500"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -116,6 +197,7 @@ function RegisterForm() {
                     focus:outline-none 
                     focus:border-lime-500
                    "
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -129,26 +211,26 @@ function RegisterForm() {
                   </div>
                   <select
                     className="
-                                                block 
-                                                appearance-none 
-                                                w-full
-                                                py-2
-                                                border-b 
-                                                border-gray-300
-                                                200 text-gray-700 
-                                                py-3 px-4 pr-8 
-                                                rounded 
-                                                leading-tight 
-                                                focus:outline-none 
-                                                focus:bg-white 
-                                                focus:border-lime-500
-                                                "
+                    block 
+                    appearance-none 
+                    w-full
+                    py-2
+                    border-b 
+                    border-gray-300
+                    200 text-gray-700 
+                    py-3 px-4 pr-8 
+                    rounded 
+                    leading-tight 
+                    focus:outline-none 
+                    focus:bg-white 
+                    focus:border-lime-500
+                    "
+                    onChange={(e) => {
+                      setGender(e.target.value);
+                    }}
                   >
-                    {Add.map((el, i) => (
-                      <option i={i} value={i}>
-                        {el}{' '}
-                      </option>
-                    ))}
+                    <option value="Pria">Pria</option>
+                    <option value="Wanita">Wanita</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg
@@ -163,7 +245,7 @@ function RegisterForm() {
               </div>
               <div className="flex w-full mt-3">
                 <button
-                  type="submit"
+                  onClick={validateSignUp}
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span className="mr-2">Create My Account</span>

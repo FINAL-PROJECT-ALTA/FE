@@ -2,10 +2,106 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaLock } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLoginCircleFill } from 'react-icons/ri';
-import asd from '../';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  const validateSign = () => {
+    if (email === '') {
+      Swal.fire('Email is required', 'Fill your Email please', 'info');
+    } else if (/\s/.test(email)) {
+      Swal.fire('Fotrbiden', 'Email contain whites space', 'info');
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      Swal.fire(
+        'Email is using forbidden character',
+        'Fill your Email with correct format please',
+        'info'
+      );
+    } else if (password < 8) {
+      Swal.fire('Password is required', 'Fill your Password please', 'info');
+    } else if (/\s/.test(password)) {
+      Swal.fire('Fotrbiden', 'Password contain whites space', 'info');
+    } else {
+      handleSign();
+    }
+  };
+
+  const handleSign = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    const body = {
+      email: email,
+      password: password,
+    };
+    let timerInterval;
+    axios
+      .post('https://aaryadewangga.cloud.okteto.net/users/login', body)
+      .then(({ data }) => {
+        // console.log(data.data.token);
+        localStorage.setItem('token', data.data.token);
+        setTimeout(() => {
+          router.push('/');
+        }, 4000);
+        Swal.fire({
+          title: 'We welcome you captain.',
+          width: 600,
+          padding: '4em',
+          color: '#141E27',
+          background:
+            '#fff url(https://cdn.wallpapersafari.com/20/93/7qZlO9.jpg)',
+          backdrop: `
+          rgba(0,0,123,0.4)
+          url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
+          left top
+          no-repeat
+        `,
+          html: 'Redirecting to home page in <b></b> milliseconds.',
+          timer: 4000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const b = Swal.getHtmlContainer().querySelector('b');
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft();
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      })
+      .finally(() => {});
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center content-center">
+        <br />
+
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
+  }
+
   return (
     <div>
       <div
@@ -78,6 +174,7 @@ function LoginForm() {
                     focus:outline-none 
                     focus:border-lime-500"
                     placeholder="E-Mail Address"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
@@ -102,13 +199,17 @@ function LoginForm() {
                     focus:border-lime-500
                    "
                     placeholder="Password"
+                    type="password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
               </div>
 
               <div className="flex w-full">
                 <button
-                  type="submit"
+                  onClick={validateSign}
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span className="mr-2 uppercase">Login</span>
