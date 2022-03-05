@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useRouter } from "next/router"
 import FeatureTitle from "../components/featureTitle"
 import NavbarApp from "../components/navbar"
 import Navigation from "../components/navigation"
@@ -35,14 +36,47 @@ const callouts = [
 
 ]
 export default function Home() {
-
+  const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const router = useRouter()
   return (
     <>
       <NavbarApp />
-      <div className="px-10 my-10">
+      <div className="px-5 my-10">
         <FeatureTitle text='My Plan' />
         <div className="w-full h-56 my-3 p-3 rounded-md bg-light-green">
-          <p className="font-semibold">On Progress</p>
+          {!getToken ? (
+            <>
+              <div className="text-xl font-medium text-center py-10">
+                <h1>Need More recomend for Your Goals?</h1>
+                <div className="flex justify-center my-5">
+                  <button onClick={() => { router.push('/user') }} className="px-4 py-2 mr-3 rounded-md text-white font-semibold bg-dark-green/80 hover:drop-shadow-md hover:bg-dark-green">Login</button>
+                  <button onClick={() => { router.push('/user/register') }} className="px-4 py-2 rounded-md text-dark-green font-semibold bg-lime-500/80 hover:drop-shadow-md hover:bg-lime-500">Sign up</button>
+                </div>
+              </div>
+            </>) : (<>
+              <div className="flex justify-evenly py-4 my-5 items-center text-center border-b-white border-b-2 relative">
+                <div>
+                  <h2 className="text-dark-green font-medium text-2xl">Weight</h2>
+                  <p className="leading-10 text-xl">70kg</p>
+                </div>
+                <div>
+                  <h2 className="text-dark-green font-medium text-2xl">Height</h2>
+                  <p className="leading-10 text-xl">160cm</p>
+                </div>
+                <div>
+                  <h2 className="text-dark-green font-medium text-2xl">Age</h2>
+                  <p className="leading-10 text-xl">21</p>
+                </div>
+                <button className="absolute right-2 -top-3 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg></button>
+              </div>
+              <div className="flex justify-between px-10 items-center">
+                <h2 className="text-2xl font-bold text-rose-500">Goal</h2>
+                <h2 className="text-xl font-semibold text-lime-700">LossFat</h2>
+              </div>
+            </>)}
         </div>
         <div className="my-10">
           <FeatureTitle text='You Knows' />

@@ -1,13 +1,14 @@
 import React from "react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 function Navigation() {
+  const router = useRouter()
   return (
     <>
       <div className="bg-slate-50/30 py-11">
         <div className="bg-slate-50 fixed bottom-0 inset-x-0 xl:inset-x-72 z-30 shadow-sm">
           <div className="py-5 grid grid-cols-4 gap-4">
-            <button className="text-dark-green text-sm  hover:text-amber-400 focus:text-amber-500">
+            <button onClick={() => { router.push('/') }} className="text-dark-green text-sm  hover:text-amber-400 focus:text-amber-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-7 w-7 mx-auto"
@@ -24,7 +25,7 @@ function Navigation() {
               </svg>
               <h3>My Plan</h3>
             </button>
-            <button className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
+            <button onClick={() => { router.push('/recomend') }} className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-7 w-7 mx-auto"
@@ -46,7 +47,7 @@ function Navigation() {
               </svg>
               <h3>Recomend</h3>
             </button>
-            <button className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
+            <button onClick={() => { router.push('/reports') }} className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-7 w-7 mx-auto"
@@ -63,25 +64,23 @@ function Navigation() {
               </svg>
               <h3>Reports</h3>
             </button>
-            <Link href="/profile">
-              <button className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7 mx-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-                <h3>Profile</h3>
-              </button>
-            </Link>
+            <button onClick={() => { router.push('/profile') }} className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-7 w-7 mx-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+              <h3>Profile</h3>
+            </button>
           </div>
         </div>
       </div>

@@ -1,16 +1,30 @@
+import React, { useEffect } from "react";
 import Link from "next/link";
 import NavbarApp from "../../components/navbar";
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
+import { useRouter } from "next/router";
+
+const data = {
+  name: "Olivia Sara",
+  age: 27,
+  weight: 68,
+  height: 164,
+  currentTarget: "Loss Weight",
+};
 
 export default function Profile() {
-  const data = {
-    name: "Olivia Sara",
-    age: 27,
-    weight: 68,
-    height: 164,
-    currentTarget: "Loss Weight",
-  };
+
+  const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!getToken) {
+      router.push('/user')
+    }
+
+  }, [getToken])
+
   return (
     <>
       <NavbarApp />
