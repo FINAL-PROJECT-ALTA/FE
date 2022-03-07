@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <>
       <div className="bg-slate-50/30 py-11">
-        <div className="bg-slate-50 fixed bottom-0 inset-x-0 xl:inset-x-72 z-30 shadow-sm">
+        <div className="bg-slate-50 rounded-md fixed bottom-0 inset-x-0 xl:inset-x-80 z-30 shadow-sm">
           <div className="py-5 grid grid-cols-4 gap-4">
             <button onClick={() => { router.push('/') }} className="text-dark-green text-sm  hover:text-amber-400 focus:text-amber-500">
               <svg

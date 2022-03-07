@@ -1,13 +1,21 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from "next/document";
+class MyDocument extends Document {
+    static async getInitialProps(ctx) {
+        const initialProps = await Document.getInitialProps(ctx);
+        return { ...initialProps };
+    }
 
-export default function Document() {
-    return (
-        <Html className='scroll-smooth'>
-            <Head />
-            <body>
-                <Main />
-                <NextScript />
-            </body>
-        </Html>
-    )
+    render() {
+        return (
+            <Html className='scroll-smooth bg-gray-100'>
+                <Head />
+                <body className='max-w-screen-md bg-white m-auto font-poppins'>
+                    <Main />
+                    <NextScript />
+                    <div id="modal-root"></div>
+                </body>
+            </Html>
+        )
+    }
 }
+export default MyDocument;
