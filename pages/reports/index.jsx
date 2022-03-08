@@ -55,7 +55,7 @@ export default function Reports() {
           <h5 className="font-semibold text-dark-green">Lunch</h5>
           <div className="flex justify-between flex-wrap mt-3 mb-10">
             {eatenMeals.map((data, i) => (
-              <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
+              <div key={i} className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
                 <div className="shrink-0">
                   <img
                     src=""
@@ -75,7 +75,7 @@ export default function Reports() {
           <h5 className="font-semibold text-dark-green">Dinner</h5>
           <div className="flex justify-between flex-wrap mt-3 mb-10">
             {eatenMeals.map((data, i) => (
-              <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
+              <div key={i} className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
                 <div className="shrink-0">
                   <img
                     src=""
