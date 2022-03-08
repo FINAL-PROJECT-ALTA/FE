@@ -60,12 +60,14 @@ function AdminPage() {
           <FeatureTitle text="What's your plan today" />
           <div className="flex justify-between flex-wrap mt-3 ">
             <div className="w-40 sm:w-40 md:w-40 lg:w-40 h-[9rem] sm:h-[9rem] md:h-[9rem] lg:h-[9rem] rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0 bg-light-green/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
-                <img src="./images/Fruits.png" alt="" className=" mx-auto" />
-                <h2 className="text-dark-green text-center font-medium mt-3">
-                  Fuits
-                </h2>
-              </div>
+              <Link href="/admin/category">
+                <div className="shrink-0 bg-light-green/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
+                  <img src="./images/Fruits.png" alt="" className=" mx-auto" />
+                  <h2 className="text-dark-green text-center font-medium mt-3">
+                    Fuits
+                  </h2>
+                </div>
+              </Link>
             </div>
             <div className="w-40 h-[9rem] rounded-md bg-floor/20 drop-shadow-sm">
               <div className="shrink-0 bg-zinc-200/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
