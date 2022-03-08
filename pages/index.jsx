@@ -40,12 +40,7 @@ const callouts = [
 export default function Home() {
 
   const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-  const [searchTerm, setSearchTerm] = useState('')
   let [isOpen, setIsOpen] = useState(false)
-
-  function closeModal() {
-    setIsOpen(false)
-  }
 
   function openModal() {
     setIsOpen(true)
@@ -55,15 +50,12 @@ export default function Home() {
   return (
     <>
       <NavbarApp />
-      <div>
-        <div className='relative px-5'>
-          <button onClick={() => { openModal() }} className='bg-dark-green text-white text-lg font-thin min-w-full py-3 rounded-md flex cursor-text' ><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3 text-light-green " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg> Find your foods...</button>
-
-        </div>
+      <div className='relative px-5 my-2'>
+        <button onClick={() => { openModal() }} className='bg-dark-green text-white text-lg font-thin min-w-full py-3 rounded-md flex cursor-text' ><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3 text-light-green " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg> Find your foods...</button>
       </div>
-      <div className="px-5 my-10">
+      <div className="px-5 my-8">
         <div className="container max-w-xl mx-auto my-3 p-3 rounded-md bg-light-green">
           {!getToken ? (
             <div className="text-xl font-medium text-center py-10">

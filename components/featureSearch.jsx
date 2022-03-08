@@ -2,15 +2,17 @@ import React, { useState, Fragment } from 'react'
 import Link from 'next/link'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-const people = [
-    { name: 'Foods' },
-    { name: 'Calories' },
+const types = [
+    { name: 'foods' },
+    { name: 'calories' },
 
 ]
 
 function FeatureSearch() {
-    const [selected, setSelected] = useState(people[0])
+    const [selected, setSelected] = useState(types[0])
     const [searchTerm, setSearchTerm] = useState('')
+
+    console.log(selected);
 
     return (
         <>
@@ -40,14 +42,14 @@ function FeatureSearch() {
                                     leaveTo="opacity-0"
                                 >
                                     <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                        {people.map((person, personIdx) => (
+                                        {types.map((item, itemIdx) => (
                                             <Listbox.Option
-                                                key={personIdx}
+                                                key={itemIdx}
                                                 className={({ active }) =>
                                                     `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'
                                                     }`
                                                 }
-                                                value={person}
+                                                value={item}
                                             >
                                                 {({ selected }) => (
                                                     <>
@@ -55,7 +57,7 @@ function FeatureSearch() {
                                                             className={`block truncate ${selected ? 'font-medium' : 'font-normal'
                                                                 }`}
                                                         >
-                                                            {person.name}
+                                                            {item.name}
                                                         </span>
                                                         {selected ? (
                                                             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
