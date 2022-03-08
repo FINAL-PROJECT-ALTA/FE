@@ -1,10 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from "next/router"
 import FeatureSearch from "../components/featureSearch"
 import Link from "next/link"
 import FeatureTitle from "../components/featureTitle"
 import NavbarApp from "../components/navbar"
-import { Dialog, Menu } from '@headlessui/react'
 import Modal from '../components/modal'
 
 const callouts = [
@@ -58,14 +57,13 @@ export default function Home() {
       <NavbarApp />
       <div>
         <div className='relative px-5'>
-          <button onClick={() => { openModal() }} className='bg-dark-green text-white text-lg font-thin min-w-full py-3 rounded-md flex cursor-text' ><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <button onClick={() => { openModal() }} className='bg-dark-green text-white text-lg font-thin min-w-full py-3 rounded-md flex cursor-text' ><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3 text-light-green " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg> Find your foods...</button>
 
         </div>
       </div>
       <div className="px-5 my-10">
-        {/* <FeatureTitle text='My Plan' /> */}
         <div className="container max-w-xl mx-auto my-3 p-3 rounded-md bg-light-green">
           {!getToken ? (
             <div className="text-xl font-medium text-center py-10">
@@ -171,45 +169,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* Modal Search */}
       <Modal show={isOpen} onClose={() => { setIsOpen(false) }} >
         <FeatureSearch />
       </Modal>
-      {/* <Dialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        className="fixed z-30 inset-0"
-      >
-        <div className="flex items-center">
-          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-
-          <div className="relative bg-white rounded-md max-w-3xl mx-auto">
-            <div className='flex px-5 my-3'>
-              <button onClick={() => setIsOpen(false)} className='text-bg-dark-green hover:text-amber-400' ><svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-              </button>
-              <div className='flex items-center border-2 rounded-md ml-3 px-5'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input type="text" className='px-5 py-2 w-80 outline-none placeholder:text-base placeholder:italic placeholder:text-gray-600' placeholder='Find your foods,calories' onChange={e => { setSearchTerm(e.target.value) }} />
-              </div>
-            </div>
-            {searchTerm != 0 && (
-              <a onClick={() => { router.push('#') }} className='inline-flex items-center ml-5 first:pt-0 last:pb-0 text-lg'><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-              </svg>REsult</a>
-            )}
-            <Dialog.Title className={`my-5 px-5`}>
-              Complete your order
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa vel temporibus minus omnis dolore asperiores voluptatum non, quod sunt ipsam consequuntur facilis cupiditate soluta? Magnam nulla, tempora impedit sapiente nam quae officia voluptate reiciendis ipsum, hic expedita officiis libero. Molestias veniam porro impedit eaque ipsum reiciendis tempore quidem exercitationem voluptatum optio provident fuga in mollitia, nesciunt ad voluptatibus, dignissimos nihil quibusdam ea quos eos error commodi facilis voluptas. Rem expedita autem magnam. Animi est ex ipsum iure. Voluptate distinctio, omnis asperiores qui quae quas consectetur dolore repellendus illum iure sunt odit id quis mollitia explicabo! Doloremque mollitia porro voluptatem quod. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt magni aliquid inventore reiciendis consequuntur, facilis numquam tenetur aut repellendus molestiae alias iusto maxime? Illum, dolores atque quia sapiente earum modi, quis, natus molestias ad labore vel. Esse, et officia facere, soluta, provident aperiam odit quae ea nulla ad eveniet aliquid harum. Perferendis, non. Iusto omnis dolorum perspiciatis explicabo quo voluptatem asperiores nemo corporis eius modi! Possimus architecto exercitationem deleniti vel molestiae labore voluptate praesentium culpa quibusdam nemo vitae excepturi in, incidunt suscipit, accusamus, totam officia non officiis? Placeat, exercitationem sed voluptatum asperiores doloribus, necessitatibus fugit incidunt suscipit impedit atque autem?
-
-            </Dialog.Title>
-
-            <Dialog.Title>Lorem</Dialog.Title>
-          </div>
-        </div>
-      </Dialog> */}
     </>
   )
 }
