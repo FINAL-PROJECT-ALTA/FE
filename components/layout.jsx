@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navigation from './navigation'
 // import NavbarApp from './navbar'
 import { useRouter } from 'next/router'
-
+import allStore from '../store/actions';
+import { useDispatch } from 'react-redux'
 
 function Layout({ children }) {
     const router = useRouter()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(allStore.fetchAllFoods())
+
+    }, [dispatch])
+
     return (
         <>
             {/* <NavbarApp /> */}
