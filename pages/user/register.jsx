@@ -2,11 +2,12 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaLock } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
-import { BsGenderAmbiguous } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
+// import { BsGenderAmbiguous } from 'react-icons/bs';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import Link from 'next/link';
 
 function RegisterForm() {
   const [name, setName] = useState('');
@@ -75,7 +76,7 @@ function RegisterForm() {
             });
             console.log('cek error', error);
           })
-          .finally(() => {});
+          .finally(() => { });
         Swal.fire(
           'Account Created!',
           'Login to accsess full experience.',
@@ -107,13 +108,11 @@ function RegisterForm() {
               </p>
               <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
                 Already have account ?{' '}
-                <a
-                  href="../user"
-                  className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"
-                >
-                  {' '}
-                  Sign in here
-                </a>
+                <Link href="../user">
+                  <a className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
+                    Sign in here
+                  </a>
+                </Link>
               </p>
               <button className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10 hover:shadow-lg">
                 <FcGoogle />
@@ -196,7 +195,7 @@ function RegisterForm() {
                     border-gray-300 
                     focus:outline-none 
                     focus:border-lime-500
-                   "
+                   " type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>

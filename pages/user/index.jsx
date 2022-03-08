@@ -221,12 +221,11 @@ function LoginForm() {
           <div className="flex justify-center items-center mt-6">
             <p className="flex flex-col items-center justify-center text-center text-md text-gray-500">
               <span>Dont have an account?</span>
-              <a
-                href="../user/register"
-                className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
-              >
-                Sign up
-              </a>
+              <Link href="../user/register">
+                <a className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
+                > Sign up
+                </a>
+              </Link>
             </p>
           </div>
         </div>
