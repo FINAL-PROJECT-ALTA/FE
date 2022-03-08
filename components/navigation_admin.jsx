@@ -12,7 +12,7 @@ function Navigation() {
           <div className="py-5 flex justify-center space-x-20">
             <button
               onClick={() => {
-                router.push('/');
+                router.push('../admin');
               }}
               className="text-dark-green text-sm  hover:text-amber-400 focus:text-amber-500"
             >
@@ -21,7 +21,7 @@ function Navigation() {
             </button>
             <button
               onClick={() => {
-                router.push('/recomend');
+                router.push('/admin/menu');
               }}
               className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500"
             >
