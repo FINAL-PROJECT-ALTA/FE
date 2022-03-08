@@ -9,7 +9,7 @@ class MyDocument extends Document {
         return (
             <Html className='scroll-smooth bg-gray-100'>
                 <Head />
-                <body className='max-w-screen-md bg-white m-auto font-poppins'>
+                <body className='max-w-screen-sm bg-white m-auto font-poppins'>
                     <Main />
                     <NextScript />
                     <div id="modal-root"></div>
