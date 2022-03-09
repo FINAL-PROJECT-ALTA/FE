@@ -32,25 +32,25 @@ export default function Goals() {
       target,
     };
 
-  //   axios({
-  //     method: "post",
-  //     url: "https://aaryadewangga.cloud.okteto.net/users/goals",
-  //     data: body,
-  //     headers: {
-  //       Authorization: `Bearer ${getToken}`,
-  //     },
-  //   })
-  //     .then(({ data }) => {
-  //       if (data) {
-  //         console.log(data);
-  //         router.push("/");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err, "error");
-  //     })
-  //     .finally(() => {});
-  // }
+    axios({
+      method: "post",
+      url: "https://aaryadewangga.cloud.okteto.net/users/goals",
+      data: body,
+      headers: {
+        Authorization: `Bearer ${getToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then(({ data }) => {
+        localStorage.setItem("goal_uid", data.data.goal_uid);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        router.push("/");
+      });
+  }
 
   return (
     <>
@@ -79,7 +79,7 @@ export default function Goals() {
                   placeholder="165"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
                   onChange={(e) => {
-                    setHeight(e.target.value);
+                    setHeight(parseInt(e.target.value));
                   }}
                   value={height}
                 />
@@ -100,7 +100,7 @@ export default function Goals() {
                   placeholder="62"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
                   onChange={(e) => {
-                    setWeight(e.target.value);
+                    setWeight(parseInt(e.target.value));
                   }}
                   value={weight}
                 />
@@ -123,7 +123,7 @@ export default function Goals() {
                   placeholder="24"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
                   onChange={(e) => {
-                    setAge(e.target.value);
+                    setAge(parseInt(e.target.value));
                   }}
                   value={age}
                 />
@@ -144,7 +144,7 @@ export default function Goals() {
                   placeholder="30"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
                   onChange={(e) => {
-                    setRange(e.target.value);
+                    setRange(parseInt(e.target.value));
                   }}
                   value={range}
                 />
@@ -168,7 +168,7 @@ export default function Goals() {
                       setTarget(e.target.value);
                     }}
                   />
-                  <span class="ml-1">Lose Weight</span>
+                  <span className="ml-1">Lose Weight</span>
                 </label>
                 <label className="inline-flex items-center ml-5">
                   <input
@@ -180,20 +180,18 @@ export default function Goals() {
                       setTarget(e.target.value);
                     }}
                   />
-                  <span class="ml-1">Gain Weight</span>
+                  <span className="ml-1">Gain Weight</span>
                 </label>
               </div>
             </div>
             <div className="">
-              <a>
-                <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:ring-2 focus:ring-offset-2"
-                >
-                  Add Goals
-                </button>
-              </a>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:ring-2 focus:ring-offset-2"
+              >
+                Add Goals
+              </button>
             </div>
           </form>
         </div>
