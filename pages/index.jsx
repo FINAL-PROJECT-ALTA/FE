@@ -21,7 +21,7 @@ const callouts = [
     imageSrc: './images/Healthyfood.png',
     imageAlt: 'Healthy Food',
     colorbg: 'bg-light-orange/80',
-    href: 'healthyfood',
+    href: 'food',
   },
   {
     name: 'Junk Food',
@@ -108,7 +108,7 @@ export default function Home() {
           <FeatureTitle text='You Knows' />
           <div className="grid grid-cols-4 gap-3 mt-3 h-[115px]">
             {callouts.map(item => (
-              <Link href={item.href} key={item.name}>
+              <Link href={`/category?foodsCategory=${item.href}`} key={item.name}>
                 <a className={`grid-rows-2 ${item.colorbg} rounded-md drop-shadow-sm hover:bg-zinc-300/20`}>
                   <img src={item.imageSrc} alt={item.imageAlt} className="mx-auto" />
                   <h2 className="text-dark-green text-center font-medium mt-2">{item.name}</h2>
