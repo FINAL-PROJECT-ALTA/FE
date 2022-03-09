@@ -1,6 +1,7 @@
 import NavbarApp from '../../../components/navbar_admin';
 import FeatureTitle from '../../../components/featureTitle';
 import { AiOutlinePlus } from 'react-icons/ai';
+import Link from 'next/link';
 
 function Category() {
   const data = {
@@ -12,13 +13,15 @@ function Category() {
       <NavbarApp />
       <div className="flex mt-[70px] ml-10">
         <FeatureTitle text={data.category} />
-        <button
-          // onClick={}
-          className="flex ml-[16rem] sm:ml-[24rem] md:ml-[24rem] lg:ml-[24rem] items-center justify-end focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-lime-500 rounded py-2 w-[7rem] sm:w-[8rem] md:w-[8rem] lg:w-[8rem]  transition duration-150 ease-in"
-        >
-          <AiOutlinePlus size={20} className="ml-2" />
-          <span className="ml-1 mr-2">Add Fruits</span>
-        </button>
+        <Link href="./category/addFood">
+          <button
+            // onClick={}
+            className="flex ml-[16rem] sm:ml-[24rem] md:ml-[24rem] lg:ml-[24rem] items-center justify-end focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-lime-500 rounded py-2 w-[7rem] sm:w-[8rem] md:w-[8rem] lg:w-[8rem]  transition duration-150 ease-in"
+          >
+            <AiOutlinePlus size={20} className="ml-2" />
+            <span className="ml-1 mr-2">Add Fruits</span>
+          </button>
+        </Link>
       </div>
 
       <div className="flex justify-around flex-wrap mt-10 mb-10 space-x-0">
