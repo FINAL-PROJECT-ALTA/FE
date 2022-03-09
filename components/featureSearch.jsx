@@ -12,8 +12,6 @@ function FeatureSearch() {
     const [selected, setSelected] = useState(types[0])
     const [searchTerm, setSearchTerm] = useState('')
 
-    console.log(selected);
-
     return (
         <>
             <div className='flex items-center px-10'>
