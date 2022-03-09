@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavbarApp from "../../components/navbar";
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
+import axios from "axios";
 
 export default function Goals() {
   const getToken =
@@ -14,6 +15,42 @@ export default function Goals() {
       router.push("/user");
     }
   }, [getToken]);
+
+  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState();
+  const [age, setAge] = useState();
+  const [range, setRange] = useState();
+  const [target, setTarget] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const body = {
+      height,
+      weight,
+      age,
+      range,
+      target,
+    };
+
+  //   axios({
+  //     method: "post",
+  //     url: "https://aaryadewangga.cloud.okteto.net/users/goals",
+  //     data: body,
+  //     headers: {
+  //       Authorization: `Bearer ${getToken}`,
+  //     },
+  //   })
+  //     .then(({ data }) => {
+  //       if (data) {
+  //         console.log(data);
+  //         router.push("/");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err, "error");
+  //     })
+  //     .finally(() => {});
+  // }
 
   return (
     <>
@@ -41,6 +78,10 @@ export default function Goals() {
                   required
                   placeholder="165"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
+                  onChange={(e) => {
+                    setHeight(e.target.value);
+                  }}
+                  value={height}
                 />
               </div>
               <div className="mb-4">
@@ -58,6 +99,10 @@ export default function Goals() {
                   required
                   placeholder="62"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
+                  onChange={(e) => {
+                    setWeight(e.target.value);
+                  }}
+                  value={weight}
                 />
               </div>
             </div>
@@ -77,6 +122,10 @@ export default function Goals() {
                   required
                   placeholder="24"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
+                  onChange={(e) => {
+                    setAge(e.target.value);
+                  }}
+                  value={age}
                 />
               </div>
               <div className="mb-4">
@@ -88,12 +137,16 @@ export default function Goals() {
                 </label>
                 <input
                   type="number"
-                  name="day"
-                  id="day"
+                  name="range"
+                  id="range"
                   autoComplete="off"
                   required
                   placeholder="30"
                   className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
+                  onChange={(e) => {
+                    setRange(e.target.value);
+                  }}
+                  value={range}
                 />
               </div>
             </div>
@@ -109,8 +162,11 @@ export default function Goals() {
                   <input
                     type="radio"
                     className="form-radio accent-mexican-pink"
-                    name="weight"
+                    name="target"
                     value="lose weight"
+                    onChange={(e) => {
+                      setTarget(e.target.value);
+                    }}
                   />
                   <span class="ml-1">Lose Weight</span>
                 </label>
@@ -118,8 +174,11 @@ export default function Goals() {
                   <input
                     type="radio"
                     className="form-radio accent-mexican-pink"
-                    name="weight"
+                    name="target"
                     value="gain weight"
+                    onChange={(e) => {
+                      setTarget(e.target.value);
+                    }}
                   />
                   <span class="ml-1">Gain Weight</span>
                 </label>
@@ -129,7 +188,8 @@ export default function Goals() {
               <a>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  onClick={handleSubmit}
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:ring-2 focus:ring-offset-2"
                 >
                   Add Goals
                 </button>
