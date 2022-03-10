@@ -12,5 +12,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HEALTHY_FIT_78F1F }}'
-          projectId: healthy-fit-78f1f
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HEALTHYFIT }}'
+          projectId: healthyfit

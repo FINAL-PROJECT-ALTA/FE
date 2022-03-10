@@ -195,7 +195,7 @@ function RegisterForm() {
                     border-gray-300 
                     focus:outline-none 
                     focus:border-lime-500
-                   "
+                   " type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
