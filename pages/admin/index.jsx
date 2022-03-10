@@ -2,14 +2,69 @@ import NavAdmin from '../../components/navigation_admin';
 import NavbarApp from '../../components/navbar';
 import FeatureTitle from '../../components/featureTitle';
 import Link from 'next/link';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
 function AdminPage() {
-  const data = {
-    name: 'Admin',
-    fruit: 68,
-    snack: 164,
-    healthy: 120,
-    junk: 110,
-  };
+  const [data, setData] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    // const token = localStorage.getItem('token');
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJleHAiOjE2NDY5NjcxNjEsInJvbGVzIjpmYWxzZSwidXNlcl91aWQiOiJIdnl5QnhxRXp6Y1k5UEEyWnd4OWphIn0.BI7EsbehxksIYrf2xn3-I2nviFSIFk-gR59stQ0QQGQ';
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    axios
+      .get('https://aaryadewangga.cloud.okteto.net/foods', config)
+      .then(({ data }) => {
+        setData(data.data);
+        // console.log(data.data.find((el) => el.food_categories === 'food'));
+      })
+      .catch((err) => {
+        console.log(err, 'error');
+      });
+  }, []);
+
+  const callouts = [
+    {
+      name: 'Fruits',
+      imageSrc: './images/Fruits.png',
+      imageAlt: 'Fruits',
+      colorbg: 'bg-light-green/80',
+      href: 'fruits',
+    },
+    {
+      name: 'Food',
+      imageSrc: './images/Healthyfood.png',
+      imageAlt: 'Healthy Food',
+      colorbg: 'bg-light-orange/80',
+      href: 'food',
+    },
+    {
+      name: 'Junk Food',
+      imageSrc: './images/Junkfood.png',
+      imageAlt: 'Junk Food',
+      colorbg: 'bg-rose-200/80',
+      href: 'junk food',
+    },
+    {
+      name: 'Snacks',
+      imageSrc: './images/Snacks.png',
+      imageAlt: 'Snacks',
+      colorbg: 'bg-yellow-200/80',
+      href: 'snack',
+    },
+    {
+      name: 'Drink',
+      imageSrc: './images/drinks.png',
+      imageAlt: 'Snacks',
+      colorbg: 'bg-yellow-200/80',
+      href: 'drink',
+    },
+  ];
 
   return (
     <div>
@@ -58,44 +113,29 @@ function AdminPage() {
 
         <div className="mt-10">
           <FeatureTitle text="What's your plan today" />
+
           <div className="flex justify-between flex-wrap mt-3 ">
-            <div className="w-40 sm:w-40 md:w-40 lg:w-40 h-[9rem] sm:h-[9rem] md:h-[9rem] lg:h-[9rem] rounded-md bg-floor/20 drop-shadow-sm">
-              <Link href="/admin/category">
-                <div className="shrink-0 bg-light-green/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
-                  <img src="./images/Fruits.png" alt="" className=" mx-auto" />
-                  <h2 className="text-dark-green text-center font-medium mt-3">
-                    Fuits
-                  </h2>
-                </div>
-              </Link>
-            </div>
-            <div className="w-40 h-[9rem] rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0 bg-zinc-200/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
-                <img
-                  src="./images/Healthyfood.png"
-                  alt=""
-                  className=" mx-auto"
-                />
-                <h2 className="text-dark-green text-center font-medium mt-3">
-                  Healthy Food
-                </h2>
-              </div>
-            </div>
-            <div className="w-40 h-[9rem] rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0 bg-light-orange/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
-                <img src="./images/Junkfood.png" alt="" className=" mx-auto" />
-                <h2 className="text-dark-green text-center font-medium mt-3">
-                  Junk Food
-                </h2>
-              </div>
-            </div>
-            <div className="w-40 h-[9rem] rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0 bg-gray-300/80 rounded-md drop-shadow-sm hover:bg-midnight/20">
-                <img src="./images/Snacks.png" alt="" className=" mx-auto" />
-                <h2 className="text-dark-green text-center font-medium mt-3">
-                  Snack
-                </h2>
-              </div>
+            <div className="grid grid-cols-3 gap-5 mt-3 w-[50rem] h-[250px]">
+              {callouts.map((item) => (
+                <Link
+                  href={`/admin/category?foodsCategory=${item.href}`}
+                  key={item.name}
+                >
+                  <a
+                    className={`grid-rows-2 ${item.colorbg} rounded-md drop-shadow-sm hover:bg-zinc-300/20`}
+                  >
+                    <img
+                      src={item.imageSrc}
+                      alt={item.imageAlt}
+                      className="mx-auto "
+                      // width="overlay-bottom-left"
+                    />
+                    <h2 className="text-dark-green text-center font-medium mt-2">
+                      {item.name}
+                    </h2>
+                  </a>
+                </Link>
+              ))}
             </div>
           </div>
         </div>

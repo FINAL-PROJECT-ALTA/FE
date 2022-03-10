@@ -89,12 +89,12 @@ function LoginForm() {
           text: 'Something went wrong!',
         });
       })
-      .finally(() => { });
+      .finally(() => {});
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center content-center">
+      <div className="flex items-center justify-center content-center h-screen">
         <br />
 
         <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />

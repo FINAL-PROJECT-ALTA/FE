@@ -1,8 +1,9 @@
-import NavbarApp from '../../../../components/navbar_admin';
-import FeatureTitle from '../../../../components/featureTitle';
-import NavAdmin from '../../../../components/navigation_admin';
+import NavbarApp from '../../../components/navbar_admin';
+import FeatureTitle from '../../../components/featureTitle';
+import NavAdmin from '../../../components/navigation_admin';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function AddFood() {
   const router = useRouter();
@@ -25,6 +26,7 @@ function AddFood() {
   return (
     <div>
       <NavbarApp />
+
       <div className="mt-10">
         <center>
           <FeatureTitle text="Add Some Food" />
