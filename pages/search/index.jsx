@@ -11,7 +11,6 @@ function Search() {
     const router = useRouter()
     const input = router.query.input
     const type = router.query.category
-    console.log(items);
 
     useEffect(() => {
         (async () => {

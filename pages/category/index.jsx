@@ -3,13 +3,14 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import MidNavbar from '../../components/MidNavbar'
 import Notification from '../../components/notification'
-import ReactLoading from 'react-loading';
+// import ReactLoading from 'react-loading';
 
 export default function Category() {
 
     const [foods, setFoods] = useState([])
     const router = useRouter()
     const page = router.query.foodsCategory
+
 
     useEffect(() => {
         (async () => {
@@ -21,9 +22,9 @@ export default function Category() {
                 console.log(error);
             }
         })()
+
     }, [page])
 
-    console.log(foods);
     return (
         <>
             <div className='min-h-full relative bg-light-orange/70 rounded-b-md'>
@@ -48,7 +49,7 @@ export default function Category() {
                                 </div>
                             </div>
                         </div>
-                    )) : (<> <ReactLoading type="cylon" color="#fa1d58" height={100} width={50} /></>)}
+                    )) : (<> <h1 className='text-lg font-medium text-gray-400 italic'>Result Empty</h1></>)}
                 </div>
             </div>
         </>

@@ -39,6 +39,7 @@ const callouts = [
   },
 
 ]
+
 export default function Home() {
 
   const listFoods = useSelector(({ listFoods }) => listFoods)

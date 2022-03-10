@@ -17,7 +17,8 @@ function FeatureSearch() {
 
     const listFoods = useSelector(({ listFoods }) => listFoods)
     const router = useRouter()
-    console.log(selected);
+
+
     // Feature Searching 
     const handleSearch = (e) => {
         const searchWord = e.target.value
@@ -40,7 +41,7 @@ function FeatureSearch() {
 
     return (
         <>
-            <div className='flex items-center px-10'>
+            <div className='flex items-center px-10 max-w-2xl'>
                 <div className='bg-dark-green rounded-md px-5 flex items-center max-w-lg relative'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-light-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -96,16 +97,16 @@ function FeatureSearch() {
                         </Listbox>
                     </div>
                 </div>
-                <button onClick={() => router.push(`/search?input=${wordEntered}&category=${selected.name}`)} className='px-3 py-2 bg-light-green'>Search</button>
+                <button onClick={() => router.push(`/search?input=${wordEntered}&category=${selected.name}`)} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
             </div>
             {searchTerm != 0 && (
                 <div className='text-dark-green text-lg my-5 px-5 overflow-y-scroll'>
                     {searchTerm.map(item => (
                         <Link key={item.food_uid} href={`/detail/${item.food_uid}`}>
-                            <a className='flex items-center font-medium my-3'>
+                            <a className='flex justify-start items-center font-medium my-3 py-1 hover:bg-light-orange/40 rounded-lg relative'>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                </svg>{item.name + " " + item.calories}</a>
+                                </svg>{item.name}<span className='absolute right-0'>{item.calories}KCAL</span></a>
                         </Link>
                     ))}
                 </div>
