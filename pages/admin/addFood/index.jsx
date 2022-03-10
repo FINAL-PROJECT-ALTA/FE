@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 function AddFood() {
   const router = useRouter();
@@ -17,28 +18,28 @@ function AddFood() {
   const [unit, setUnit] = useState('');
   const [unitValue, setUnitValue] = useState(0);
   const [category, setCategory] = useState([
-    'Fruit',
-    'Drink',
-    'Junk Food',
-    'Food',
-    'Snack',
+    'fruit',
+    'drink',
+    'junk Food',
+    'food',
+    'snack',
   ]);
 
   const handleAddFood = () => {
     const body = {
       name: food,
-      calories: calories,
-      energy: energy,
-      carbohidrate: carbohidrate,
-      protein: protein,
+      calories: parseInt(calories),
+      energy: parseInt(energy),
+      carbohidrate: parseInt(carbohidrate),
+      protein: parseInt(protein),
       unit: unit,
-      unitValue: unitValue,
-      category: category,
+      unit_value: parseInt(unitValue),
+      food_categories: category,
     };
 
     // const token = localStorage.getItem('token');
     const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJleHAiOjE2NDY5NjcxNjEsInJvbGVzIjpmYWxzZSwidXNlcl91aWQiOiJIdnl5QnhxRXp6Y1k5UEEyWnd4OWphIn0.BI7EsbehxksIYrf2xn3-I2nviFSIFk-gR59stQ0QQGQ';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJleHAiOjE2NDcwMDA5MjIsInJvbGVzIjp0cnVlLCJ1c2VyX3VpZCI6InZGM1J6UFN4d0Ezd2o4SzhaaUdjb2gifQ.N3qSIerP2LhoHODO_WHMLhz8yEDtZjr0aX8IWmXfFTI';
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -55,6 +56,7 @@ function AddFood() {
         axios
           .post('https://aaryadewangga.cloud.okteto.net/foods', body, config)
           .then(({ data }) => {
+            console.log(data);
             // console.log(data.data.token);
             // localStorage.setItem('token', data.data.token);
             setTimeout(() => {
@@ -131,7 +133,6 @@ function AddFood() {
           <label
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
-            onChange={(e) => setCalories(e.target.value)}
           >
             Calories
           </label>
@@ -140,6 +141,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setCalories(e.target.value)}
           />
         </div>
 
@@ -173,7 +175,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            onChange={(e) => setCarbohydrate(e.target.value)}
+            onChange={(e) => setCarbohidrate(e.target.value)}
           />
         </div>
 
@@ -199,7 +201,6 @@ function AddFood() {
           <label
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
-            onChange={(e) => setUnit(e.target.value)}
           >
             Unit
           </label>
@@ -208,6 +209,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setUnit(e.target.value)}
           />
         </div>
 
@@ -224,7 +226,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            onChange={(e) => setValueUnit(e.target.value)}
+            onChange={(e) => setUnitValue(e.target.value)}
           />
         </div>
 
@@ -243,16 +245,16 @@ function AddFood() {
                       outline-none"
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option>Fruit</option>
-            <option>Drink</option>
-            <option>Junk Food</option>
-            <option>Food</option>
-            <option>Snack</option>
+            <option>fruit</option>
+            <option>drink</option>
+            <option>junk Food</option>
+            <option>food</option>
+            <option>snack</option>
           </select>
         </div>
         <div className="flex w-96 mt-10 mb-10 ml-36">
           <button
-            // onClick={validateSignUp}
+            onClick={handleAddFood}
             className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
           >
             <span className="mr-2">Add Food Data</span>

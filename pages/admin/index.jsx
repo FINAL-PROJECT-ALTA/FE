@@ -34,7 +34,7 @@ function AdminPage() {
       imageSrc: './images/Fruits.png',
       imageAlt: 'Fruits',
       colorbg: 'bg-light-green/80',
-      href: 'fruits',
+      href: 'fruit',
     },
     {
       name: 'Food',
