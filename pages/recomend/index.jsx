@@ -115,7 +115,7 @@ function RecommenPage() {
           <div className="flex flex-col flex-wrap mt-5 mb-5 bg-[#E9F9B0] w-[400px] sm:w-[480px] md:w-[480px] lg:w-[480px] h-[180px] sm:h-[180px] md:h-[180px] lg:h-[180px] drop-shadow-lg rounded-[10px]">
             <div className="flex text-[#013542] pl-10 pt-10">
               <h3 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold">
-                Launch
+                Lunch
               </h3>
               <div className="flex flex-col">
                 <h1 className="text-xl font-semibold pl-[9rem] sm:pl-[12.3rem] md:pl-[12.3rem] lg:pl-[12.3rem]">

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useRouter } from "next/router"
 import FeatureSearch from "../components/featureSearch"
-import Link from "next/link"
 import FeatureTitle from "../components/featureTitle"
 import NavbarApp from "../components/navbar"
 import Modal from '../components/modal'
+import Pagnination from '../components/pagination'
+import Link from "next/link"
+import { useSelector } from 'react-redux'
 
 const callouts = [
   {
@@ -18,35 +20,47 @@ const callouts = [
     name: 'Healthy Food',
     imageSrc: './images/Healthyfood.png',
     imageAlt: 'Healthy Food',
-    colorbg: 'bg-zinc-200/80',
-    href: 'healthyfood',
+    colorbg: 'bg-light-orange/80',
+    href: 'food',
   },
   {
     name: 'Junk Food',
     imageSrc: './images/Junkfood.png',
     imageAlt: 'Junk Food',
-    colorbg: 'bg-light-orange/80',
+    colorbg: 'bg-rose-200/80',
     href: 'junkfood',
   },
   {
     name: 'Snacks',
     imageSrc: './images/Snacks.png',
     imageAlt: 'Snacks',
-    colorbg: 'bg-gray-300/80',
+    colorbg: 'bg-yellow-200/80',
     href: 'snacks',
   },
 
 ]
 export default function Home() {
 
+  const listFoods = useSelector(({ listFoods }) => listFoods)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage] = useState(12)
+
   const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const router = useRouter()
   let [isOpen, setIsOpen] = useState(false)
 
   function openModal() {
     setIsOpen(true)
   }
 
-  const router = useRouter()
+  // Get Current Page
+  const indexOfLastPost = currentPage * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPost = listFoods.slice(indexOfFirstPost, indexOfLastPost)
+
+  // Change Page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
   return (
     <>
       <NavbarApp />
@@ -94,8 +108,8 @@ export default function Home() {
           <FeatureTitle text='You Knows' />
           <div className="grid grid-cols-4 gap-3 mt-3 h-[115px]">
             {callouts.map(item => (
-              <Link href={item.href} key={item.name}>
-                <a className={`grid-rows-2 ${item.colorbg} rounded-md drop-shadow-sm hover:bg-midnight/20`}>
+              <Link href={`/category?foodsCategory=${item.href}`} key={item.name}>
+                <a className={`grid-rows-2 ${item.colorbg} rounded-md drop-shadow-sm hover:bg-zinc-300/20`}>
                   <img src={item.imageSrc} alt={item.imageAlt} className="mx-auto" />
                   <h2 className="text-dark-green text-center font-medium mt-2">{item.name}</h2>
                 </a>
@@ -104,61 +118,19 @@ export default function Home() {
           </div>
           <div className="flex justify-between flex-wrap my-10">
             {/* Cards Items */}
-            <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0">
-                <img src="" alt="" className="bg-red-400 h-28 object-cover rounded-t-md" />
+            {currentPost ? currentPost.map(el => (
+              <div key={el.food_uid} className='group relative cursor-pointer'>
+                <div className="relative w-40 h-48 mb-3 rounded-md overflow-hidden group-hover:opacity-70 bg-lime-200/20 drop-shadow-sm" onClick={() => { router.push(`/detail/${el.food_uid}`) }}>
+                  <img src='https://images.unsplash.com/photo-1572376832515-4a8aac0f63a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80' alt={el.name} className="bg-red-400 h-28 w-full object-cover" />
+                  <div className="px-3 py-3 text-dark-green ">
+                    <h3 className="text-lg font-medium">{el.name}</h3>
+                    <p className="text-md font-mono">{el.calories} KCAL</p>
+                  </div>
+                </div>
               </div>
-              <div className="px-3 py-3 text-dark-green ">
-                <h3 className="text-lg font-medium">Title</h3>
-                <p className="text-md font-mono">319 KCAL</p>
-              </div>
-            </div>
-            <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0">
-                <img src="" alt="" className="bg-red-400 h-28 object-cover rounded-t-md" />
-              </div>
-              <div className="px-3 py-3 text-dark-green ">
-                <h3 className="text-lg font-medium">Title</h3>
-                <p className="text-md font-mono">319 KCAL</p>
-              </div>
-            </div>
-            <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0">
-                <img src="" alt="" className="bg-red-400 h-28 object-cover rounded-t-md" />
-              </div>
-              <div className="px-3 py-3 text-dark-green ">
-                <h3 className="text-lg font-medium">Title</h3>
-                <p className="text-md font-mono">319 KCAL</p>
-              </div>
-            </div>
-            <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0">
-                <img src="" alt="" className="bg-red-400 h-28 object-cover rounded-t-md" />
-              </div>
-              <div className="px-3 py-3 text-dark-green ">
-                <h3 className="text-lg font-medium">Title</h3>
-                <p className="text-md font-mono">319 KCAL</p>
-              </div>
-            </div>
-            <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0">
-                <img src="" alt="" className="bg-red-400 h-28 object-cover rounded-t-md" />
-              </div>
-              <div className="px-3 py-3 text-dark-green ">
-                <h3 className="text-lg font-medium">Title</h3>
-                <p className="text-md font-mono">319 KCAL</p>
-              </div>
-            </div>
-            <div className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-              <div className="shrink-0">
-                <img src="" alt="" className="bg-red-400 h-28 object-cover rounded-t-md" />
-              </div>
-              <div className="px-3 py-3 text-dark-green ">
-                <h3 className="text-lg font-medium">Title</h3>
-                <p className="text-md font-mono">319 KCAL</p>
-              </div>
-            </div>
+            )) : (<></>)}
           </div>
+          <Pagnination postPerPage={postPerPage} totalPosts={listFoods.length} paginate={paginate} />
         </div>
       </div>
       {/* Modal Search */}
