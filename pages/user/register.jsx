@@ -12,15 +12,13 @@ function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [gender, setGender] = useState(['Pria', 'Wanita']);
+  const [gender, setGender] = useState(['Male', 'Female']);
 
   const router = useRouter();
 
   const validateSignUp = () => {
     if (name.trim() === '') {
       Swal.fire('Name is required', 'Fill your name please', 'info');
-    } else if (/\s/.test(name)) {
-      Swal.fire('Fotrbiden', 'Name contain whites space', 'info');
     } else if (email === '') {
       Swal.fire('Email is required', 'Fill your Email please', 'info');
     } else if (/\s/.test(email)) {
@@ -31,8 +29,18 @@ function RegisterForm() {
         'Fill your Email with correct format please',
         'info'
       );
-    } else if (password < 8) {
-      Swal.fire('Password is required', 'Fill your Password please', 'info');
+    } else if (password < 3) {
+      Swal.fire(
+        'Password is required',
+        'Fill your Password min. 3 character',
+        'info'
+      );
+    } else if (password > 8) {
+      Swal.fire(
+        'Password is required',
+        'Fill your Password max. 8 character',
+        'info'
+      );
     } else if (/\s/.test(password)) {
       Swal.fire('Fotrbiden', 'Password contain whites space', 'info');
     } else {
@@ -66,6 +74,11 @@ function RegisterForm() {
             setTimeout(() => {
               router.push('/user');
             }, 1500);
+            Swal.fire(
+              'Account Created!',
+              'Login to accsess full experience.',
+              'success'
+            );
           })
           .catch((error) => {
             Swal.fire({
@@ -73,14 +86,8 @@ function RegisterForm() {
               title: 'Oops...',
               text: 'Something went wrong!',
             });
-            console.log('cek error', error);
           })
           .finally(() => {});
-        Swal.fire(
-          'Account Created!',
-          'Login to accsess full experience.',
-          'success'
-        );
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -199,6 +206,9 @@ function RegisterForm() {
                    "
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10">
+                    * min. 3 character and max. 8 character
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col mb-6">
@@ -229,8 +239,8 @@ function RegisterForm() {
                       setGender(e.target.value);
                     }}
                   >
-                    <option value="Pria">Pria</option>
-                    <option value="Wanita">Wanita</option>
+                    <option value="Pria">Male</option>
+                    <option value="Wanita">Female</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg

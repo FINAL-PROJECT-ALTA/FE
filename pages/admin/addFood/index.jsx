@@ -4,6 +4,7 @@ import NavAdmin from '../../../components/navigation_admin';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 function AddFood() {
   const router = useRouter();
@@ -23,10 +24,65 @@ function AddFood() {
     'Snack',
   ]);
 
+  const handleAddFood = () => {
+    const body = {
+      name: food,
+      calories: calories,
+      energy: energy,
+      carbohidrate: carbohidrate,
+      protein: protein,
+      unit: unit,
+      unitValue: unitValue,
+      category: category,
+    };
+
+    // const token = localStorage.getItem('token');
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJleHAiOjE2NDY5NjcxNjEsInJvbGVzIjpmYWxzZSwidXNlcl91aWQiOiJIdnl5QnhxRXp6Y1k5UEEyWnd4OWphIn0.BI7EsbehxksIYrf2xn3-I2nviFSIFk-gR59stQ0QQGQ';
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Please check again the required field',
+      icon: 'question',
+      confirmButtonText: 'Yes, create it!',
+      confirmButtonColor: '#3085d6',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post('https://aaryadewangga.cloud.okteto.net/foods', body, config)
+          .then(({ data }) => {
+            // console.log(data.data.token);
+            // localStorage.setItem('token', data.data.token);
+            setTimeout(() => {
+              router.push('../admin');
+            }, 1500);
+            Swal.fire(
+              'Added Successfully',
+              'Your food has been added',
+              'success'
+            );
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          })
+          .finally(() => {});
+      } else if (result.isDismissed) {
+        Swal.fire('Check again ?', 'We are waiting you inside', 'question');
+      }
+    });
+  };
+
   return (
     <div>
       <NavbarApp />
-
       <div className="mt-10">
         <center>
           <FeatureTitle text="Add Some Food" />
@@ -66,6 +122,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setFood(e.target.value)}
           />
         </div>
 
@@ -74,6 +131,7 @@ function AddFood() {
           <label
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
+            onChange={(e) => setCalories(e.target.value)}
           >
             Calories
           </label>
@@ -98,6 +156,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setEnergy(e.target.value)}
           />
         </div>
 
@@ -114,6 +173,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setCarbohydrate(e.target.value)}
           />
         </div>
 
@@ -130,6 +190,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setProtein(e.target.value)}
           />
         </div>
 
@@ -138,6 +199,7 @@ function AddFood() {
           <label
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
+            onChange={(e) => setUnit(e.target.value)}
           >
             Unit
           </label>
@@ -162,6 +224,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
+            onChange={(e) => setValueUnit(e.target.value)}
           />
         </div>
 
@@ -170,6 +233,7 @@ function AddFood() {
           <label
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
+            onChange={(e) => setCategory(e.target.value)}
           >
             Category of Food
           </label>
@@ -177,6 +241,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none"
+            onChange={(e) => setCategory(e.target.value)}
           >
             <option>Fruit</option>
             <option>Drink</option>
