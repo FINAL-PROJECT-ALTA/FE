@@ -73,7 +73,7 @@ export default function Home() {
         <div className="container max-w-xl mx-auto my-3 p-3 rounded-md bg-light-green">
           {!getToken ? (
             <div className="text-xl font-medium text-center py-10">
-              <h1>Need More recomend for Your Goals?</h1>
+              <h1>Need More Recomend for Your Goals?</h1>
               <div className="flex justify-center my-5">
                 <button onClick={() => { router.push('/user') }} className="px-4 py-2 mr-3 rounded-md text-white font-semibold bg-dark-green/80 hover:drop-shadow-md hover:bg-dark-green">Login</button>
                 <button onClick={() => { router.push('/user/register') }} className="px-4 py-2 rounded-md text-dark-green font-semibold bg-lime-500/80 hover:drop-shadow-md hover:bg-lime-500">Sign up</button>
