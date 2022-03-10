@@ -3,27 +3,27 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import MidNavbar from '../../components/MidNavbar'
 import Notification from '../../components/notification'
-// import ReactLoading from 'react-loading';
+import ReactLoading from 'react-loading';
 
-export default function Category() {
 
-    const [foods, setFoods] = useState([])
+function Search() {
+    const [items, setItems] = useState([])
     const router = useRouter()
-    const page = router.query.foodsCategory
-
+    const input = router.query.input
+    const type = router.query.category
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get(`https://aaryadewangga.cloud.okteto.net/foods?category=${page}`);
+                const res = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${input}&category=${type}`);
                 const items = await res.data;
-                setFoods(items.data)
+                setItems(items.data)
             } catch (error) {
                 console.log(error);
             }
         })()
+    }, [input, type])
 
-    }, [page])
 
     return (
         <>
@@ -39,7 +39,7 @@ export default function Category() {
             <div className='min-h-screen bg-slate-50/50 p-5 my-5 rounded-md'>
                 <div className="flex justify-evenly flex-wrap">
                     {/* Cards Items */}
-                    {foods != 0 ? foods.map(el => (
+                    {items != 0 ? items.map(el => (
                         <div key={el.food_uid} className='group relative cursor-pointer'>
                             <div className="relative w-40 h-48 mb-3 rounded-md overflow-hidden group-hover:opacity-70 bg-lime-200/20 drop-shadow-sm" onClick={() => { router.push(`/detail/${el.food_uid}`) }}>
                                 <img src='https://images.unsplash.com/photo-1572376832515-4a8aac0f63a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80' alt={el.name} className="bg-red-400 h-28 w-full object-cover" />
@@ -49,10 +49,11 @@ export default function Category() {
                                 </div>
                             </div>
                         </div>
-                    )) : (<> <h1 className='text-lg font-medium text-gray-400 italic'>Result Empty</h1></>)}
+                    )) : (<> <ReactLoading type="cylon" color="#fa1d58" height={100} width={50} /></>)}
                 </div>
             </div>
         </>
     )
 }
 
+export default Search
