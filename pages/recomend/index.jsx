@@ -6,6 +6,7 @@ import NavbarApp from '../../components/navbar';
 import Navigation from '../../components/navigation';
 import Link from 'next/link';
 
+
 function RecommenPage() {
   const data = {
     calories_count: 0,
@@ -59,136 +60,118 @@ function RecommenPage() {
             </span>
           </div>
         </div>
+
         <div className="mt-10">
           <div className="flex ">
             <FeatureTitle text="Program Goals" />
-
           </div>
+
           {/* Breakfast */}
-          <div className="flex flex-col flex-wrap mt-5 mb-5 bg-[#FAFE37] w-[400px] sm:w-[480px] md:w-[480px] lg:w-[480px] h-[180px] sm:h-[180px] md:h-[180px] lg:h-[180px] drop-shadow-lg rounded-[10px]">
-            <div className="flex text-[#013542] pl-10 pt-10">
-              <h3 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold">
-                Breakfast
-              </h3>
-              <div className="flex flex-col">
-                <h1 className="text-xl font-semibold pl-[7rem] sm:pl-[9.3rem] md:pl-[9.3rem] lg:pl-[9.3rem]">
+          <div className="flex flex-col px-10 py-5 my-3 bg-yellow-300/70 max-w-lg mx-auto drop-shadow-lg rounded-xl">
+            <div className="flex justify-between">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                  Breakfast
+                </h3>
+                <div className="flex items-center text-gray-600">
+                  <AiOutlineClockCircle className="mr-2" />
+                  <span className="text-xs md:text-sm font-sans">
+                    7.00 - 9.00 am
+                  </span>
+                </div>
+              </div>
+              <div className="text-right">
+                <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xl font-semibold pl-[4.5rem] sm:pl-[6.7rem] md:pl-[6.7rem] lg:pl-[6.7rem]">
+                <h1 className="text-xs md:text-xl font-semibold">
                   Calories
                 </h1>
               </div>
             </div>
-            <div className="flex pl-8">
-              <AiOutlineClockCircle
-                size={17}
-                className="ml-2 mt-[0.5px] text-[#8B8B8B]"
-              />
-              <span className="text-sm font-mono text-[#8B8B8B] ml-1 mr-2">
-                7.00 - 9.00 am
-              </span>
-            </div>
-            <div className="flex justify-end pr-8 sm:pr-6 md:pr-6 lg:pr-6">
-              <AiOutlinePlus
-                size={50}
-                className="ml-2 mt-[0.5px] text-[#FA1D58]"
-              />
+            <div className="flex justify-end ">
+              <AiOutlinePlus size={40} className="text-rose-500" />
             </div>
           </div>
-
-          {/* Launch */}
-          <div className="flex flex-col flex-wrap mt-5 mb-5 bg-[#E9F9B0] w-[400px] sm:w-[480px] md:w-[480px] lg:w-[480px] h-[180px] sm:h-[180px] md:h-[180px] lg:h-[180px] drop-shadow-lg rounded-[10px]">
-            <div className="flex text-[#013542] pl-10 pt-10">
-              <h3 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold">
-                Lunch
-              </h3>
-              <div className="flex flex-col">
-                <h1 className="text-xl font-semibold pl-[9rem] sm:pl-[12.3rem] md:pl-[12.3rem] lg:pl-[12.3rem]">
+          {/* Lunch */}
+          <div className="flex flex-col px-10 py-5 my-3 bg-light-green/80 max-w-lg mx-auto drop-shadow-lg rounded-xl">
+            <div className="flex justify-between">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                  Lunch
+                </h3>
+                <div className="flex items-center text-gray-600">
+                  <AiOutlineClockCircle className="mr-2" />
+                  <span className="text-xs md:text-sm font-sans">
+                    12.00 - 1.00 pm
+                  </span>
+                </div>
+              </div>
+              <div className="text-right">
+                <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xl font-semibold pl-[6.3rem] sm:pl-[9.7rem] md:pl-[9.7rem] lg:pl-[9.7rem]">
+                <h1 className="text-xs md:text-xl font-semibold">
                   Calories
                 </h1>
               </div>
             </div>
-            <div className="flex pl-8">
-              <AiOutlineClockCircle
-                size={17}
-                className="ml-2 mt-[0.5px] text-[#8B8B8B]"
-              />
-              <span className="text-sm font-mono text-[#8B8B8B] ml-1 mr-2">
-                12.00 - 1.00 pm
-              </span>
-            </div>
-            <div className="flex justify-end pr-8 sm:pr-6 md:pr-6 lg:pr-6 ">
-              <AiOutlinePlus
-                size={50}
-                className="ml-2 mt-[0.5px] text-[#FA1D58]"
-              />
+            <div className="flex justify-end ">
+              <AiOutlinePlus size={40} className="text-rose-500" />
             </div>
           </div>
-
           {/* Dinner */}
-          <div className="flex flex-col flex-wrap mt-5 mb-5 bg-[#FAE5A6] w-[400px] sm:w-[480px] md:w-[480px] lg:w-[480px] h-[180px] sm:h-[180px] md:h-[180px] lg:h-[180px] drop-shadow-lg rounded-[10px]">
-            <div className="flex text-[#013542] pl-10 pt-10">
-              <h3 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold">
-                Dinner
-              </h3>
-              <div className="flex flex-col">
-                <h1 className="text-xl font-semibold pl-[10rem] sm:pl-[13.3rem] md:pl-[13.3rem] lg:pl-[13.3rem]">
+          <div className="flex flex-col px-10 py-5 my-3 bg-midnight/50 max-w-lg mx-auto drop-shadow-lg rounded-xl">
+            <div className="flex justify-between">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                  Dinner
+                </h3>
+                <div className="flex items-center text-gray-600">
+                  <AiOutlineClockCircle className="mr-2" />
+                  <span className="text-xs md:text-sm font-sans">
+                    05.00 - 8.00 pm
+                  </span>
+                </div>
+              </div>
+              <div className="text-right">
+                <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xl font-semibold pl-[7.3rem] sm:pl-[10.7rem] md:pl-[10.7rem] lg:pl-[10.7rem]">
+                <h1 className="text-xs md:text-xl font-semibold">
                   Calories
                 </h1>
               </div>
             </div>
-            <div className="flex pl-8">
-              <AiOutlineClockCircle
-                size={17}
-                className="ml-2 mt-[0.5px] text-[#8B8B8B]"
-              />
-              <span className="text-sm font-mono text-[#8B8B8B] ml-1 mr-2">
-                05.00 - 8.00 pm
-              </span>
-            </div>
-            <div className="flex justify-end pr-8 sm:pr-6 md:pr-6 lg:pr-6 ">
-              <AiOutlinePlus
-                size={50}
-                className="ml-2 mt-[0.5px] text-[#FA1D58]"
-              />
+            <div className="flex justify-end ">
+              <AiOutlinePlus size={40} className="text-rose-500" />
             </div>
           </div>
-
           {/* Snack */}
-          <div className="flex flex-col flex-wrap mt-5 mb-5 bg-[#F3F3F3] w-[400px] sm:w-[480px] md:w-[480px] lg:w-[480px] h-[180px] sm:h-[180px] md:h-[180px] lg:h-[180px] drop-shadow-lg rounded-[10px]">
-            <div className="flex text-[#013542] pl-10 pt-10">
-              <h3 className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold">
-                Snack
-              </h3>
-              <div className="flex flex-col">
-                <h1 className="text-xl font-semibold pl-[10.3rem] sm:pl-[13.5rem] md:pl-[13.5rem] lg:pl-[13.5rem]">
+          <div className="flex flex-col px-10 py-5 my-3 bg-zinc-200/80 max-w-lg mx-auto drop-shadow-lg rounded-xl">
+            <div className="flex justify-between">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                  Snack
+                </h3>
+                <div className="flex items-center text-gray-600">
+                  <AiOutlineClockCircle className="mr-2" />
+                  <span className="text-xs md:text-sm font-sans">
+                    4.00 - 4.30 pm
+                  </span>
+                </div>
+              </div>
+              <div className="text-right">
+                <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xl font-semibold pl-[7.7rem] sm:pl-[10.9rem] md:pl-[10.9rem] lg:pl-[10.9rem]">
+                <h1 className="text-xs md:text-xl font-semibold">
                   Calories
                 </h1>
               </div>
             </div>
-            <div className="flex pl-8">
-              <AiOutlineClockCircle
-                size={17}
-                className="ml-2 mt-[0.5px] text-[#8B8B8B]"
-              />
-              <span className="text-sm font-mono text-[#8B8B8B] ml-1 mr-2">
-                4.00 - 4.30 pm
-              </span>
-            </div>
-            <div className="flex justify-end pr-8 sm:pr-6 md:pr-6 lg:pr-6 ">
-              <AiOutlinePlus
-                size={50}
-                className="ml-2 mt-[0.5px] text-[#FA1D58]"
-              />
+            <div className="flex justify-end ">
+              <AiOutlinePlus size={40} className="text-rose-500" />
             </div>
           </div>
         </div>
