@@ -106,7 +106,7 @@ function FeatureSearch() {
                     </div>
                 </div>
                 {/* { router.push(`/search?input=${wordEntered}&category=${selected.name}`) } */}
-                <button onClick={getSearch} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
+                <button onClick={() => { router.push(`/search?input=${wordEntered}&category=${selected.name}`) }} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
             </div>
             {searchTerm != 0 && (
                 <div className='text-dark-green text-lg my-5 px-5 overflow-y-scroll'>
