@@ -233,32 +233,23 @@ export default function Goals() {
               >
                 Are you an Active Person ?
               </label>
-              <div>
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio accent-mexican-pink"
-                    name="dailyActive"
-                    value="yes"
-                    onChange={(e) => {
-                      setDailyActive(e.target.value);
-                    }}
-                  />
-                  <span className="ml-1">Yes</span>
-                </label>
-                <label className="inline-flex items-center ml-5">
-                  <input
-                    type="radio"
-                    className="form-radio accent-mexican-pink"
-                    name="dailyActive"
-                    value="no"
-                    onChange={(e) => {
-                      setDailyActive(e.target.value);
-                    }}
-                  />
-                  <span className="ml-1">No</span>
-                </label>
-              </div>
+              <select
+                id="dailyActive"
+                name="dailyActive"
+                autoComplete="off"
+                required
+                className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
+                onChange={(e) => {
+                  setDailyActive(e.target.value);
+                }}
+                value={dailyActive}
+              >
+                <option value="not active">Not Active</option>
+                <option value="little active">Little Active</option>
+                <option value="quite active">Quite Active</option>
+                <option value="active">Active</option>
+                <option value="very active">Very Active</option>
+              </select>
             </div>
             <div className="">
               <button
