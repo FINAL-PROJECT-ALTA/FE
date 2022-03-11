@@ -17,27 +17,33 @@ const callouts = [
     href: 'fruits',
   },
   {
-    name: 'Healthy Food',
-    imageSrc: './images/Healthyfood.png',
+    name: 'Food',
+    imageSrc: './images/Food.png',
     imageAlt: 'Healthy Food',
     colorbg: 'bg-light-orange/80',
     href: 'food',
   },
   {
     name: 'Junk Food',
-    imageSrc: './images/Junkfood.png',
+    imageSrc: './images/pizza.png',
     imageAlt: 'Junk Food',
     colorbg: 'bg-rose-200/80',
-    href: 'junkfood',
+    href: 'junk food',
+  },
+  {
+    name: 'Drinks',
+    imageSrc: './images/lemonade.png',
+    imageAlt: 'Snacks',
+    colorbg: 'bg-yellow-200/80',
+    href: 'drink',
   },
   {
     name: 'Snacks',
     imageSrc: './images/Snacks.png',
     imageAlt: 'Snacks',
-    colorbg: 'bg-yellow-200/80',
-    href: 'snacks',
+    colorbg: 'bg-teal-200/80',
+    href: 'snack',
   },
-
 ]
 
 export default function Home() {
@@ -94,7 +100,7 @@ export default function Home() {
                 <h2 className="text-dark-green font-medium text-2xl">Age</h2>
                 <p className="leading-10 text-xl">21</p>
               </div>
-              <button onClick={() => { router.push('/profile') }} className="absolute right-2 -top-3 text-gray-500/50 hover:text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <button onClick={() => { router.push('/goals') }} className="absolute right-2 -top-3 text-gray-500/50 hover:text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg></button>
@@ -107,11 +113,13 @@ export default function Home() {
         </div>
         <div className="my-10">
           <FeatureTitle text='You Knows' />
-          <div className="grid grid-cols-4 gap-3 mt-3 h-[115px]">
+          <div className="grid grid-cols-5 gap-3 mt-3 h-[115px]">
             {callouts.map(item => (
               <Link href={`/category?foodsCategory=${item.href}`} key={item.name}>
-                <a className={`grid-rows-2 ${item.colorbg} rounded-md drop-shadow-sm hover:bg-zinc-300/20`}>
-                  <img src={item.imageSrc} alt={item.imageAlt} className="mx-auto" />
+                <a className={`grid-rows-2 ${item.colorbg} pt-3 rounded-md drop-shadow-sm hover:bg-zinc-300/20`}>
+                  <div className='shrink-0'>
+                    <img src={item.imageSrc} alt={item.imageAlt} className="mx-auto" />
+                  </div>
                   <h2 className="text-dark-green text-center font-medium mt-2">{item.name}</h2>
                 </a>
               </Link>
@@ -120,12 +128,12 @@ export default function Home() {
           <div className="flex justify-between flex-wrap my-10">
             {/* Cards Items */}
             {currentPost ? currentPost.map(el => (
-              <div key={el.food_uid} className='group relative cursor-pointer'>
-                <div className="relative w-40 h-48 mb-3 rounded-md overflow-hidden group-hover:opacity-70 bg-lime-200/20 drop-shadow-sm" onClick={() => { router.push(`/detail/${el.food_uid}`) }}>
+              <div key={el.food_uid} className='group relative cursor-pointer my-2'>
+                <div className="relative w-40 h-full mb-3 rounded-md overflow-hidden group-hover:opacity-70 bg-lime-200/20 drop-shadow-sm" onClick={() => { router.push(`/detail/${el.food_uid}`) }}>
                   <img src='https://images.unsplash.com/photo-1572376832515-4a8aac0f63a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=773&q=80' alt={el.name} className="bg-red-400 h-28 w-full object-cover" />
-                  <div className="px-3 py-3 text-dark-green ">
-                    <h3 className="text-lg font-medium">{el.name}</h3>
-                    <p className="text-md font-mono">{el.calories} KCAL</p>
+                  <div className="px-3 py-3 text-dark-green">
+                    <h3 className="text-md font-medium">{el.name}</h3>
+                    <p className="text-md font-mono text-gray-500">{el.calories} KCAL</p>
                   </div>
                 </div>
               </div>
