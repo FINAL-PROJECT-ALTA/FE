@@ -49,7 +49,7 @@ export default function Category() {
                                 </div>
                             </div>
                         </div>
-                    )) : (<> <h1 className='text-lg font-medium text-gray-400 italic'>Result Empty</h1></>)}
+                    )) : (<><h1 className='text-lg font-medium text-gray-400 italic'>Result Empty</h1></>)}
                 </div>
             </div>
         </>

@@ -3,26 +3,26 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import MidNavbar from '../../components/MidNavbar'
 import Notification from '../../components/notification'
-import ReactLoading from 'react-loading';
+// import ReactLoading from 'react-loading';
 
 
 function Search() {
     const [items, setItems] = useState([])
+    const { query } = useRouter()
     const router = useRouter()
-    const input = router.query.input
-    const type = router.query.category
 
+    // console.log(query);
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${input}&category=${type}`);
+                const res = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${query.input}&category=${query.category}`);
                 const items = await res.data;
                 setItems(items.data)
             } catch (error) {
                 console.log(error);
             }
         })()
-    }, [input, type])
+    }, [query])
 
 
     return (
@@ -49,7 +49,7 @@ function Search() {
                                 </div>
                             </div>
                         </div>
-                    )) : (<> <ReactLoading type="cylon" color="#fa1d58" height={100} width={50} /></>)}
+                    )) : (<><h1 className='text-lg font-medium text-gray-400 italic'>Result Empty</h1></>)}
                 </div>
             </div>
         </>
