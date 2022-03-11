@@ -4,6 +4,7 @@ import NavbarApp from "../../components/navbar";
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import axios from "axios";
+import ReactLoading from "react-loading";
 
 export default function Goals() {
   const getToken =
@@ -16,20 +17,27 @@ export default function Goals() {
     }
   }, [getToken]);
 
+  const [loading, setLoading] = useState(false);
+
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
   const [age, setAge] = useState();
-  const [range, setRange] = useState();
+  const [dailyActive, setDailyActive] = useState("");
+  const [weightTarget, setWeightTarget] = useState();
   const [target, setTarget] = useState("");
+  const [range, setRange] = useState();
 
   function handleSubmit(e) {
+    setLoading(true);
     e.preventDefault();
     const body = {
-      height,
-      weight,
-      age,
-      range,
-      target,
+      height: height,
+      weight: weight,
+      age: age,
+      daily_active: dailyActive,
+      weight_target: weightTarget,
+      target: target,
+      range_time: range,
     };
 
     axios({
@@ -42,7 +50,10 @@ export default function Goals() {
       },
     })
       .then(({ data }) => {
-        localStorage.setItem("goal_uid", data.data.goal_uid);
+        console.log(data.message);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -50,6 +61,15 @@ export default function Goals() {
       .finally(() => {
         router.push("/");
       });
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center content-center">
+        <br />
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
   }
 
   return (
@@ -181,6 +201,62 @@ export default function Goals() {
                     }}
                   />
                   <span className="ml-1">Gain Weight</span>
+                </label>
+              </div>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="weightTarget"
+                className="block text-sm font-bold text-mexican-pink"
+              >
+                Weight Target (kg)
+              </label>
+              <input
+                type="number"
+                name="weightTarget"
+                id="weightTarget"
+                autoComplete="off"
+                required
+                placeholder="65"
+                className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
+                onChange={(e) => {
+                  setWeightTarget(parseInt(e.target.value));
+                }}
+                value={weightTarget}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="dailyActive"
+                className="block text-sm font-bold text-mexican-pink mb-2"
+              >
+                Are you an Active Person ?
+              </label>
+              <div>
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    className="form-radio accent-mexican-pink"
+                    name="dailyActive"
+                    value="yes"
+                    onChange={(e) => {
+                      setDailyActive(e.target.value);
+                    }}
+                  />
+                  <span className="ml-1">Yes</span>
+                </label>
+                <label className="inline-flex items-center ml-5">
+                  <input
+                    type="radio"
+                    className="form-radio accent-mexican-pink"
+                    name="dailyActive"
+                    value="no"
+                    onChange={(e) => {
+                      setDailyActive(e.target.value);
+                    }}
+                  />
+                  <span className="ml-1">No</span>
                 </label>
               </div>
             </div>
