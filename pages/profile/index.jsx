@@ -1,17 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import NavbarApp from "../../components/navbar";
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import { useRouter } from "next/router";
-
-const data = {
-  name: "Olivia Sara",
-  age: 27,
-  weight: 68,
-  height: 164,
-  currentTarget: "Loss Weight",
-};
+import axios from "axios";
+import ReactLoading from "react-loading";
 
 export default function Profile() {
   const getToken =
@@ -24,6 +18,41 @@ export default function Profile() {
     }
   }, [getToken]);
 
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState();
+  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState();
+  const [target, setTarget] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    axios({
+      method: "get",
+      url: "https://aaryadewangga.cloud.okteto.net/users",
+      headers: {
+        Authorization: `Bearer ${getToken}`,
+      },
+    })
+      .then(({ data }) => {
+        setName(data.data.Name);
+        setEmail(data.data.Email);
+        setGender(data.data.Gender);
+        setAge(data.data.Goal[data.data.Goal.length - 1].Age);
+        setHeight(data.data.Goal[data.data.Goal.length - 1].Height);
+        setWeight(data.data.Goal[data.data.Goal.length - 1].Weight);
+        setTarget(data.data.Goal[data.data.Goal.length - 1].Target);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   // funtion Logout
   function handleLogout() {
     if (getToken) {
@@ -34,6 +63,15 @@ export default function Profile() {
 
   function handleFileChange() {
     console.log("file change");
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center content-center">
+        <br />
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
   }
 
   return (
@@ -64,10 +102,12 @@ export default function Profile() {
             </button>
           </div>
           <div className="flex items-center">
-            <div className="w-30 h-30 flex flex-col">
+            <div className="flex flex-col">
               <img
-                src="https://randomuser.me/api/portraits/women/81.jpg"
+                src="https://prometheus-x.org/decidim-packs/media/images/default-avatar-aaa9e55bac5d7159b847.svg"
                 className="rounded-full border border-gray-100 shadow-sm"
+                width={120}
+                height={120}
               />
               <input
                 type="file"
@@ -86,29 +126,49 @@ export default function Profile() {
               </label>
             </div>
             <div className="pl-5">
-              <h3 className="text-2xl font-semibold">{data.name}</h3>
-              <h5>{data.age}th</h5>
+              <h3 className="text-2xl font-semibold capitalize">{name}</h3>
+              <h5>{email}</h5>
+              {age ? <h5>{age}th</h5> : ""}
+              {gender == "Pria" ? (
+                <h5>Male</h5>
+              ) : gender == "Wanita" ? (
+                <h5>Female</h5>
+              ) : (
+                ""
+              )}
             </div>
           </div>
 
           <div className="flex justify-center mt-5">
             <div>
-              <h3 className="font-semibold">
-                Weight: <span className="font-normal">{data.weight} kg</span>
-              </h3>
-              <h3 className="font-semibold">
-                Height: <span className="font-normal">{data.height} cm</span>
-              </h3>
+              {height ? (
+                <h3 className="font-semibold">
+                  Height: <span className="font-normal">{height} kg</span>
+                </h3>
+              ) : (
+                ""
+              )}
+              {weight ? (
+                <h3 className="font-semibold">
+                  Weight: <span className="font-normal">{weight} cm</span>
+                </h3>
+              ) : (
+                ""
+              )}
             </div>
-            <div className="ml-5">
-              <h3 className="font-semibold">Current Target</h3>
-              <h3>{data.currentTarget}</h3>
-            </div>
+            {target ? (
+              <div className="ml-5">
+                <h3 className="font-semibold">Current Target</h3>
+                <h3 className="capitalize">{target}</h3>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="text-center mt-5">
             <Link href="/goals">
               <button className="bg-mexican-pink rounded-full px-4 py-3 text-white">
-                Change Your Goals
+                Add Your Goals
               </button>
             </Link>
           </div>
