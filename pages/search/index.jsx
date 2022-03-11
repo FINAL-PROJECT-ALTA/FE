@@ -14,13 +14,9 @@ function Search() {
     // console.log(query);
     useEffect(() => {
         (async () => {
-            try {
-                const res = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${query.input}&category=${query.category}`);
-                const items = await res.data;
-                setItems(items.data)
-            } catch (error) {
-                console.log(error);
-            }
+            const res = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${query.input}&category=${query.category}`);
+            const items = await res.data;
+            setItems(items.data)
         })()
     }, [query])
 

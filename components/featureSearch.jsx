@@ -4,6 +4,8 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+
 const types = [
     { name: 'foods' },
     { name: 'calories' },
@@ -37,6 +39,12 @@ function FeatureSearch() {
     const clearInput = () => {
         setSearchTerm([])
         setWordEntered('')
+    }
+
+    async function getSearch() {
+        const result = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${wordEntered}&category=${selected.name}`)
+        console.log(result.data);
+
     }
 
     return (
@@ -97,7 +105,8 @@ function FeatureSearch() {
                         </Listbox>
                     </div>
                 </div>
-                <button onClick={() => { router.push(`/search?input=${wordEntered}&category=${selected.name}`) }} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
+                {/* { router.push(`/search?input=${wordEntered}&category=${selected.name}`) } */}
+                <button onClick={getSearch} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
             </div>
             {searchTerm != 0 && (
                 <div className='text-dark-green text-lg my-5 px-5 overflow-y-scroll'>
