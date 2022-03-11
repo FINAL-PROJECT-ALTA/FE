@@ -11,6 +11,7 @@ function Layout({ children }) {
 
     useEffect(() => {
         dispatch(allStore.fetchAllFoods())
+        dispatch(allStore.fetchAllMenus())
 
     }, [dispatch])
 
