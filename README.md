@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
 
-## Getting Started
+# Healthy Fit
 
-First, run the development server:
+<!-- PROJECT LOGO -->
+<div align="center">
+  <a href="https://github.com/FINAL-PROJECT-ALTA/FE">
+    <img src="image/logo-white.png" alt="Logo" width="250" height="180">
+  </a>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+  <h3 align="center">Healthy Fit</h3>
+  <p align="center">
+   An application that aims its users to monitor eating behavior on a daily basis
+    <br />
+    <div id = "other-software-design"></div>
+    <a href="https://www.figma.com/file/PZBScHf3Gr09b4H2VonNXU/Capstone---Healthy-App?node-id=0%3A1">Figma</a>
+    ·
+    <a href="https://app.swaggerhub.com/apis/aaryadewangga/Final_Project/1.0#/">Open API</a>
+  </p>
+</div>
+<br />
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+1. [About the Project](#about-the-project)
+2. [Tech Stack](#tech-stack)
+3. [Preview](#preview)
+4. [Contact](#contact)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<!-- ABOUT THE PROJECT -->
+## About The Project
+-  An application that aims its users to monitor eating behavior on a daily basis
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## Learn More
+## Tech Stack
+### Framework
+- Next.js - Next Js simplified simplifies HTML, routing and interactions for rapid web development
+- TailwindCss - simplified to styling, with inline styling
 
-To learn more about Next.js, take a look at the following resources:
+### Build With
+- Axios
+- React - Redux
+- React - Icons
+- Heroicons
+- Sweetalert2
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deployment
+- [Firebase](https://firebase.google.com/) - FireBase by Google
+- [Vercel](https://vercel.com/) - Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Collaboration 
+- [Trello](https://trello.com/) - Manage Project
+- [Github](https://github.com/) - Versioning Project
 
-## Deploy on Vercel
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<!-- Preview -->
+## Preview
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img src="image/display1.png" alt="display-preview">
+<img src="image/display2.png" alt="display-preview">
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+* Muhamad Fahmi Fauzan - [Github](https://github.com/fahmi-zan) · [LinkedIn](http://www.linkedin.com/in/muhamad-fahmi-fauzan)
+* Adhindya Trigha Nugraha - [Github](https://github.com/Trigha) · [LinkedIn]()
+* Dicky Juniansyah Putra - [Github](https://github.com/dickyrex19) · [LinkedIn](https://www.linkedin.com/in/dickyjuniansyahputra/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>

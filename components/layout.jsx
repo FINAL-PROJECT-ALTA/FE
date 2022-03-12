@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navigation from './navigation'
 // import NavbarApp from './navbar'
 import { useRouter } from 'next/router'
-
+import allStore from '../store/actions';
+import { useDispatch } from 'react-redux'
 
 function Layout({ children }) {
     const router = useRouter()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(allStore.fetchAllFoods())
+        dispatch(allStore.fetchAllMenus())
+
+    }, [dispatch])
+
     return (
         <>
-            <div className='max-w-screen-sm m-auto font-poppins'>
-                {/* <NavbarApp /> */}
-                <main>{children}</main>
-                {router.pathname !== "/" ? <></> : (
-                    <Navigation />)}
-            </div>
+            {/* <NavbarApp /> */}
+            <main>{children}</main>
+            {router.pathname !== "/" ? <></> : (
+                <Navigation />)}
         </>
     )
 }
