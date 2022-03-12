@@ -5,7 +5,7 @@
 <!-- PROJECT LOGO -->
 <div align="center">
   <a href="https://github.com/FINAL-PROJECT-ALTA/FE">
-    <img src="image/Logo-white.png" alt="Logo" width="180" height="180">
+    <img src="image/logo-white.png" alt="Logo" width="250" height="180">
   </a>
 
   <h3 align="center">Healthy Fit</h3>
