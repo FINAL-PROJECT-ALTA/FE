@@ -17,6 +17,7 @@ function Category() {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [idFood, setIdFood] = useState('');
+
   // console.log(idFood);
 
   const router = useRouter();

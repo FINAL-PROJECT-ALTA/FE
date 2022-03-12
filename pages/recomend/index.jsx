@@ -6,7 +6,6 @@ import NavbarApp from '../../components/navbar';
 import Navigation from '../../components/navigation';
 import Link from 'next/link';
 
-
 function RecommenPage() {
   const data = {
     calories_count: 0,
@@ -22,23 +21,21 @@ function RecommenPage() {
       <NavbarApp />
       <div className="px-10">
         <FeatureTitle />
-        <div className="w-full sm:w-full md:w-full lg:w-full h-[205px] my-20 p-6 rounded-[20px] bg-[#013542]">
-          <div className="">
-            <div className="flex">
-              <div className="flex flex-col sm:px-[5px] md:px-[10px] lg:px-[10px]">
-                <h1 className="text-3xl md:text-4xl lg:text-4xl text-[#FA1D58] font-medium">
-                  {data.calories_count}
-                </h1>
-                <p className="text-[14px] md:text-base lg:text-base text-white font-medium w-36">
-                  Caloris Count
-                </p>
-              </div>
+        <div className="max-w-md mx-auto h-44 p-6 rounded-xl bg-dark-green">
+          <div className="flex- flex-row justify-between">
+            <div className="basis-1/2">
+              <h1 className="text-3xl md:text-4xl lg:text-4xl text-[#FA1D58] font-medium">
+                {data.calories_count}
+              </h1>
+              <h5 className="text-xs lg:text-lg text-white font-base">
+                Caloris Count
+              </h5>
 
-              <div className="flex flex-col">
-                <h3 className="text-3xl md:text-4xl lg:text-4xl text-[#FA1D58] font-medium ml-[120px] sm:ml-60 md:ml-60 lg:ml-60">
+              <div className="basis-1/2 text-right">
+                <h3 className="text-3xl md:text-4xl lg:text-4xl text-rose-500 font-mono">
                   {data.caloris_mt}
                 </h3>
-                <h5 className="text-[14px] md:text-base lg:text-base text-white font-medium ml-[51px] sm:ml-40 md:ml-40 lg:ml-40">
+                <h5 className="text-xs lg-text-lg text-white font-base">
                   Calories Maintenance
                 </h5>
               </div>
@@ -57,20 +54,26 @@ function RecommenPage() {
           </div>
           <div className="grid grid-cols-4 gap-1 my-2 text-center text-white">
             <span>
-              <p className="font-mono text-lg text-light-green">{data.carbo}gr</p>
-              <h2 className='font-medium text-lg'>Carbo</h2>
+              <p className="font-mono text-lg text-light-green">
+                {data.carbo}gr
+              </p>
+              <h2 className="font-medium text-lg">Carbo</h2>
             </span>
             <span>
               <p className="font-mono text-lg text-light-green">{data.fat}gr</p>
-              <h2 className='font-medium text-lg'>Fat</h2>
+              <h2 className="font-medium text-lg">Fat</h2>
             </span>
             <span>
-              <p className="font-mono text-lg text-light-green">{data.protein}gr</p>
-              <h2 className='font-medium text-lg'>Protein</h2>
+              <p className="font-mono text-lg text-light-green">
+                {data.protein}gr
+              </p>
+              <h2 className="font-medium text-lg">Protein</h2>
             </span>
             <span>
-              <p className="font-mono text-lg text-light-green">{data.sugar}gr</p>
-              <h2 className='font-medium text-lg'>Sugar</h2>
+              <p className="font-mono text-lg text-light-green">
+                {data.sugar}gr
+              </p>
+              <h2 className="font-medium text-lg">Sugar</h2>
             </span>
           </div>
         </div>
@@ -107,9 +110,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
@@ -134,9 +135,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
@@ -161,9 +160,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
@@ -188,9 +185,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
