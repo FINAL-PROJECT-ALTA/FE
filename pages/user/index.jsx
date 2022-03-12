@@ -52,7 +52,7 @@ function LoginForm() {
         // console.log(data.data.token);
         localStorage.setItem('token', data.data.token);
         setTimeout(() => {
-          router.push('/');
+          router.push('/profile');
         }, 4000);
         Swal.fire({
           title: 'We welcome you captain.',

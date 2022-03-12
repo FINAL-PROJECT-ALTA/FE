@@ -11,9 +11,7 @@ function AdminPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // const token = localStorage.getItem('token');
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJleHAiOjE2NDY5NjcxNjEsInJvbGVzIjpmYWxzZSwidXNlcl91aWQiOiJIdnl5QnhxRXp6Y1k5UEEyWnd4OWphIn0.BI7EsbehxksIYrf2xn3-I2nviFSIFk-gR59stQ0QQGQ';
+    const token = localStorage.getItem('token');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -128,7 +126,6 @@ function AdminPage() {
                       src={item.imageSrc}
                       alt={item.imageAlt}
                       className="mx-auto "
-                      // width="overlay-bottom-left"
                     />
                     <h2 className="text-dark-green text-center font-medium mt-2">
                       {item.name}

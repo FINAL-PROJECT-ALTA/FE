@@ -37,9 +37,7 @@ function AddFood() {
       food_categories: category,
     };
 
-    // const token = localStorage.getItem('token');
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJleHAiOjE2NDcwMDA5MjIsInJvbGVzIjp0cnVlLCJ1c2VyX3VpZCI6InZGM1J6UFN4d0Ezd2o4SzhaaUdjb2gifQ.N3qSIerP2LhoHODO_WHMLhz8yEDtZjr0aX8IWmXfFTI';
+    const token = localStorage.getItem('token');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -247,7 +245,7 @@ function AddFood() {
           >
             <option>fruit</option>
             <option>drink</option>
-            <option>junk Food</option>
+            <option>junk food</option>
             <option>food</option>
             <option>snack</option>
           </select>

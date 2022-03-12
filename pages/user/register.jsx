@@ -13,6 +13,9 @@ function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState(['Male', 'Female']);
+  const [nameErr, setNameErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const [passwordErr, setPasswordErr] = useState({});
 
   const router = useRouter();
 
@@ -48,7 +51,32 @@ function RegisterForm() {
     }
   };
 
+  const formValidation = () => {
+    const nameErr = {};
+    const emailErr = {};
+    const passwordErr = {};
+    let isValid = true;
+
+    if (name.trim().length <= 3) {
+      nameErr.nameShort = 'Name too very short';
+      isValid = false;
+    }
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      emailErr.mailtag = 'Invalid Email';
+      isValid = false;
+    }
+    if (password.length <= 8) {
+      passwordErr.passleng = 'Password must be at least 8 chars long';
+      isValid = false;
+    }
+    setNameErr(nameErr);
+    setEmailErr(emailErr);
+    setPasswordErr(passwordErr);
+    return isValid;
+  };
+
   const handleSign = () => {
+    const isValid = formValidation();
     const body = {
       name: name,
       email: email,
@@ -168,9 +196,10 @@ function RegisterForm() {
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <MdEmail />
                   </div>
-
-                  <input
-                    className="
+                  <label className="block">
+                    <input
+                      type="email"
+                      className="
                     w-full 
                     text-base 
                     py-2
@@ -179,9 +208,20 @@ function RegisterForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                    focus:border-lime-500
+                    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+      invalid:border-pink-500 invalid:text-pink-600
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+      peer ..."
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 invisible peer-invalid:visible">
+                      * Please provide a valid email address.
+                    </p>
+                  </label>
+                  {/* <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
+                    Please provide a valid email address.
+                  </p> */}
                 </div>
               </div>
               <div className="flex flex-col mb-6">
@@ -203,10 +243,11 @@ function RegisterForm() {
                     border-gray-300 
                     focus:outline-none 
                     focus:border-lime-500
+                   
                    "
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10">
+                  <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 ">
                     * min. 3 character and max. 8 character
                   </p>
                 </div>
@@ -239,6 +280,9 @@ function RegisterForm() {
                       setGender(e.target.value);
                     }}
                   >
+                    <option value="" disabled selected hidden>
+                      Choose Gender...
+                    </option>
                     <option value="Pria">Male</option>
                     <option value="Wanita">Female</option>
                   </select>
