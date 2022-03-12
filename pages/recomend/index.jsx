@@ -22,33 +22,19 @@ function RecommenPage() {
       <NavbarApp />
       <div className="px-10">
         <FeatureTitle />
-        <div className="w-full sm:w-full md:w-full lg:w-full h-[205px] my-20 p-6 rounded-[20px] bg-[#013542]">
-          <div className="">
-            <div className="flex">
-              <div className="flex flex-col sm:px-[5px] md:px-[10px] lg:px-[10px]">
-                <h1 className="text-3xl md:text-4xl lg:text-4xl text-[#FA1D58] font-medium">
-                  {data.calories_count}
-                </h1>
-                <p className="text-[14px] md:text-base lg:text-base text-white font-medium w-36">
-                  Caloris Count
-                </p>
-              </div>
-
-              <div className="flex flex-col">
-                <h3 className="text-3xl md:text-4xl lg:text-4xl text-[#FA1D58] font-medium ml-[120px] sm:ml-60 md:ml-60 lg:ml-60">
-                  {data.caloris_mt}
-                </h3>
-                <h5 className="text-[14px] md:text-base lg:text-base text-white font-medium ml-[51px] sm:ml-40 md:ml-40 lg:ml-40">
-                  Calories Maintenance
-                </h5>
-              </div>
+        <div className="max-w-md mx-auto h-44 p-6 rounded-xl bg-dark-green">
+          <div className="flex flex-row justify-between">
+            <div className="basis-1/2">
+              <h1 className="text-3xl md:text-4xl lg:text-4xl text-rose-500 font-mono">
+                {data.calories_count}
+              </h1>
+              <p className="text-xs lg:text-lg text-white font-base">
+                Caloris Count
+              </p>
             </div>
-          </div>
-          <div className="flex mt-7 sm:ml-[50px] md:ml-[50px] lg:ml-[50px] text-white">
-            <div>
-              <h3 className="font-semibold">
-                {data.carbo}
-                gr
+            <div className="basis-1/2 text-right">
+              <h3 className="text-3xl md:text-4xl lg:text-4xl text-rose-500 font-mono">
+                {data.caloris_mt}
               </h3>
               <h5 className="text-xs lg:text-lg text-white font-base">
                 Calories Maintenance
@@ -78,15 +64,6 @@ function RecommenPage() {
         <div className="mt-10">
           <div className="flex ">
             <FeatureTitle text="Program Goals" />
-            <div className="flex">
-              <button
-                // onClick={}
-                className="flex ml-[9.5rem] sm:ml-[18rem] md:ml-[18rem] lg:ml-[18rem] items-center justify-end focus:outline-none text-white text-sm sm:text-base bg-cyan-900 hover:bg-cyan-700 rounded py-2 w-full transition duration-150 ease-in"
-              >
-                <AiOutlinePlus size={20} className="ml-2" />
-                <span className="ml-1 mr-2">Add Menu</span>
-              </button>
-            </div>
           </div>
 
           {/* Breakfast */}
