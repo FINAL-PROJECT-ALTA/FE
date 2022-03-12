@@ -13,15 +13,15 @@ function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [gender, setGender] = useState(['Pria', 'Wanita']);
+  const [gender, setGender] = useState(['Male', 'Female']);
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
 
   const router = useRouter();
 
   const validateSignUp = () => {
     if (name.trim() === '') {
       Swal.fire('Name is required', 'Fill your name please', 'info');
-    } else if (/\s/.test(name)) {
-      Swal.fire('Fotrbiden', 'Name contain whites space', 'info');
     } else if (email === '') {
       Swal.fire('Email is required', 'Fill your Email please', 'info');
     } else if (/\s/.test(email)) {
@@ -32,8 +32,18 @@ function RegisterForm() {
         'Fill your Email with correct format please',
         'info'
       );
-    } else if (password < 8) {
-      Swal.fire('Password is required', 'Fill your Password please', 'info');
+    } else if (password < 3) {
+      Swal.fire(
+        'Password is required',
+        'Fill your Password min. 3 character',
+        'info'
+      );
+    } else if (password > 8) {
+      Swal.fire(
+        'Password is required',
+        'Fill your Password max. 8 character',
+        'info'
+      );
     } else if (/\s/.test(password)) {
       Swal.fire('Fotrbiden', 'Password contain whites space', 'info');
     } else {
@@ -42,11 +52,22 @@ function RegisterForm() {
   };
 
   const handleSign = () => {
-    const body = {
-      name: name,
-      email: email,
-      password: password,
-      gender: gender,
+    // const body = {
+    //   name: name,
+    //   email: email,
+    //   password: password,
+    //   gender: gender,
+    // };
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('gender', gender);
+    formData.append('image', image);
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     };
 
     Swal.fire({
@@ -60,13 +81,22 @@ function RegisterForm() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post('https://aaryadewangga.cloud.okteto.net/users/register', body)
+          .post(
+            'https://aaryadewangga.cloud.okteto.net/users/register',
+            formData,
+            config
+          )
           .then(({ data }) => {
             // console.log(data.data.token);
             localStorage.setItem('token', data.data.token);
             setTimeout(() => {
               router.push('/user');
             }, 1500);
+            Swal.fire(
+              'Account Created!',
+              'Login to accsess full experience.',
+              'success'
+            );
           })
           .catch((error) => {
             Swal.fire({
@@ -74,18 +104,21 @@ function RegisterForm() {
               title: 'Oops...',
               text: 'Something went wrong!',
             });
-            console.log('cek error', error);
           })
-          .finally(() => { });
-        Swal.fire(
-          'Account Created!',
-          'Login to accsess full experience.',
-          'success'
-        );
+          .finally(() => {});
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
     });
+  };
+
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+    }
   };
 
   return (
@@ -160,9 +193,10 @@ function RegisterForm() {
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <MdEmail />
                   </div>
-
-                  <input
-                    className="
+                  <label className="block">
+                    <input
+                      type="email"
+                      className="
                     w-full 
                     text-base 
                     py-2
@@ -171,9 +205,22 @@ function RegisterForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                    focus:border-lime-500
+                    disabled:bg-slate-50 
+                    disabled:text-slate-500 
+                    disabled:border-slate-200 
+                    disabled:shadow-none
+                    invalid:border-pink-500 
+                    invalid:text-pink-600
+                    focus:invalid:border-pink-500 
+                    focus:invalid:ring-pink-500
+                    peer ..."
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 invisible peer-invalid:visible">
+                      * Please provide a valid email address.
+                    </p>
+                  </label>
                 </div>
               </div>
               <div className="flex flex-col mb-6">
@@ -194,10 +241,13 @@ function RegisterForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500
-                   " type="password"
+                    focus:border-lime-500                 
+                   "
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 ">
+                    * min. 3 character and max. 8 character
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col mb-6">
@@ -228,8 +278,11 @@ function RegisterForm() {
                       setGender(e.target.value);
                     }}
                   >
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="" disabled selected hidden>
+                      Choose Gender...
+                    </option>
+                    <option value="Pria">Male</option>
+                    <option value="Wanita">Female</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg
@@ -240,6 +293,36 @@ function RegisterForm() {
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                     </svg>
                   </div>
+                </div>
+              </div>
+              <div className="flex flex-col mb-6">
+                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
+                  Photo Profile:
+                </label>
+                <div className="relative">
+                  <label className="block">
+                    <span className="sr-only">Choose profile photo</span>
+                    <input
+                      type="file"
+                      className="
+                      block 
+                      w-full 
+                      text-sm 
+                      text-slate-500
+                      file:mr-4 
+                      file:py-2 
+                      file:px-4
+                      file:rounded-full 
+                      file:border-0
+                      file:text-sm 
+                      file:font-semibold
+                      file:bg-violet-50 
+                      file:text-violet-700
+                      hover:file:bg-violet-100
+                    "
+                      onChange={uploadToClient}
+                    />
+                  </label>
                 </div>
               </div>
               <div className="flex w-full mt-3">
