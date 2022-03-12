@@ -17,6 +17,8 @@ function AddFood() {
   const [protein, setProtein] = useState(0);
   const [unit, setUnit] = useState('');
   const [unitValue, setUnitValue] = useState(0);
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
   const [category, setCategory] = useState([
     'fruit',
     'drink',
@@ -35,6 +37,7 @@ function AddFood() {
       unit: unit,
       unit_value: parseInt(unitValue),
       food_categories: category,
+      // image: image
     };
 
     const token = localStorage.getItem('token');
@@ -54,9 +57,6 @@ function AddFood() {
         axios
           .post('https://aaryadewangga.cloud.okteto.net/foods', body, config)
           .then(({ data }) => {
-            console.log(data);
-            // console.log(data.data.token);
-            // localStorage.setItem('token', data.data.token);
             setTimeout(() => {
               router.push('../admin');
             }, 1500);
@@ -80,6 +80,15 @@ function AddFood() {
     });
   };
 
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+    }
+  };
+
   return (
     <div>
       <NavbarApp />
@@ -89,22 +98,35 @@ function AddFood() {
         </center>
         <section className="flex flex-col w-full h-full p-1 overflow-auto mt-5">
           <header className="flex flex-col items-center justify-center py-12 text-base text-blueGray-500 transition duration-500 ease-in-out transform bg-white border border-dashed rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
-            <p className="flex flex-wrap justify-center mb-3 text-base leading-7 text-blueGray-500">
-              <span>Drag and drop your files anywhere or</span>
-            </p>
-            {/* <input
-              type="file"
-              style={{ display: 'none' }}
-              id="imgUpload"
-              // ref={fileInputRef}
-            /> */}
-            <label>
-              <button
-                className="w-auto px-2 py-1 my-2 mr-2 text-blueGray-500 transition duration-500 ease-in-out transform border rounded-md hover:text-blueGray-600 text-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-gray-100"
-                onClick={'#imgUpload'}
-              >
-                Upload a file{' '}
-              </button>
+            {/* <p className="flex flex-wrap justify-center mb-3 text-base leading-7 text-blueGray-500"> */}
+            <img
+              src={createObjectURL}
+              width={255}
+              height={170}
+              alt="preview photo"
+            />
+
+            <label className="block">
+              <input
+                type="file"
+                className="
+                      block 
+                      w-full 
+                      text-sm 
+                      text-slate-500
+                      file:mr-4 
+                      file:py-2 
+                      file:px-4
+                      file:rounded-full 
+                      file:border-0
+                      file:text-sm 
+                      file:font-semibold
+                      file:bg-violet-50 
+                      file:text-violet-700
+                      hover:file:bg-violet-100
+                    "
+                onChange={uploadToClient}
+              />
             </label>
           </header>
         </section>
