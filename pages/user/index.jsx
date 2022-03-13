@@ -50,12 +50,14 @@ function LoginForm() {
       .post('https://aaryadewangga.cloud.okteto.net/users/login', body)
       .then(({ data }) => {
         // console.log(data.data.token);
-        localStorage.setItem('token', data.data.token);
+
         if (data.data.roles === true) {
+          localStorage.setItem('token_admin', data.data.token);
           setTimeout(() => {
             router.push('/admin');
           }, 4000);
         } else {
+          localStorage.setItem('token', data.data.token);
           setTimeout(() => {
             router.push('/profile');
           }, 4000);
@@ -241,8 +243,9 @@ function LoginForm() {
             <p className="flex flex-col items-center justify-center text-center text-md text-gray-500">
               <span>Dont have an account?</span>
               <Link href="../user/register">
-                <a className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
-                > Sign up
+                <a className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300">
+                  {' '}
+                  Sign up
                 </a>
               </Link>
             </p>

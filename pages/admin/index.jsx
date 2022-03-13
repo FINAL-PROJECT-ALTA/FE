@@ -16,7 +16,7 @@ function AdminPage() {
   const router = useRouter();
 
   const getToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -103,14 +103,14 @@ function AdminPage() {
 
   function handleLogout() {
     if (getToken) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('token_admin');
       router.push('/user');
     }
   }
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      router.push('/user');
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/profile');
     }
   }, []);
 
