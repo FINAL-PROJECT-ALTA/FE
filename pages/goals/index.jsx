@@ -59,7 +59,7 @@ export default function Goals() {
         console.log(err, "error");
       })
       .finally(() => {
-        router.push("/");
+        router.push("/profile");
       });
   }
 
