@@ -135,13 +135,7 @@ export default function Profile() {
               <h3 className="text-2xl font-semibold capitalize">{name}</h3>
               <h5>{email}</h5>
               {age ? <h5>{age}th</h5> : ""}
-              {gender == "Pria" ? (
-                <h5>Male</h5>
-              ) : gender == "Wanita" ? (
-                <h5>Female</h5>
-              ) : (
-                ""
-              )}
+              {gender ? <h5 className="capitalize">{gender}</h5> : ""}
             </div>
           </div>
 
