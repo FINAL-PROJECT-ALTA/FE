@@ -40,7 +40,7 @@ function AddFood() {
       // image: image
     };
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };

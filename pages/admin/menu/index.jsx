@@ -41,10 +41,10 @@ function RecommenPage() {
   ];
 
   const getToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -75,7 +75,9 @@ function RecommenPage() {
               href={`/admin/listMenu?category=${item.href}`}
               key={item.name}
             >
-              <div className="flex flex-col px-10 py-5 my-3 ${item.colorbg} max-w-lg mx-auto drop-shadow-lg rounded-xl">
+              <div
+                className={`flex flex-col px-10 py-5 my-3 ${item.colorbg} max-w-lg mx-auto drop-shadow-lg rounded-xl`}
+              >
                 <div className="flex justify-between">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-semibold leading-8">

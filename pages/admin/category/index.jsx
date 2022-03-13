@@ -25,7 +25,7 @@ function Category() {
   const food_categories = router.query.foodsCategory;
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_admin');
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -48,6 +48,7 @@ function Category() {
           setCategory(findFood.food_categories);
           setName(findFood.name);
           setIdFood(findFood.food_uid);
+          console.log(idFood);
         }
 
         setData(data.data);
@@ -59,7 +60,7 @@ function Category() {
   }, []);
 
   function handleDelete() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -68,6 +69,7 @@ function Category() {
       .delete(`https://aaryadewangga.cloud.okteto.net/foods/${idFood}`, config)
       .then(({ data }) => {
         console.log(data);
+        router.push('/admin/menu');
       })
       .catch((err) => {
         console.log(err, 'error');
@@ -132,13 +134,12 @@ function Category() {
                           </center>
                         </button>
                       </Link>
+
                       <button
                         className="w-[55px] hover:w-[500px] bg-red-500 hover:bg-red-700 text-gray-800 font-bold py-2 px-4 border border-blue-700 rounded"
                         onClick={() => {
-                          // setIdFood == el.food_uid;
-                          // console.log(idFood);
+                          setIdFood(el.food_uid);
                           handleDelete();
-                          router.push('/admin');
                         }}
                       >
                         <center>

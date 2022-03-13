@@ -29,7 +29,7 @@ function AddFood() {
   const [createObjectURL, setCreateObjectURL] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -61,7 +61,7 @@ function AddFood() {
   }, []);
 
   function handleEdit() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
