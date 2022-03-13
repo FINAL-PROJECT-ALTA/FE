@@ -6,7 +6,6 @@ import NavbarApp from '../../components/navbar';
 import Navigation from '../../components/navigation';
 import Link from 'next/link';
 
-
 function RecommenPage() {
   const data = {
     calories_count: 0,
@@ -43,20 +42,26 @@ function RecommenPage() {
           </div>
           <div className="grid grid-cols-4 gap-1 my-2 text-center text-white">
             <span>
-              <p className="font-mono text-lg text-light-green">{data.carbo}gr</p>
-              <h2 className='font-medium text-lg'>Carbo</h2>
+              <p className="font-mono text-lg text-light-green">
+                {data.carbo}gr
+              </p>
+              <h2 className="font-medium text-lg">Carbo</h2>
             </span>
             <span>
               <p className="font-mono text-lg text-light-green">{data.fat}gr</p>
-              <h2 className='font-medium text-lg'>Fat</h2>
+              <h2 className="font-medium text-lg">Fat</h2>
             </span>
             <span>
-              <p className="font-mono text-lg text-light-green">{data.protein}gr</p>
-              <h2 className='font-medium text-lg'>Protein</h2>
+              <p className="font-mono text-lg text-light-green">
+                {data.protein}gr
+              </p>
+              <h2 className="font-medium text-lg">Protein</h2>
             </span>
             <span>
-              <p className="font-mono text-lg text-light-green">{data.sugar}gr</p>
-              <h2 className='font-medium text-lg'>Sugar</h2>
+              <p className="font-mono text-lg text-light-green">
+                {data.sugar}gr
+              </p>
+              <h2 className="font-medium text-lg">Sugar</h2>
             </span>
           </div>
         </div>
@@ -84,9 +89,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
@@ -111,9 +114,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
@@ -138,9 +139,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">
@@ -165,9 +164,7 @@ function RecommenPage() {
                 <h1 className="text-lg md:text-xl font-mono ">
                   {data.calories}
                 </h1>
-                <h1 className="text-xs md:text-xl font-semibold">
-                  Calories
-                </h1>
+                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
               </div>
             </div>
             <div className="flex justify-end ">

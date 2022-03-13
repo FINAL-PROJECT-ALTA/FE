@@ -51,9 +51,16 @@ function LoginForm() {
       .then(({ data }) => {
         // console.log(data.data.token);
         localStorage.setItem('token', data.data.token);
-        setTimeout(() => {
-          router.push('/');
-        }, 4000);
+        if (data.data.roles === true) {
+          setTimeout(() => {
+            router.push('/admin');
+          }, 4000);
+        } else {
+          setTimeout(() => {
+            router.push('/profile');
+          }, 4000);
+        }
+
         Swal.fire({
           title: 'We welcome you captain.',
           width: 600,
@@ -89,12 +96,12 @@ function LoginForm() {
           text: 'Something went wrong!',
         });
       })
-      .finally(() => { });
+      .finally(() => {});
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center content-center">
+      <div className="flex items-center justify-center content-center h-screen">
         <br />
 
         <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
@@ -163,6 +170,7 @@ function LoginForm() {
                   </div>
 
                   <input
+                    type="email"
                     className="
                     w-full 
                     text-base 
@@ -172,10 +180,21 @@ function LoginForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500"
-                    placeholder="E-Mail Address"
+                    focus:border-lime-500
+                    disabled:bg-slate-50 
+                    disabled:text-slate-500 
+                    disabled:border-slate-200 
+                    disabled:shadow-none
+                    invalid:border-pink-500 
+                    invalid:text-pink-600
+                    focus:invalid:border-pink-500 
+                    focus:invalid:ring-pink-500
+                    peer ..."
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 invisible peer-invalid:visible">
+                    * Please provide a valid email address.
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col mb-6">
