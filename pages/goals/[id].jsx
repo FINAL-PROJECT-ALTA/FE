@@ -82,7 +82,7 @@ export default function UpdateGoals() {
         }, 2000);
         Swal.fire(
           "Update Successfully",
-          "Your Goals has been Update",
+          "Your Goals has been Updated",
           "success"
         );
       })

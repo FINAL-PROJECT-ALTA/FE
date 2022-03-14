@@ -54,9 +54,19 @@ export default function Goals() {
         setTimeout(() => {
           setLoading(false);
         }, 2000);
+        Swal.fire(
+          "Create Successfully",
+          "Your Goals has been Created",
+          "success"
+        );
       })
       .catch((err) => {
         console.log(err, "error");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+        });
       })
       .finally(() => {
         router.push("/profile");
