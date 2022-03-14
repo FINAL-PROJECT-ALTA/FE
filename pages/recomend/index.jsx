@@ -1,21 +1,45 @@
-import { AiOutlinePlus } from 'react-icons/ai';
-import { AiOutlineClockCircle } from 'react-icons/ai';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import { AiOutlinePlus, AiOutlineClockCircle } from 'react-icons/ai';
+import { HiOutlinePlusSm, HiBan } from "react-icons/hi";
+import { Disclosure } from "@headlessui/react";
 import FeatureTitle from '../../components/featureTitle';
 import NavbarApp from '../../components/navbar';
 import Navigation from '../../components/navigation';
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+
+const data = {
+  calories_count: 0,
+  caloris_mt: 2400,
+  calories: 255,
+  carbo: 50,
+  fat: 10,
+  protein: 20,
+  sugar: 6,
+};
 function RecommenPage() {
-  const data = {
-    calories_count: 0,
-    caloris_mt: 2400,
-    calories: 255,
-    carbo: 50,
-    fat: 10,
-    protein: 20,
-    sugar: 6,
-  };
+
+  const router = useRouter()
+  const breakFast = useSelector(({ listBreakfast }) => listBreakfast)
+  const lunch = useSelector(({ listLunch }) => listLunch)
+  const dinner = useSelector(({ listDinner }) => listDinner)
+  const snack = useSelector(({ listSnack }) => listSnack)
+  const [click, setClick] = useState('')
+
+  console.log(snack);
+
+  const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  useEffect(() => {
+    if (!getToken) {
+      router.push("/user");
+    }
+  }, [getToken]);
+
+
+
   return (
     <>
       <NavbarApp />
@@ -72,105 +96,185 @@ function RecommenPage() {
           </div>
 
           {/* Breakfast */}
-          <div className="flex flex-col px-10 py-5 my-3 bg-yellow-300/70 max-w-lg mx-auto drop-shadow-lg rounded-xl">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
-                  Breakfast
-                </h3>
-                <div className="flex items-center text-gray-600">
-                  <AiOutlineClockCircle className="mr-2" />
-                  <span className="text-xs md:text-sm font-sans">
-                    7.00 - 9.00 am
-                  </span>
+          <Disclosure>
+            {({ open }) => (
+              <>
+                <div className="flex flex-col px-10 py-5 my-3 bg-yellow-300/70 max-w-lg mx-auto drop-shadow-sm rounded-xl">
+                  <div className="flex justify-between">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                        Breakfast
+                      </h3>
+                      <div className="flex items-center text-gray-600">
+                        <AiOutlineClockCircle className="mr-2" />
+                        <span className="text-xs md:text-sm font-sans">
+                          7.00 - 9.00 am
+                        </span>
+                      </div>
+                    </div>
+                    <Disclosure.Button>
+                      <div className=" flex items-center">
+                        <AiOutlinePlus size={40} className={`${open ? 'transform rotate-45' : ''
+                          } text-rose-500`} />
+                      </div>
+                    </Disclosure.Button>
+                  </div>
                 </div>
-              </div>
-              <div className="text-right">
-                <h1 className="text-lg md:text-xl font-mono ">
-                  {data.calories}
-                </h1>
-                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
-              </div>
-            </div>
-            <div className="flex justify-end ">
-              <AiOutlinePlus size={40} className="text-rose-500" />
-            </div>
-          </div>
+                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                  {Object.keys(breakFast).map(key => (
+                    <div key={key} className='flex flex-row py-1 items-center'>
+                      <span className='w-16 text-right font-mono text-rose-500'>{breakFast[key].total_calories}KCAL</span>
+                      {breakFast[key].foods.map(el => (
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                          {el.name}
+                        </div>
+                      ))}
+                      <div className="flex-1 text-right items-center">
+                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
+                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                      </div>
+                    </div>
+                  ))}
+                </Disclosure.Panel>
+              </>
+            )}
+          </Disclosure>
+
           {/* Lunch */}
-          <div className="flex flex-col px-10 py-5 my-3 bg-light-green/80 max-w-lg mx-auto drop-shadow-lg rounded-xl">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
-                  Lunch
-                </h3>
-                <div className="flex items-center text-gray-600">
-                  <AiOutlineClockCircle className="mr-2" />
-                  <span className="text-xs md:text-sm font-sans">
-                    12.00 - 1.00 pm
-                  </span>
+          <Disclosure>
+            {({ open }) => (
+              <>
+                <div className="flex flex-col px-10 py-5 my-3 bg-light-green/80 max-w-lg mx-auto drop-shadow-sm rounded-xl">
+                  <div className="flex justify-between">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                        Lunch
+                      </h3>
+                      <div className="flex items-center text-gray-600">
+                        <AiOutlineClockCircle className="mr-2" />
+                        <span className="text-xs md:text-sm font-sans">
+                          12.00 - 1.00 pm
+                        </span>
+                      </div>
+                    </div>
+                    <Disclosure.Button>
+                      <div className=" flex items-center">
+                        <AiOutlinePlus size={40} className={`${open ? 'transform rotate-45' : ''
+                          } text-rose-500`} />
+                      </div>
+                    </Disclosure.Button>
+                  </div>
                 </div>
-              </div>
-              <div className="text-right">
-                <h1 className="text-lg md:text-xl font-mono ">
-                  {data.calories}
-                </h1>
-                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
-              </div>
-            </div>
-            <div className="flex justify-end ">
-              <AiOutlinePlus size={40} className="text-rose-500" />
-            </div>
-          </div>
+                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                  {Object.keys(lunch).map(key => (
+                    <div key={key} className='flex flex-row py-1 items-center'>
+                      <span className='w-16 text-right font-mono text-rose-500'>{lunch[key].total_calories}KCAL</span>
+                      {lunch[key].foods.map(el => (
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                          {el.name}
+                        </div>
+                      ))}
+                      <div className="flex-1 text-right items-center">
+                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
+                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                      </div>
+                    </div>
+                  ))}
+                </Disclosure.Panel>
+              </>
+            )}
+          </Disclosure>
+
           {/* Dinner */}
-          <div className="flex flex-col px-10 py-5 my-3 bg-midnight/50 max-w-lg mx-auto drop-shadow-lg rounded-xl">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
-                  Dinner
-                </h3>
-                <div className="flex items-center text-gray-600">
-                  <AiOutlineClockCircle className="mr-2" />
-                  <span className="text-xs md:text-sm font-sans">
-                    05.00 - 8.00 pm
-                  </span>
+          <Disclosure>
+            {({ open }) => (
+              <>
+                <div className="flex flex-col px-10 py-5 my-3 bg-midnight/50 max-w-lg mx-auto drop-shadow-sm rounded-xl">
+                  <div className="flex justify-between">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                        Dinner
+                      </h3>
+                      <div className="flex items-center text-gray-600">
+                        <AiOutlineClockCircle className="mr-2" />
+                        <span className="text-xs md:text-sm font-sans">
+                          05.00 - 8.00 pm
+                        </span>
+                      </div>
+                    </div>
+                    <Disclosure.Button>
+                      <div className=" flex items-center">
+                        <AiOutlinePlus size={40} className={`${open ? 'transform rotate-45' : ''
+                          } text-rose-500`} />
+                      </div>
+                    </Disclosure.Button>
+                  </div>
                 </div>
-              </div>
-              <div className="text-right">
-                <h1 className="text-lg md:text-xl font-mono ">
-                  {data.calories}
-                </h1>
-                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
-              </div>
-            </div>
-            <div className="flex justify-end ">
-              <AiOutlinePlus size={40} className="text-rose-500" />
-            </div>
-          </div>
+                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                  {Object.keys(dinner).map(key => (
+                    <div key={key} className='flex flex-row py-1 items-center'>
+                      <span className='w-16 text-right font-mono text-rose-500'>{dinner[key].total_calories}KCAL</span>
+                      {dinner[key].foods.map(el => (
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                          {el.name}
+                        </div>
+                      ))}
+                      <div className="flex-1 text-right items-center">
+                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
+                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                      </div>
+                    </div>
+                  ))}
+                </Disclosure.Panel>
+              </>
+            )}
+          </Disclosure>
+
           {/* Snack */}
-          <div className="flex flex-col px-10 py-5 my-3 bg-zinc-200/80 max-w-lg mx-auto drop-shadow-lg rounded-xl">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold leading-8">
-                  Snack
-                </h3>
-                <div className="flex items-center text-gray-600">
-                  <AiOutlineClockCircle className="mr-2" />
-                  <span className="text-xs md:text-sm font-sans">
-                    4.00 - 4.30 pm
-                  </span>
+          <Disclosure>
+            {({ open }) => (
+              <>
+                <div className="flex flex-col px-10 py-5 my-3 bg-zinc-200/80 max-w-lg mx-auto drop-shadow-sm rounded-xl">
+                  <div className="flex justify-between">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-semibold leading-8">
+                        Snack
+                      </h3>
+                      <div className="flex items-center text-gray-600">
+                        <AiOutlineClockCircle className="mr-2" />
+                        <span className="text-xs md:text-sm font-sans">
+                          4.00 - 4.30 pm
+                        </span>
+                      </div>
+                    </div>
+                    <Disclosure.Button>
+                      <div className=" flex items-center">
+                        <AiOutlinePlus size={40} className={`${open ? 'transform rotate-45' : ''
+                          } text-rose-500`} />
+                      </div>
+                    </Disclosure.Button>
+                  </div>
                 </div>
-              </div>
-              <div className="text-right">
-                <h1 className="text-lg md:text-xl font-mono ">
-                  {data.calories}
-                </h1>
-                <h1 className="text-xs md:text-xl font-semibold">Calories</h1>
-              </div>
-            </div>
-            <div className="flex justify-end ">
-              <AiOutlinePlus size={40} className="text-rose-500" />
-            </div>
-          </div>
+                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                  {Object.keys(snack).map(key => (
+                    <div key={key} className='flex flex-row py-1 items-center'>
+                      <span className='w-16 text-right font-mono text-rose-500'>{snack[key].total_calories}KCAL</span>
+                      {snack[key].foods.map(el => (
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                          {el.name}
+                        </div>
+                      ))}
+                      <div className="flex-1 text-right items-center">
+                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
+                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                      </div>
+                    </div>
+                  ))}
+                </Disclosure.Panel>
+              </>
+            )}
+          </Disclosure>
+
         </div>
       </div>
 

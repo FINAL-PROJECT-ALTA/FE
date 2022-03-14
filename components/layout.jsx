@@ -11,7 +11,11 @@ function Layout({ children }) {
 
     useEffect(() => {
         dispatch(allStore.fetchAllFoods())
-        dispatch(allStore.fetchAllMenus())
+        dispatch(allStore.fetchAllBreakfast())
+        dispatch(allStore.fetchAllLunch())
+        dispatch(allStore.fetchAllDinner())
+        dispatch(allStore.fetchAllSnack())
+        // dispatch(allStore.fetchAllMenus())
 
     }, [dispatch])
 

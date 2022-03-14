@@ -1,5 +1,5 @@
 import { FcGoogle } from 'react-icons/fc';
-import { FaLock } from 'react-icons/fa';
+import { FaLock, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLoginCircleFill } from 'react-icons/ri';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   const router = useRouter();
 
@@ -96,7 +97,7 @@ function LoginForm() {
           text: 'Something went wrong!',
         });
       })
-      .finally(() => {});
+      .finally(() => { });
   };
 
   if (loading) {
@@ -130,7 +131,7 @@ function LoginForm() {
               Please sign in to your account
             </p>
           </div>
-          <div className="flex flex-row justify-center items-center space-x-3 mt-6">
+          {/* <div className="flex flex-row justify-center items-center space-x-3 mt-6">
             <span
               className="
             w-11 
@@ -157,8 +158,8 @@ function LoginForm() {
                 Or Login With Email
               </span>
             </div>
-          </div>
-          <div className="mt-10">
+          </div> */}
+          <div className="mt-7">
             <form action="#">
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
@@ -205,6 +206,7 @@ function LoginForm() {
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
+                  <button onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</button>
                   <input
                     className="
                     w-full 
@@ -218,7 +220,7 @@ function LoginForm() {
                     focus:border-lime-500
                    "
                     placeholder="Password"
-                    type="password"
+                    type="password" type={showPassword ? 'text' : 'password'}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
