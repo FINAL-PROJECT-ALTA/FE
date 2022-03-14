@@ -8,7 +8,10 @@ import Navigation from '../../components/navigation';
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
+import axios from 'axios'
+// import { useDispatch } from 'react-redux';
+// import allStore from "../../store/actions";
+// import { useReducer } from "react";
 
 const data = {
   calories_count: 0,
@@ -26,9 +29,13 @@ function RecommenPage() {
   const lunch = useSelector(({ listLunch }) => listLunch)
   const dinner = useSelector(({ listDinner }) => listDinner)
   const snack = useSelector(({ listSnack }) => listSnack)
-  const [click, setClick] = useState('')
+  const goal = useSelector(({ listGoal }) => listGoal)
 
-  console.log(snack);
+  const [idGoal, setIdGoal] = useState('')
+  const [tempBf, setTempBf] = useState('')
+  const [tempLunch, setTempLunch] = useState('')
+
+
 
   const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -36,9 +43,42 @@ function RecommenPage() {
     if (!getToken) {
       router.push("/user");
     }
-  }, [getToken]);
+    const findIdGoal = goal.find((el) => el.status === 'active')
+    if (findIdGoal) {
+      setIdGoal(findIdGoal.goal_uid);
+    }
 
+  }, [getToken, goal]);
 
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+  function handleAddToBreakfast() {
+    const data = { menu_uid: tempBf, goal_uid: idGoal }
+    axios.post('https://aaryadewangga.cloud.okteto.net/userhistories', data, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    })
+      .then((data) => {
+
+        console.log(data);
+        // if (data) {
+        //     if (data.data) {
+        //         setTitle('')
+        //         setDudate('')
+        //         setDesc('')
+        //         setAlert(data.data.message)
+        //         setTimeout(() => {
+        //             setAlert('')
+        //         }, 5000);
+        //     }
+        // }
+      })
+      .catch((err) => {
+        // console.log(err.response.data.message);
+        setError(err.response.data.message)
+      })
+  }
 
   return (
     <>
@@ -112,6 +152,9 @@ function RecommenPage() {
                         </span>
                       </div>
                     </div>
+                    <div>
+
+                    </div>
                     <Disclosure.Button>
                       <div className=" flex items-center">
                         <AiOutlinePlus size={40} className={`${open ? 'transform rotate-45' : ''
@@ -129,9 +172,10 @@ function RecommenPage() {
                           {el.name}
                         </div>
                       ))}
-                      <div className="flex-1 text-right items-center">
-                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
-                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                      <div className="flex-1 text-right items-center relative">
+                        <button onClick={handleAddToBreakfast} className={classNames(tempBf.length != 0 ? 'visible' : 'invisible', `mx-1 p-1 absolute right-20 top-1 text-lime-500`)}>Confirm</button>
+                        <button onClick={() => setTempBf(breakFast[key].menu_uid)} disabled={tempBf} className={classNames(tempBf.length != 0 ? 'text-slate-400' : '', `mx-1 p-1 bg-slate-100/70 rounded-md text-green-400`)}><HiOutlinePlusSm size={25} /></button>
+                        <button onClick={() => { setTempBf('') }} className="mx-1 p-1 bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
                       </div>
                     </div>
                   ))}
@@ -175,8 +219,8 @@ function RecommenPage() {
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center">
-                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
-                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                        <button onClick={() => setTempLunch(lunch[key].menu_uid)} disabled={tempLunch} className={classNames(tempLunch.length != 0 ? 'text-slate-400' : '', `mx-1 p-1 bg-slate-100/70 rounded-md text-green-400`)}><HiOutlinePlusSm size={25} /></button>
+                        <button onClick={() => { setTempLunch('') }} className="mx-1 p-1 bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
                       </div>
                     </div>
                   ))}
@@ -220,8 +264,8 @@ function RecommenPage() {
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center">
-                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
-                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                        <button onClick={() => { }} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
+                        <button onClick={() => { }} className="mx-1 text-rose-400"><HiBan size={20} /></button>
                       </div>
                     </div>
                   ))}
@@ -265,8 +309,8 @@ function RecommenPage() {
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center">
-                        <button onClick={() => setClick(true)} disabled={click} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
-                        <button onClick={() => setClick(false)} className="mx-1 text-rose-400"><HiBan size={20} /></button>
+                        <button onClick={() => { }} className="mx-1 text-green-400"><HiOutlinePlusSm size={20} /></button>
+                        <button onClick={() => { }} className="mx-1 text-rose-400"><HiBan size={20} /></button>
                       </div>
                     </div>
                   ))}
@@ -274,7 +318,6 @@ function RecommenPage() {
               </>
             )}
           </Disclosure>
-
         </div>
       </div>
 

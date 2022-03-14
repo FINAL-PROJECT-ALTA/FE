@@ -3,7 +3,7 @@ import { FaLock, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLoginCircleFill } from 'react-icons/ri';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -163,7 +163,7 @@ function LoginForm() {
             <form action="#">
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  E-Mail Address:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">E-Mail Address:</span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -200,7 +200,7 @@ function LoginForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  Password:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Password:</span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">

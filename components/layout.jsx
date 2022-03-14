@@ -15,6 +15,8 @@ function Layout({ children }) {
         dispatch(allStore.fetchAllLunch())
         dispatch(allStore.fetchAllDinner())
         dispatch(allStore.fetchAllSnack())
+        dispatch(allStore.fetchAllUser())
+        dispatch(allStore.fetchAllGoal())
         // dispatch(allStore.fetchAllMenus())
 
     }, [dispatch])
