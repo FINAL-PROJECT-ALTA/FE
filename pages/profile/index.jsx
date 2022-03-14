@@ -26,6 +26,7 @@ export default function Profile() {
   const [gender, setGender] = useState("");
   const [goal, setGoal] = useState([]);
   const [goalUid, setGoalUid] = useState("");
+  const [goalStatus, setGoalStatus] = useState("");
   const [age, setAge] = useState();
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
@@ -46,6 +47,7 @@ export default function Profile() {
         setGender(data.data.gender);
         setGoal(data.data.goal);
         setGoalUid(data.data.goal[data.data.goal.length - 1].goal_uid);
+        setGoalStatus(data.data.goal[data.data.goal.length - 1].status);
         setAge(data.data.goal[data.data.goal.length - 1].age);
         setHeight(data.data.goal[data.data.goal.length - 1].height);
         setWeight(data.data.goal[data.data.goal.length - 1].weight);
@@ -143,14 +145,14 @@ export default function Profile() {
             <div>
               {height ? (
                 <h3 className="font-semibold">
-                  Height: <span className="font-normal">{height} kg</span>
+                  Height: <span className="font-normal">{height} cm</span>
                 </h3>
               ) : (
                 ""
               )}
               {weight ? (
                 <h3 className="font-semibold">
-                  Weight: <span className="font-normal">{weight} cm</span>
+                  Weight: <span className="font-normal">{weight} kg</span>
                 </h3>
               ) : (
                 ""
@@ -166,11 +168,18 @@ export default function Profile() {
             )}
           </div>
           <div className="text-center mt-5">
-            {goal.length > 0 ? (
+            {goal.length > 0 && goalStatus == "active" ? (
               <Link href={`/goals/${goalUid}`}>
                 <button className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center">
                   <HiPencil className="mr-2" />
                   Change Your Goals
+                </button>
+              </Link>
+            ) : goal.length > 0 && goalStatus == "not active" ? (
+              <Link href="/goals">
+                <button className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center">
+                  <HiPlus className="mr-2" />
+                  Add Your Next Goals
                 </button>
               </Link>
             ) : (
