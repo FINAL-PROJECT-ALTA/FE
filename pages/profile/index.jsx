@@ -25,12 +25,11 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [goal, setGoal] = useState([]);
+  const [goalUid, setGoalUid] = useState("");
   const [age, setAge] = useState();
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
   const [target, setTarget] = useState("");
-
-  console.log(goal.length);
 
   useEffect(() => {
     setLoading(true);
@@ -46,6 +45,7 @@ export default function Profile() {
         setEmail(data.data.email);
         setGender(data.data.gender);
         setGoal(data.data.goal);
+        setGoalUid(data.data.goal[data.data.goal.length - 1].goal_uid);
         setAge(data.data.goal[data.data.goal.length - 1].age);
         setHeight(data.data.goal[data.data.goal.length - 1].height);
         setWeight(data.data.goal[data.data.goal.length - 1].weight);
@@ -167,7 +167,7 @@ export default function Profile() {
           </div>
           <div className="text-center mt-5">
             {goal.length > 0 ? (
-              <Link href="/goals">
+              <Link href={`/goals/${goalUid}`}>
                 <button className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center">
                   <HiPencil className="mr-2" />
                   Change Your Goals
