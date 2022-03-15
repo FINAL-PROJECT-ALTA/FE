@@ -1,5 +1,5 @@
 import { FcGoogle } from 'react-icons/fc';
-import { FaLock } from 'react-icons/fa';
+import { FaLock, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
 // import { BsGenderAmbiguous } from 'react-icons/bs';
@@ -13,9 +13,10 @@ function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [gender, setGender] = useState(['Male', 'Female']);
+  const [gender, setGender] = useState([]);
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
+  const [showPassword, setShowPassword] = useState(false)
 
   const router = useRouter();
 
@@ -32,13 +33,13 @@ function RegisterForm() {
         'Fill your Email with correct format please',
         'info'
       );
-    } else if (password < 3) {
+    } else if (password.length < 3) {
       Swal.fire(
         'Password is required',
         'Fill your Password min. 3 character',
         'info'
       );
-    } else if (password > 8) {
+    } else if (password.length > 8) {
       Swal.fire(
         'Password is required',
         'Fill your Password max. 8 character',
@@ -105,7 +106,7 @@ function RegisterForm() {
               text: 'Something went wrong!',
             });
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -147,23 +148,23 @@ function RegisterForm() {
                   </a>
                 </Link>
               </p>
-              <button className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10 hover:shadow-lg">
+              {/* <button className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10 hover:shadow-lg">
                 <FcGoogle />
                 <p className="text-base font-medium ml-4 text-gray-700">
                   Continue with Google
                 </p>
-              </button>
+              </button> */}
 
-              <div className="w-full flex items-center justify-between py-5">
+              {/* <div className="w-full flex items-center justify-between py-5">
                 <hr className="w-full bg-gray-400" />
                 <p className="text-base font-medium leading-4 px-2.5 text-gray-400">
                   OR
                 </p>
                 <hr className="w-full bg-gray-400  " />
-              </div>
-              <div className="flex flex-col mb-6">
-                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  Name:
+              </div> */}
+              <div className="flex flex-col mt-5 mb-6">
+                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3 ">
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Name:</span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -187,7 +188,7 @@ function RegisterForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  E-Mail Address:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">E-Mail Address:</span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -225,26 +226,15 @@ function RegisterForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  Password:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Password:</span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
-                  <input
-                    className="
-                    w-full 
-                    text-base 
-                    py-2
-                    pl-10
-                    pr-4 
-                    border-b 
-                    border-gray-300 
-                    focus:outline-none 
-                    focus:border-lime-500                 
-                   "
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                  <button onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</button>
+                  <input type={showPassword ? 'text' : 'password'} className=" w-full text-base py-2 pl-10 pr-4 border-b border-gray-300 focus:outline-none focus:border-lime-500"
+                    onChange={(e) => setPassword(e.target.value)} />
                   <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 ">
                     * min. 3 character and max. 8 character
                   </p>
@@ -252,7 +242,7 @@ function RegisterForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  Gender:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Gender:</span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -263,7 +253,6 @@ function RegisterForm() {
                     block 
                     appearance-none 
                     w-full
-                    py-2
                     border-b 
                     border-gray-300
                     200 text-gray-700 
@@ -281,8 +270,8 @@ function RegisterForm() {
                     <option value="" disabled selected hidden>
                       Choose Gender...
                     </option>
-                    <option value="Pria">Male</option>
-                    <option value="Wanita">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg
@@ -295,7 +284,7 @@ function RegisterForm() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col mb-6">
+              {/* <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
                   Photo Profile:
                 </label>
@@ -324,7 +313,7 @@ function RegisterForm() {
                     />
                   </label>
                 </div>
-              </div>
+              </div> */}
               <div className="flex w-full mt-3">
                 <button
                   onClick={validateSignUp}
