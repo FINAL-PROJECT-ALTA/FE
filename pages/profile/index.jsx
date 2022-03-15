@@ -143,14 +143,14 @@ export default function Profile() {
             <div>
               {height ? (
                 <h3 className="font-semibold">
-                  Height: <span className="font-normal">{height} kg</span>
+                  Height: <span className="font-normal">{height} cm</span>
                 </h3>
               ) : (
                 ""
               )}
               {weight ? (
                 <h3 className="font-semibold">
-                  Weight: <span className="font-normal">{weight} cm</span>
+                  Weight: <span className="font-normal">{weight} kg</span>
                 </h3>
               ) : (
                 ""

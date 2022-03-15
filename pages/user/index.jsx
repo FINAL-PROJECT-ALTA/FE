@@ -220,7 +220,7 @@ function LoginForm() {
                     focus:border-lime-500
                    "
                     placeholder="Password"
-                    type="password" type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
