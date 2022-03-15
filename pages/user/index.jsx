@@ -206,7 +206,7 @@ function LoginForm() {
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
-                  <button onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</button>
+                  <span onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none cursor-pointer'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</span>
                   <input
                     className="
                     w-full 
