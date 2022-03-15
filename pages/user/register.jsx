@@ -143,7 +143,7 @@ function RegisterForm() {
               <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
                 Already have account ?{' '}
                 <Link href="../user">
-                  <a className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
+                  <a className="hover:text-rose-500 focus:text-rose-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
                     Sign in here
                   </a>
                 </Link>
@@ -232,7 +232,7 @@ function RegisterForm() {
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
-                  <button onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</button>
+                  <span onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none cursor-pointer'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</span>
                   <input type={showPassword ? 'text' : 'password'} className=" w-full text-base py-2 pl-10 pr-4 border-b border-gray-300 focus:outline-none focus:border-lime-500"
                     onChange={(e) => setPassword(e.target.value)} />
                   <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 ">
