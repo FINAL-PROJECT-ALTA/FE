@@ -5,8 +5,8 @@ export const fetchAllMenus = () => {
         // const getToken = localStorage.getItem('token')
         axios.get('https://aaryadewangga.cloud.okteto.net/menus')
             .then(({ data }) => {
-                console.log(data.data);
-                // dispatch(setMenu(data.data))
+                // console.log(data.data);
+                dispatch(setMenu(data.data))
             })
             .catch(err => {
                 console.log(err.response);

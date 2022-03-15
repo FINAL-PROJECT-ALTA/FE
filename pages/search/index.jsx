@@ -14,7 +14,7 @@ function Search() {
     // console.log(query);
     useEffect(() => {
         (async () => {
-            const res = await axios.get(`http://aaryadewangga.cloud.okteto.net/foods/search?input=${query.input}&category=${query.category}`);
+            const res = await axios.get(`https://aaryadewangga.cloud.okteto.net/foods/search?input=${query.input}&category=${query.category}`);
             const items = await res.data;
             setItems(items.data)
         })()

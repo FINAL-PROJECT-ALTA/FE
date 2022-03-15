@@ -4,10 +4,10 @@ import NavbarApp from "../../components/navbar";
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import axios from "axios";
-import ReactLoading from "react-loading";
 import Swal from "sweetalert2";
+import ReactLoading from "react-loading";
 
-export default function Goals() {
+export default function UpdateGoals() {
   const getToken =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const router = useRouter();
@@ -17,6 +17,31 @@ export default function Goals() {
       router.push("/user");
     }
   }, [getToken]);
+
+  const { id } = router.query;
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `https://aaryadewangga.cloud.okteto.net/users/goals/${id}`,
+      headers: {
+        Authorization: `Bearer ${getToken}`,
+      },
+    })
+      .then(({ data }) => {
+        setHeight(data.data.height);
+        setWeight(data.data.weight);
+        setAge(data.data.age);
+        setRange(data.data.range_time);
+        setTarget(data.data.target);
+        setWeightTarget(data.data.weight_target);
+        setDailyActive(data.data.daily_active);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
+      .finally(() => {});
+  }, []);
 
   const [loading, setLoading] = useState(false);
 
@@ -42,8 +67,8 @@ export default function Goals() {
     };
 
     axios({
-      method: "post",
-      url: "https://aaryadewangga.cloud.okteto.net/users/goals",
+      method: "put",
+      url: `https://aaryadewangga.cloud.okteto.net/users/goals/${id}`,
       data: body,
       headers: {
         Authorization: `Bearer ${getToken}`,
@@ -56,13 +81,12 @@ export default function Goals() {
           setLoading(false);
         }, 2000);
         Swal.fire(
-          "Create Successfully",
-          "Your Goals has been Created",
+          "Update Successfully",
+          "Your Goals has been Updated",
           "success"
         );
       })
       .catch((err) => {
-        console.log(err, "error");
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -193,7 +217,6 @@ export default function Goals() {
                   <input
                     type="radio"
                     className="form-radio accent-mexican-pink"
-                    id="target-lose"
                     name="target"
                     value="lose weight"
                     onChange={(e) => {
@@ -206,7 +229,6 @@ export default function Goals() {
                   <input
                     type="radio"
                     className="form-radio accent-mexican-pink"
-                    id="target-gain"
                     name="target"
                     value="gain weight"
                     onChange={(e) => {
@@ -267,11 +289,10 @@ export default function Goals() {
             <div className="">
               <button
                 type="submit"
-                id="btn-submit"
                 onClick={handleSubmit}
                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:ring-2 focus:ring-offset-2"
               >
-                Add Goals
+                Update Goals
               </button>
             </div>
           </form>
