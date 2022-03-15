@@ -4,6 +4,7 @@ import Navigation from './navigation'
 import { useRouter } from 'next/router'
 import allStore from '../store/actions';
 import { useDispatch } from 'react-redux'
+import HeadApp from './Head';
 
 function Layout({ children }) {
     const router = useRouter()
@@ -23,6 +24,7 @@ function Layout({ children }) {
 
     return (
         <>
+            <HeadApp />
             {/* <NavbarApp /> */}
             <main>{children}</main>
             {router.pathname !== "/" ? <></> : (
