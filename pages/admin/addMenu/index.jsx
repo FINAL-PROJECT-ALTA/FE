@@ -22,6 +22,11 @@ function AddFood() {
 
   const food_categories = router.query.category;
 
+  const sumCal = () => {
+    const total = parseInt(cal1) + parseInt(cal2) + parseInt(cal3);
+    return total;
+  };
+
   useEffect(() => {
     const token = localStorage.getItem('token_admin');
     // setLoading(true);
@@ -88,10 +93,6 @@ function AddFood() {
       ],
     };
 
-    function sumCal() {
-      return cal1;
-    }
-
     const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -124,6 +125,7 @@ function AddFood() {
               title: 'Oops...',
               text: 'Something went wrong!',
             });
+            console.log(error);
           })
           .finally(() => {});
       } else if (result.isDismissed) {
@@ -178,17 +180,15 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  console.log('option selected', e.target.value);
                   setItem1(e.target.value);
-                  // console.log(e);
-                  e.calories = cal1;
+                  setCal1(e.target.value.split(',')[1]);
                 }}
               >
                 <option value="" disabled selected hidden>
                   Select one
                 </option>
                 {data.map((el, i) => (
-                  <option key={i.food_uid} value={el.food_uid}>
+                  <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
                   </option>
                 ))}
@@ -230,17 +230,15 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  console.log('option selected', e.target.value);
                   setItem2(e.target.value);
-                  // console.log(e);
-                  e.calories = cal1;
+                  setCal2(e.target.value.split(',')[1]);
                 }}
               >
                 <option value="" disabled selected hidden>
                   Select one
                 </option>
                 {data.map((el, i) => (
-                  <option key={i.food_uid} value={el.food_uid}>
+                  <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
                   </option>
                 ))}
@@ -281,18 +279,15 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  console.log('option selected', e.target.value);
-                  console.log('cek', e.target.key);
                   setItem3(e.target.value);
-                  // console.log(e);
-                  // console.log(e.calories);
+                  setCal3(e.target.value.split(',')[1]);
                 }}
               >
                 <option value="" disabled selected hidden>
                   Select one
                 </option>
                 {data.map((el, i) => (
-                  <option key={i.food_uid} value={el.food_uid}>
+                  <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
                   </option>
                 ))}
@@ -312,7 +307,11 @@ function AddFood() {
 
         <div className="flex justify-center mt-10">
           <h1>
-            Total calories : <span className="text-lime-500">{cal3}</span>/ 2400
+            Total calories :{' '}
+            <span className="text-lime-500">
+              {sumCal() > 2400 ? 'to much calories' : sumCal()}
+            </span>
+            / 2400
           </h1>
         </div>
         <div className="w-96 mt-10 mb-10 ml-8 sm:ml-20 md:ml-20 lg:ml-20">

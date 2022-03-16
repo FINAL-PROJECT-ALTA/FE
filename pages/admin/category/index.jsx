@@ -25,39 +25,43 @@ function Category() {
   const food_categories = router.query.foodsCategory;
 
   useEffect(() => {
-    const token = localStorage.getItem('token_admin');
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    if (food_categories) {
+      const token = localStorage.getItem('token_admin');
 
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(
-        `https://aaryadewangga.cloud.okteto.net/foods?category=${food_categories}`,
-        config
-      )
-      .then(({ data }) => {
-        const findFood = data.data.find(
-          (el) => el.food_categories === food_categories
-        );
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
 
-        if (findFood) {
-          setCategory(findFood.food_categories);
-          setName(findFood.name);
-          setIdFood(findFood.food_uid);
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      // console.log(router.query);
+      axios
+        .get(
+          `https://aaryadewangga.cloud.okteto.net/foods?category=${food_categories}`,
+          config
+        )
+        .then(({ data }) => {
+          const findFood = data.data.find(
+            (el) => el.food_categories === food_categories
+          );
+
+          if (findFood) {
+            setCategory(findFood.food_categories);
+            setName(findFood.name);
+            setIdFood(findFood.food_uid);
+            console.log(idFood);
+          }
+
+          setData(data.data);
           console.log(idFood);
-        }
-
-        setData(data.data);
-        console.log(idFood);
-      })
-      .catch((err) => {
-        console.log(err, 'error');
-      });
-  }, []);
+        })
+        .catch((err) => {
+          console.log(err, 'error');
+        });
+    }
+  }, [router]);
 
   function handleDelete() {
     const token = localStorage.getItem('token_admin');
