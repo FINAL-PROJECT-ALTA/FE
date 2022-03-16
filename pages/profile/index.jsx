@@ -5,6 +5,7 @@ import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Swal from "sweetalert2";
 import ReactLoading from "react-loading";
 import { HiPencil } from "react-icons/hi";
 import { HiPlus } from "react-icons/hi";
@@ -24,6 +25,7 @@ export default function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
+  const [imgProfile, setImgProfile] = useState("");
   const [goal, setGoal] = useState([]);
   const [goalUid, setGoalUid] = useState("");
   const [goalStatus, setGoalStatus] = useState("");
@@ -45,6 +47,7 @@ export default function Profile() {
         setName(data.data.name);
         setEmail(data.data.email);
         setGender(data.data.gender);
+        setImgProfile(data.data.image);
         setGoal(data.data.goal);
         setGoalUid(data.data.goal[data.data.goal.length - 1].goal_uid);
         setGoalStatus(data.data.goal[data.data.goal.length - 1].status);
@@ -59,7 +62,7 @@ export default function Profile() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [imgProfile]);
 
   // funtion Logout
   function handleLogout() {
@@ -69,8 +72,39 @@ export default function Profile() {
     }
   }
 
-  function handleFileChange() {
-    console.log("file change");
+  function handleFileChange(e) {
+    e.preventDefault();
+    const bodyFormData = new FormData();
+    bodyFormData.append("image", e.target.files[0]);
+
+    setLoading(true);
+    axios({
+      method: "put",
+      url: "https://aaryadewangga.cloud.okteto.net/users",
+      data: bodyFormData,
+      headers: {
+        Authorization: `Bearer ${getToken}`,
+      },
+    })
+      .then(({ data }) => {
+        setLoading(false);
+        console.log(data.message);
+        Swal.fire(
+          "Upload Successfully",
+          "Your Profile Picture has been Change, Please Refresh Page",
+          "success"
+        );
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+        });
+      })
+      .finally(() => {
+        router.push("/profile");
+      });
   }
 
   if (loading) {
@@ -112,12 +146,21 @@ export default function Profile() {
           </div>
           <div className="flex items-center">
             <div className="flex flex-col">
-              <img
-                src="https://prometheus-x.org/decidim-packs/media/images/default-avatar-aaa9e55bac5d7159b847.svg"
-                className="rounded-full border border-gray-100 shadow-sm"
-                width={120}
-                height={120}
-              />
+              {imgProfile == "" ? (
+                <img
+                  src="https://prometheus-x.org/decidim-packs/media/images/default-avatar-aaa9e55bac5d7159b847.svg"
+                  className="rounded-full border border-gray-100 shadow-sm"
+                  width={120}
+                  height={120}
+                />
+              ) : (
+                <img
+                  src={imgProfile}
+                  className="rounded-full border border-gray-100 shadow-sm"
+                  width={120}
+                  height={120}
+                />
+              )}
               <input
                 type="file"
                 name="profile-pic"
