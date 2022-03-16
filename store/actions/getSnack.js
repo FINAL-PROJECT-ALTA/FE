@@ -12,7 +12,7 @@ export const fetchAllSnack = () => {
             })
             .catch(err => {
                 console.log(err.response);
-                localStorage.removeItem("token");
+                // localStorage.removeItem("token");
             })
     }
 }

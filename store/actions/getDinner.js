@@ -12,7 +12,7 @@ export const fetchAllDinner = () => {
             })
             .catch(err => {
                 console.log(err.response);
-                localStorage.removeItem("token");
+                // localStorage.removeItem("token");
             })
     }
 }
