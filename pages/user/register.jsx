@@ -14,8 +14,6 @@ function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState(['Male', 'Female']);
-  const [image, setImage] = useState(null);
-  const [createObjectURL, setCreateObjectURL] = useState(null);
 
   const router = useRouter();
 
@@ -63,7 +61,7 @@ function RegisterForm() {
     formData.append('email', email);
     formData.append('password', password);
     formData.append('gender', gender);
-    formData.append('image', image);
+    // formData.append('image', image);
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -296,36 +294,7 @@ function RegisterForm() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col mb-6">
-                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  Photo Profile:
-                </label>
-                <div className="relative">
-                  <label className="block">
-                    <span className="sr-only">Choose profile photo</span>
-                    <input
-                      type="file"
-                      className="
-                      block 
-                      w-full 
-                      text-sm 
-                      text-slate-500
-                      file:mr-4 
-                      file:py-2 
-                      file:px-4
-                      file:rounded-full 
-                      file:border-0
-                      file:text-sm 
-                      file:font-semibold
-                      file:bg-violet-50 
-                      file:text-violet-700
-                      hover:file:bg-violet-100
-                    "
-                      onChange={uploadToClient}
-                    />
-                  </label>
-                </div>
-              </div>
+
               <div className="flex w-full mt-3">
                 <button
                   onClick={validateSignUp}

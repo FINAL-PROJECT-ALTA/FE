@@ -69,7 +69,6 @@ function Category() {
       .delete(`https://aaryadewangga.cloud.okteto.net/foods/${idFood}`, config)
       .then(({ data }) => {
         console.log(data);
-        router.push('/admin/menu');
       })
       .catch((err) => {
         console.log(err, 'error');
@@ -104,7 +103,7 @@ function Category() {
       </div>
       <div className="px-10 my-10">
         <div className="mt-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-5 mt-3 w-[30rem] sm:w-[37rem] md:w-[37rem] lg:w-[37rem] h-[250px]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-5 mt-3 w-[30rem] sm:w-[37rem] md:w-[37rem] lg:w-[37rem] h-vh">
             {data != 0 ? (
               data.map((el, i) => (
                 <div
@@ -140,6 +139,7 @@ function Category() {
                         onClick={() => {
                           setIdFood(el.food_uid);
                           handleDelete();
+                          router.push('/admin');
                         }}
                       >
                         <center>
