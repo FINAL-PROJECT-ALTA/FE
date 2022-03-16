@@ -62,7 +62,7 @@ export default function Profile() {
       .finally(() => {
         setLoading(false);
       });
-  }, [imgProfile]);
+  }, []);
 
   // funtion Logout
   function handleLogout() {
@@ -103,7 +103,7 @@ export default function Profile() {
         });
       })
       .finally(() => {
-        router.push("/profile");
+        router.push("/");
       });
   }
 
@@ -129,7 +129,7 @@ export default function Profile() {
               className="text-lg text-lime-700 font-semibold inline-flex items-center py-2 px-3 bg-light-green/80 hover:bg-lime-200 hover:text-dark-green rounded-md"
               id="btn-logout"
             >
-              {/* <p>Logout</p> */}
+              <p>Logout</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 ml-2"
@@ -149,16 +149,12 @@ export default function Profile() {
               {imgProfile == "" ? (
                 <img
                   src="https://prometheus-x.org/decidim-packs/media/images/default-avatar-aaa9e55bac5d7159b847.svg"
-                  className="rounded-full border border-gray-100 shadow-sm"
-                  width={120}
-                  height={120}
+                  className="rounded-full border border-gray-100 shadow-sm w-32 h-32 object-cover"
                 />
               ) : (
                 <img
                   src={imgProfile}
-                  className="rounded-full border border-gray-100 shadow-sm"
-                  width={120}
-                  height={120}
+                  className="rounded-full border border-gray-100 shadow-sm w-32 h-32 object-cover"
                 />
               )}
               <input
