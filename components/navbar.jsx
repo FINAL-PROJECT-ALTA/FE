@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Notification from './notification'
+// import Notification from './notification'
 
 function NavbarApp() {
 
@@ -15,8 +15,7 @@ function NavbarApp() {
                                 <img src="./images/Logo-healthyapp.png" alt="logo" />
                             </div>
                         </div>
-                        {/* Notification */}
-                        <Notification />
+                        {/* <Notification /> */}
                     </div>
                 </div>
             </div>
