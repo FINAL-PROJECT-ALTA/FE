@@ -85,7 +85,7 @@ export default function Profile() {
   return (
     <>
       <NavbarApp />
-      <div className="px-10 my-10">
+      <div className="px-10 my-5 relative">
         <FeatureTitle text="My Profile" />
         <div className="w-full my-3 p-6 rounded-md bg-floor relative">
           {/* Logout Button */}
@@ -93,8 +93,9 @@ export default function Profile() {
             <button
               onClick={handleLogout}
               className="text-lg text-lime-700 font-semibold inline-flex items-center py-2 px-3 bg-light-green/80 hover:bg-lime-200 hover:text-dark-green rounded-md"
+              id="btn-logout"
             >
-              <p>Logout</p>
+              {/* <p>Logout</p> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 ml-2"
@@ -129,6 +130,7 @@ export default function Profile() {
               <label
                 htmlFor="profile-pic"
                 className="mt-1 bg-lime-200 text-lime-700 text-sm text-center rounded-full p-1 cursor-pointer"
+                id="lbl-change-image"
               >
                 Change Image
               </label>
@@ -170,21 +172,20 @@ export default function Profile() {
           <div className="text-center mt-5">
             {goal.length > 0 && goalStatus == "active" ? (
               <Link href={`/goals/${goalUid}`}>
-                <button className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center">
+                <button
+                  className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center"
+                  id="btn-change-goals"
+                >
                   <HiPencil className="mr-2" />
                   Change Your Goals
                 </button>
               </Link>
-            ) : goal.length > 0 && goalStatus == "not active" ? (
-              <Link href="/goals">
-                <button className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center">
-                  <HiPlus className="mr-2" />
-                  Add Your Next Goals
-                </button>
-              </Link>
             ) : (
               <Link href="/goals">
-                <button className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center">
+                <button
+                  className="bg-rose-500 hover:bg-rose-600 rounded-full px-4 py-3 text-white inline-flex items-center"
+                  id="btn-add-goals"
+                >
                   <HiPlus className="mr-2" />
                   Add Your Goals
                 </button>

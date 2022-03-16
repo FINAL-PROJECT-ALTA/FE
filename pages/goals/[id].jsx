@@ -218,6 +218,7 @@ export default function UpdateGoals() {
                     type="radio"
                     className="form-radio accent-mexican-pink"
                     name="target"
+                    id="target-lose"
                     value="lose weight"
                     onChange={(e) => {
                       setTarget(e.target.value);
@@ -230,6 +231,7 @@ export default function UpdateGoals() {
                     type="radio"
                     className="form-radio accent-mexican-pink"
                     name="target"
+                    id="target-gain"
                     value="gain weight"
                     onChange={(e) => {
                       setTarget(e.target.value);
@@ -244,7 +246,7 @@ export default function UpdateGoals() {
                 htmlFor="weightTarget"
                 className="block text-sm font-bold text-mexican-pink"
               >
-                Weight Target (kg)
+                Target to Cut or Bulk (kg)
               </label>
               <input
                 type="number"
@@ -252,7 +254,7 @@ export default function UpdateGoals() {
                 id="weightTarget"
                 autoComplete="off"
                 required
-                placeholder="65"
+                placeholder="5"
                 className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
                 onChange={(e) => {
                   setWeightTarget(parseInt(e.target.value));
@@ -286,9 +288,10 @@ export default function UpdateGoals() {
                 <option value="very active">Very Active</option>
               </select>
             </div>
-            <div className="">
+            <div>
               <button
                 type="submit"
+                id="btn-submit-update-goals"
                 onClick={handleSubmit}
                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:ring-2 focus:ring-offset-2"
               >
