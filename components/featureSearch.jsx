@@ -109,13 +109,13 @@ function FeatureSearch() {
                 <button onClick={() => { router.push(`/search?input=${wordEntered}&category=${selected.name}`) }} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
             </div>
             {searchTerm != 0 && (
-                <div className='text-dark-green text-lg my-5 px-5 overflow-y-scroll'>
+                <div className='text-dark-green text-lg my-5 px-5 overflow-scroll'>
                     {searchTerm.map(item => (
                         <Link key={item.food_uid} href={`/detail/${item.food_uid}`}>
                             <a className='flex justify-start items-center font-medium my-3 py-1 hover:bg-light-orange/40 rounded-lg relative'>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                </svg>{item.name}<span className='absolute right-0'>{item.calories}KCAL</span></a>
+                                </svg><p className='truncate w-72'>{item.name}</p><span className='absolute right-0'>{item.calories}KCAL</span></a>
                         </Link>
                     ))}
                 </div>

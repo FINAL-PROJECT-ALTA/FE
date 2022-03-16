@@ -205,7 +205,7 @@ function RecommenPage() {
                         Breakfast
                       </h3>
                       <div className="flex items-center text-gray-600">
-                        <AiOutlineClockCircle className="mr-2" />
+                        <AiOutlineClockCircle id="breakfast" className="mr-2" />
                         <span className="text-xs md:text-sm font-sans">
                           7.00 - 9.00 am
                         </span>
@@ -262,7 +262,7 @@ function RecommenPage() {
                     </div>
                     <Disclosure.Button>
                       <div className=" flex items-center">
-                        <AiOutlinePlus size={40} className={`${open ? 'transform rotate-45' : ''
+                        <AiOutlinePlus id="lunch" size={40} className={`${open ? 'transform rotate-45' : ''
                           } text-rose-500`} />
                       </div>
                     </Disclosure.Button>
@@ -300,7 +300,7 @@ function RecommenPage() {
                         Dinner
                       </h3>
                       <div className="flex items-center text-gray-600">
-                        <AiOutlineClockCircle className="mr-2" />
+                        <AiOutlineClockCircle id="dinner" className="mr-2" />
                         <span className="text-xs md:text-sm font-sans">
                           05.00 - 8.00 pm
                         </span>
@@ -346,7 +346,7 @@ function RecommenPage() {
                         Snack
                       </h3>
                       <div className="flex items-center text-gray-600">
-                        <AiOutlineClockCircle className="mr-2" />
+                        <AiOutlineClockCircle id="snack" className="mr-2" />
                         <span className="text-xs md:text-sm font-sans">
                           4.00 - 4.30 pm
                         </span>

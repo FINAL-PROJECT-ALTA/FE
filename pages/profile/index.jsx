@@ -75,7 +75,7 @@ export default function Profile() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center content-center">
+      <div className="flex items-center h-screen md:h-screen justify-center content-center">
         <br />
         <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
       </div>
@@ -85,7 +85,7 @@ export default function Profile() {
   return (
     <>
       <NavbarApp />
-      <div className="px-10 my-10">
+      <div className="px-10 my-5 relative">
         <FeatureTitle text="My Profile" />
         <div className="w-full my-3 p-6 rounded-md bg-floor relative">
           {/* Logout Button */}
@@ -95,7 +95,7 @@ export default function Profile() {
               className="text-lg text-lime-700 font-semibold inline-flex items-center py-2 px-3 bg-light-green/80 hover:bg-lime-200 hover:text-dark-green rounded-md"
               id="btn-logout"
             >
-              <p>Logout</p>
+              {/* <p>Logout</p> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 ml-2"
