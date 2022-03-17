@@ -248,7 +248,7 @@ function RegisterForm() {
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     {/* <BsGenderAmbiguous /> */}
                   </div>
-                  <select
+                  <select id='gender'
                     className="
                     block 
                     appearance-none 
