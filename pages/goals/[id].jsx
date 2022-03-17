@@ -14,7 +14,7 @@ export default function UpdateGoals() {
 
   useEffect(() => {
     if (!getToken) {
-      router.push("/user");
+      router.push("/user/login");
     }
   }, [getToken]);
 
@@ -40,7 +40,7 @@ export default function UpdateGoals() {
       .catch((err) => {
         console.log(err.message);
       })
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   const [loading, setLoading] = useState(false);

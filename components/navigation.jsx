@@ -45,7 +45,7 @@ function Navigation() {
                   d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
                 />
               </svg>
-              <h3>Recomend</h3>
+              <h3>Recommend</h3>
             </button>
             <button onClick={() => { router.push('/reports') }} className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500">
               <svg

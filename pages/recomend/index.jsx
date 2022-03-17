@@ -49,7 +49,7 @@ function RecommenPage() {
 
   useEffect(() => {
     if (!getToken) {
-      router.push("/user");
+      router.push("/user/login");
     }
     const findIdGoal = goal.find((el) => el.status === 'active')
     if (findIdGoal) {

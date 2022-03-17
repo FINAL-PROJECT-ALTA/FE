@@ -142,7 +142,7 @@ function RegisterForm() {
               </p>
               <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
                 Already have account ?{' '}
-                <Link href="../user">
+                <Link href="../user/login">
                   <a className="hover:text-rose-500 focus:text-rose-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
                     Sign in here
                   </a>

@@ -190,7 +190,8 @@ function LoginForm() {
                     invalid:text-pink-600
                     focus:invalid:border-pink-500 
                     focus:invalid:ring-pink-500
-                    peer ..."
+                    peer ... placeholder:text-md"
+                    placeholder="Your email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 invisible peer-invalid:visible">
@@ -217,7 +218,7 @@ function LoginForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500
+                    focus:border-lime-500 placeholder:text-md
                    "
                     placeholder="Password"
                     type={showPassword ? 'text' : 'password'}

@@ -49,6 +49,7 @@ const callouts = [
   },
 ]
 
+
 export default function Home() {
 
   // const dispatch = useDispatch()
@@ -98,6 +99,7 @@ export default function Home() {
   return (
     <>
       <NavbarApp />
+      {/* Search Feature */}
       <div className='relative px-5 my-2'>
         <button onClick={() => { openModal() }} className='bg-dark-green text-white text-lg font-thin min-w-full py-3 rounded-md flex cursor-text' ><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3 text-light-green " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -110,8 +112,8 @@ export default function Home() {
             <div className="text-xl font-medium text-center py-10">
               <h1>Need More Recomend for Your Goals?</h1>
               <div className="flex justify-center my-5">
-                <button onClick={() => { router.push('/user') }} className="px-4 py-2 mr-3 rounded-md text-white font-semibold bg-dark-green/80 hover:drop-shadow-md hover:bg-dark-green">Login</button>
-                <button onClick={() => { router.push('/user/register') }} className="px-4 py-2 rounded-md text-dark-green font-semibold bg-lime-500/80 hover:drop-shadow-md hover:bg-lime-500">Sign up</button>
+                <button onClick={() => { router.push('/user/login') }} className="px-4 py-2 mr-3 rounded-md text-white font-semibold bg-dark-green/80 hover:drop-shadow-md hover:bg-dark-green transition ease-in-out delay-100">Login</button>
+                <button onClick={() => { router.push('/user/register') }} className="px-4 py-2 rounded-md text-dark-green font-semibold bg-lime-500/80 hover:drop-shadow-md hover:bg-lime-500 transition ease-in-out delay-100">Sign up</button>
               </div>
             </div>
           ) : (<>
@@ -135,7 +137,7 @@ export default function Home() {
             </div>
             <div className="flex justify-between px-2 xl:px-10 items-center">
               <div className='flex items-center'>
-                <h2 className="text-xl xl:text-2xl font-bold text-rose-500">Goals</h2>
+                <h2 className="text-xl xl:text-2xl font-bold text-rose-500">Goals:</h2>
                 <h2 className="text-md xl:text-xl uppercase font-semibold text-lime-700 ml-3">{target}</h2>
               </div>
               <span className='text-lg font-medium text-gray-600 flex items-center'><HiOutlineClock className='mx-1 w-5 h-5' /> {time} day</span>
@@ -143,11 +145,11 @@ export default function Home() {
           </>)}
         </div>
         <div className="my-10">
-          <FeatureTitle text='You Knows' />
+          <FeatureTitle text='Discover your favorites' />
           <div className="grid grid-cols-5 gap-3 mt-3 h-[115px]">
             {callouts.map(item => (
               <Link href={`/category?foodsCategory=${item.href}`} key={item.name}>
-                <a className={`grid-rows-2 ${item.colorbg} pt-3 rounded-md drop-shadow-sm hover:bg-zinc-300/20`}>
+                <a className={`grid-rows-2 ${item.colorbg} pt-3 rounded-md drop-shadow-sm hover:bg-zinc-300/20 transition ease-in-out delay-150`}>
                   <div className='shrink-0'>
                     <img src={item.imageSrc} alt={item.imageAlt} className="mx-auto" />
                   </div>
@@ -161,7 +163,7 @@ export default function Home() {
             {currentPost ? currentPost.map(el => (
               <div key={el.food_uid} className='group relative cursor-pointer my-2'>
                 <div className="relative w-40 h-full mb-3 rounded-md overflow-hidden group-hover:opacity-70 bg-lime-200/20 drop-shadow-sm" onClick={() => { router.push(`/detail/${el.food_uid}`) }}>
-                  <img src={el.image} alt={el.name} className=" h-28 w-full object-cover" />
+                  <img src={el.image.length != 0 ? `${el.image}` : `./images/logo-white.png`} alt={el.name} className=" h-28 w-full object-cover" />
                   <div className="px-3 py-3 text-dark-green">
                     <h3 className="text-md font-medium">{el.name}</h3>
                     <p className="text-md font-mono text-gray-500">{el.calories} KCAL</p>

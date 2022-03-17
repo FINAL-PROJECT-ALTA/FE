@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import MidNavbar from '../../components/MidNavbar'
-import Notification from '../../components/notification'
 import FeatureTitle from '../../components/featureTitle'
 // import ReactLoading from 'react-loading';
 
@@ -32,13 +31,12 @@ export default function Category() {
                 <MidNavbar />
                 <div className='h-24 flex justify-center items-center'>
                     <img className='flex' src='../images/Logo-healthyapp.png' ></img>
-                    <span className='absolute right-8'>
-                        <Notification />
-                    </span>
                 </div>
             </div>
-            <div className='min-h-screen bg-slate-50/50 p-5 my-5 rounded-md'>
-                <FeatureTitle text={page} />
+            <div className='min-h-screen p-5 rounded-md'>
+                <div className='m-5'>
+                    <FeatureTitle text={page} />
+                </div>
                 <div className="flex justify-evenly flex-wrap">
                     {/* Cards Items */}
                     {foods != 0 ? foods.map(el => (

@@ -17,7 +17,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (!getToken) {
-      router.push("/user");
+      router.push("/user/login");
     }
   }, [getToken]);
 
@@ -110,7 +110,6 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="flex items-center h-screen md:h-screen justify-center content-center">
-        <br />
         <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
       </div>
     );
