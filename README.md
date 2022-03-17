@@ -32,7 +32,7 @@
 2. [Feature](#feture)
 3. [Tech Stack](#tech-stack)
 4. [Preview](#preview)
-5. [How to Contrib](#contribute)
+5. [How to Contribute](#contribute)
 6. [Authors](#authors)
 
 <!-- ABOUT THE PROJECT -->
@@ -82,17 +82,20 @@ As Admin
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Preview -->
-## 💻 Contribute
+## 💻 How to Contrib
 
 - Fork this repository
 
     ```sh
     $ git clone https://github.com/YOUR_USERNAME/FINAL-PROJECT-ALTA/FE.git
-    > Cloning into `healthy-fit`...
+    > Cloning into `FE`...
     > remote: Counting objects: 10, done.
     > remote: Compressing objects: 100% (8/8), done.
     > remove: Total 10 (delta 1), reused 10 (delta 1)
     > Unpacking objects: 100% (10/10), done.
+    ```
+     ```sh
+    cd FE
     ```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
