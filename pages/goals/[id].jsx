@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavbarApp from "../../components/navbar";
+import MidNavbar from '../../components/MidNavbar'
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import axios from "axios";
@@ -36,6 +37,7 @@ export default function UpdateGoals() {
         setTarget(data.data.target);
         setWeightTarget(data.data.weight_target);
         setDailyActive(data.data.daily_active);
+        // console.log(data.data.weight);
       })
       .catch((err) => {
         console.log(err.message);
@@ -45,13 +47,15 @@ export default function UpdateGoals() {
 
   const [loading, setLoading] = useState(false);
 
-  const [height, setHeight] = useState();
-  const [weight, setWeight] = useState();
-  const [age, setAge] = useState();
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [age, setAge] = useState(0);
   const [dailyActive, setDailyActive] = useState("");
   const [weightTarget, setWeightTarget] = useState();
   const [target, setTarget] = useState("");
-  const [range, setRange] = useState();
+  const [range, setRange] = useState(0);
+
+  // console.log(weight);
 
   function handleSubmit(e) {
     setLoading(true);
@@ -100,7 +104,7 @@ export default function UpdateGoals() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center content-center">
+      <div className="flex items-center h-screen justify-center content-center">
         <br />
         <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
       </div>
@@ -109,9 +113,13 @@ export default function UpdateGoals() {
 
   return (
     <>
-      <NavbarApp />
+      <div className="h-14 relative">
+        <MidNavbar />
+        <div className="flex absolute left-20 top-8">
+          <FeatureTitle text="Your Goals" />
+        </div>
+      </div>
       <div className="px-10 my-10">
-        <FeatureTitle text="Your Goals" />
         <div className="w-full my-3 p-6 rounded-md bg-light-green">
           <h5 className="font-semibold mb-5 text-md">
             Input Your Data for Calculation
