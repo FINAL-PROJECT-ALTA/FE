@@ -80,19 +80,29 @@ function AddFood() {
   const handleAddMenu = () => {
     const body = {
       menu_category: menu,
-      foods: [
-        {
-          food_uid: item1,
-        },
-        {
-          food_uid: item2,
-        },
-        {
-          food_uid: item3,
-        },
-      ],
+      foods: [],
     };
 
+    body['foods'] ===
+      Object.keys(data).map((el) => {
+        if (data[el].food_uid === item1) {
+          body['foods'].push({
+            food_uid: item1,
+          });
+        }
+        if (data[el].food_uid === item2) {
+          body['foods'].push({
+            food_uid: item2,
+          });
+        }
+        if (data[el].food_uid === item3) {
+          body['foods'].push({
+            food_uid: item3,
+          });
+        }
+      });
+
+    console.log(body);
     const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -111,7 +121,7 @@ function AddFood() {
           .post('https://aaryadewangga.cloud.okteto.net/menus', body, config)
           .then(({ data }) => {
             setTimeout(() => {
-              router.push('../admin');
+              router.push('../admin/menu');
             }, 1500);
             Swal.fire(
               'Added Successfully',
@@ -190,11 +200,11 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  setItem1(e.target.value);
+                  setItem1(e.target.value.split(',')[0]);
                   setCal1(e.target.value.split(',')[1]);
                 }}
               >
-                <option value="" disabled selected hidden>
+                <option value="none" disabled selected hidden>
                   Select one
                 </option>
                 {data.map((el, i) => (
@@ -240,11 +250,11 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  setItem2(e.target.value);
+                  setItem2(e.target.value.split(',')[0]);
                   setCal2(e.target.value.split(',')[1]);
                 }}
               >
-                <option value="" disabled selected hidden>
+                <option value="none" disabled selected hidden>
                   Select one
                 </option>
                 {data.map((el, i) => (
@@ -289,11 +299,11 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  setItem3(e.target.value);
+                  setItem3(e.target.value.split(',')[0]);
                   setCal3(e.target.value.split(',')[1]);
                 }}
               >
-                <option value="" disabled selected hidden>
+                <option value="none" disabled selected hidden>
                   Select one
                 </option>
                 {data.map((el, i) => (
@@ -321,7 +331,6 @@ function AddFood() {
             <span className="text-lime-500">
               {sumCal() > 2400 ? 'to much calories' : sumCal()}
             </span>
-            / 2400
           </h1>
         </div>
         <div className="w-96 mt-10 mb-10 ml-8 sm:ml-20 md:ml-20 lg:ml-20">

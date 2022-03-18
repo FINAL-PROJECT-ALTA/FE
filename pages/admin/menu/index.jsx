@@ -18,25 +18,25 @@ function RecommenPage() {
       name: 'Breakfast',
       colorbg: 'bg-yellow-300/70',
       time: '7:00 AM - 9:00 AM',
-      href: `breakfast`,
+      href: 'breakfast',
     },
     {
       name: 'Lunch',
       colorbg: 'bg-light-green/80',
       time: '12:00 AM - 1:00 PM',
-      href: `lunch`,
+      href: 'lunch',
     },
     {
       name: 'Dinner',
       colorbg: 'bg-midnight/50',
       time: '05.00 PM - 8.00 PM',
-      href: `dinner`,
+      href: 'dinner',
     },
     {
       name: 'Snacks',
       colorbg: 'bg-midnight/50',
       time: '4.00 PM - 4.30 PM',
-      href: `snack`,
+      href: 'snack',
     },
   ];
 

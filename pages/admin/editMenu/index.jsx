@@ -195,7 +195,7 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  setItem1(e.target.value);
+                  setItem1(e.target.value.split(',')[0]);
                   setCal1(e.target.value.split(',')[1]);
                 }}
               >
@@ -246,7 +246,7 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  setItem2(e.target.value);
+                  setItem2(e.target.value.split(',')[0]);
                   setCal2(e.target.value.split(',')[1]);
                 }}
               >
@@ -296,7 +296,7 @@ function AddFood() {
                 focus:border-lime-500
                 "
                 onChange={(e) => {
-                  setItem3(e.target.value);
+                  setItem3(e.target.value.split(',')[0]);
                   setCal3(e.target.value.split(',')[1]);
                 }}
               >
@@ -329,7 +329,6 @@ function AddFood() {
             <span className="text-lime-500">
               {sumCal() > 2400 ? 'to much calories' : sumCal()}
             </span>
-            / 2400
           </h1>
         </div>
         <div className="w-96 mt-10 mb-10 ml-8 sm:ml-20 md:ml-20 lg:ml-20">

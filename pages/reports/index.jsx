@@ -17,7 +17,7 @@ export default function Reports() {
 
   useEffect(() => {
     if (!getToken) {
-      router.push("/user");
+      router.push("/user/login");
     }
   }, [getToken]);
 

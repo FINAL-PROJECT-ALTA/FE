@@ -1,9 +1,9 @@
 import { FcGoogle } from 'react-icons/fc';
-import { FaLock } from 'react-icons/fa';
+import { FaLock, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { RiLoginCircleFill } from 'react-icons/ri';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -13,6 +13,7 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
@@ -51,6 +52,9 @@ function LoginForm() {
       .then(({ data }) => {
         // console.log(data.data.token);
 
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('goal_exspired', data.data.goal_exspired);
+
         if (data.data.roles === true) {
           localStorage.setItem('token_admin', data.data.token);
           setTimeout(() => {
@@ -68,14 +72,13 @@ function LoginForm() {
           width: 600,
           padding: '4em',
           color: '#141E27',
-          background:
-            '#fff url(https://cdn.wallpapersafari.com/20/93/7qZlO9.jpg)',
-          backdrop: `
-          rgba(0,0,123,0.4)
-          url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
-          left top
-          no-repeat
-        `,
+          background: '#fff',
+          //   backdrop: `
+          //   rgba(0,0,123,0.4)
+          //   url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
+          //   left top
+          //   no-repeat
+          // `,
           html: 'Redirecting to home page in <b></b> milliseconds.',
           timer: 4000,
           timerProgressBar: true,
@@ -132,7 +135,7 @@ function LoginForm() {
               Please sign in to your account
             </p>
           </div>
-          <div className="flex flex-row justify-center items-center space-x-3 mt-6">
+          {/* <div className="flex flex-row justify-center items-center space-x-3 mt-6">
             <span
               className="
             w-11 
@@ -159,12 +162,14 @@ function LoginForm() {
                 Or Login With Email
               </span>
             </div>
-          </div>
-          <div className="mt-10">
+          </div> */}
+          <div className="mt-7">
             <form action="#">
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  E-Mail Address:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    E-Mail Address:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -191,7 +196,8 @@ function LoginForm() {
                     invalid:text-pink-600
                     focus:invalid:border-pink-500 
                     focus:invalid:ring-pink-500
-                    peer ..."
+                    peer ... placeholder:text-md"
+                    placeholder="Your email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 invisible peer-invalid:visible">
@@ -201,12 +207,20 @@ function LoginForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  Password:
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    Password:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute block right-5 top-4 text-gray-600 select-none cursor-pointer"
+                  >
+                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </span>
                   <input
                     className="
                     w-full 
@@ -217,10 +231,10 @@ function LoginForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500
+                    focus:border-lime-500 placeholder:text-md
                    "
                     placeholder="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}

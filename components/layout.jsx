@@ -4,6 +4,7 @@ import Navigation from './navigation'
 import { useRouter } from 'next/router'
 import allStore from '../store/actions';
 import { useDispatch } from 'react-redux'
+import HeadApp from './Head';
 
 function Layout({ children }) {
     const router = useRouter()
@@ -11,12 +12,19 @@ function Layout({ children }) {
 
     useEffect(() => {
         dispatch(allStore.fetchAllFoods())
-        dispatch(allStore.fetchAllMenus())
+        dispatch(allStore.fetchAllGoal())
+        dispatch(allStore.fetchAllUser())
+        // dispatch(allStore.fetchAllBreakfast())
+        // dispatch(allStore.fetchAllLunch())
+        // dispatch(allStore.fetchAllDinner())
+        // dispatch(allStore.fetchAllSnack())
+        // dispatch(allStore.fetchAllMenus())
 
     }, [dispatch])
 
     return (
         <>
+            <HeadApp />
             {/* <NavbarApp /> */}
             <main>{children}</main>
             {router.pathname !== "/" ? <></> : (

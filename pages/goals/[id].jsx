@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavbarApp from "../../components/navbar";
+import MidNavbar from '../../components/MidNavbar'
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import axios from "axios";
-import ReactLoading from "react-loading";
 import Swal from "sweetalert2";
+import ReactLoading from "react-loading";
 
-export default function Goals() {
+export default function UpdateGoals() {
   const getToken =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
   const router = useRouter();
@@ -18,15 +19,43 @@ export default function Goals() {
     }
   }, [getToken]);
 
+  const { id } = router.query;
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `https://aaryadewangga.cloud.okteto.net/users/goals/${id}`,
+      headers: {
+        Authorization: `Bearer ${getToken}`,
+      },
+    })
+      .then(({ data }) => {
+        setHeight(data.data.height);
+        setWeight(data.data.weight);
+        setAge(data.data.age);
+        setRange(data.data.range_time);
+        setTarget(data.data.target);
+        setWeightTarget(data.data.weight_target);
+        setDailyActive(data.data.daily_active);
+        // console.log(data.data.count);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
+      .finally(() => { });
+  }, []);
+
   const [loading, setLoading] = useState(false);
 
-  const [height, setHeight] = useState();
-  const [weight, setWeight] = useState();
-  const [age, setAge] = useState();
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [age, setAge] = useState(0);
   const [dailyActive, setDailyActive] = useState("");
   const [weightTarget, setWeightTarget] = useState();
   const [target, setTarget] = useState("");
-  const [range, setRange] = useState();
+  const [range, setRange] = useState(0);
+
+  // console.log(weight);
 
   function handleSubmit(e) {
     setLoading(true);
@@ -42,8 +71,8 @@ export default function Goals() {
     };
 
     axios({
-      method: "post",
-      url: "https://aaryadewangga.cloud.okteto.net/users/goals",
+      method: "put",
+      url: `https://aaryadewangga.cloud.okteto.net/users/goals/${id}`,
       data: body,
       headers: {
         Authorization: `Bearer ${getToken}`,
@@ -56,13 +85,12 @@ export default function Goals() {
           setLoading(false);
         }, 2000);
         Swal.fire(
-          "Create Successfully",
-          "Your Goals has been Created",
+          "Update Successfully",
+          "Your Goals has been Updated",
           "success"
         );
       })
       .catch((err) => {
-        console.log(err, "error");
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -82,11 +110,16 @@ export default function Goals() {
       </div>
     );
   }
+
   return (
     <>
-      <NavbarApp />
+      <div className="h-14 relative">
+        <MidNavbar />
+        <div className="flex absolute left-20 top-8">
+          <FeatureTitle text="Your Goals" />
+        </div>
+      </div>
       <div className="px-10 my-10">
-        <FeatureTitle text="Your Goals" />
         <div className="w-full my-3 p-6 rounded-md bg-light-green">
           <h5 className="font-semibold mb-5 text-md">
             Input Your Data for Calculation
@@ -183,7 +216,8 @@ export default function Goals() {
             <div className="mb-4">
               <label
                 htmlFor="target"
-                className="block text-sm font-bold text-mexican-pink mb-2">
+                className="block text-sm font-bold text-mexican-pink mb-2"
+              >
                 Target
               </label>
               <div>
@@ -191,8 +225,8 @@ export default function Goals() {
                   <input
                     type="radio"
                     className="form-radio accent-mexican-pink"
-                    id="target-lose"
                     name="target"
+                    id="target-lose"
                     value="lose weight"
                     onChange={(e) => {
                       setTarget(e.target.value);
@@ -204,8 +238,8 @@ export default function Goals() {
                   <input
                     type="radio"
                     className="form-radio accent-mexican-pink"
-                    id="target-gain"
                     name="target"
+                    id="target-gain"
                     value="gain weight"
                     onChange={(e) => {
                       setTarget(e.target.value);
@@ -265,11 +299,11 @@ export default function Goals() {
             <div>
               <button
                 type="submit"
-                id="btn-submit-new-goals"
+                id="btn-submit-update-goals"
                 onClick={handleSubmit}
                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-mexican-pink hover:bg-secondary focus:ring-2 focus:ring-offset-2"
               >
-                Add Goals
+                Update Goals
               </button>
             </div>
           </form>
