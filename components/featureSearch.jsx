@@ -109,7 +109,7 @@ function FeatureSearch() {
                 <button onClick={() => { router.push(`/search?input=${wordEntered}&category=${selected.name}`) }} className='px-3 py-3 ml-2 bg-light-green/70 text-dark-green hover:bg-light-green font-medium rounded-md '>Search</button>
             </div>
             {searchTerm != 0 && (
-                <div className='text-dark-green text-lg my-5 px-5 overflow-scroll'>
+                <div className='text-dark-green text-lg my-5 px-5 overflow-y-hidden'>
                     {searchTerm.map(item => (
                         <Link key={item.food_uid} href={`/detail/${item.food_uid}`}>
                             <a className='flex justify-start items-center font-medium my-3 py-1 hover:bg-light-orange/40 rounded-lg relative'>

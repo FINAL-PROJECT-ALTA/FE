@@ -5,6 +5,7 @@ import { compose, applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from '../store/reducers';
+import Notice from '../components/Notice'
 
 // redux main
 const composeEnhancers = compose
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
+        <Notice />
       </Layout>
     </Provider>
   )
