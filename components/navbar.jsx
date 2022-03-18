@@ -13,7 +13,7 @@ function NavbarApp() {
               </div>
             </div>
             {/* Notification */}
-            <Notification />
+            {/* <Notification /> */}
           </div>
         </div>
       </div>

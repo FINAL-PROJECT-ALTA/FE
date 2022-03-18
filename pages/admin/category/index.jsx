@@ -143,42 +143,44 @@ function Category() {
         </div>
 
         <div className=" my-10 ">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10 sm:gap-5 md:gap-5 mt-3 h-vh">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-10 sm:gap-5 md:gap-5 mt-3 h-vh">
             {currentPost ? (
               currentPost.map((el, i) => (
                 <div
-                  className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm cursor-pointer"
+                  className="w-30 h-30 mb-3  rounded-md drop-shadow-sm cursor-pointer"
                   key={i}
                 >
-                  <div className="shrink-0">
+                  <div className="">
                     <img
                       src={el.image}
                       alt=""
                       className="bg-red-400 h-28 object-cover rounded-t-md"
                       width="100%"
                     />
+
+                    <p className="-translate-y-6 text-md bg-lime-700/40 font-medium  bg-blend-darken text-white text-center truncate ">
+                      {el.name}
+                    </p>
                   </div>
-                  <div className="px-3 py-3 text-dark-green">
+                  {/* <div className=" text-dark-green">
                     <p className="text-md font-medium text-center truncate ">
                       {el.name}
                     </p>
-                    {/* <p>{el.food_uid}</p> */}
-                  </div>
+                    <p>{el.food_uid}</p>
+                  </div> */}
                   <form>
-                    <div className="flex justify-between">
+                    <div className="flex justify-around -translate-y-6">
                       <Link
                         href={`/admin/editFood?foodsId=${el.food_uid}`}
                         key={el.name}
                       >
-                        <button className="w-[55px] hover:w-[500px] bg-yellow-400 hover:bg-orange-500 text-white font-semibold py-2 px-4 border  rounded shadow mr-5">
-                          <center>
-                            <MdOutlineEdit size={20} />
-                          </center>
+                        <button className="w-full   hover:bg-orange-500 text-gray-600 font-semibold py-2 px-4 border  rounded shadow mr-5">
+                          <MdOutlineEdit size={20} className="ml-3" />
                         </button>
                       </Link>
 
                       <button
-                        className="w-[55px] hover:w-[500px] bg-red-500/70 hover:bg-red-700 text-white font-bold py-2 px-4 border  rounded"
+                        className="w-full  hover:bg-red-700 text-red-400 font-bold py-2 px-4 border  rounded"
                         onClick={() => {
                           setIdFood(el.food_uid);
                           handleDelete();

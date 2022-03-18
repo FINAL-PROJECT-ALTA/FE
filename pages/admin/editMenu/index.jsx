@@ -42,9 +42,13 @@ function AddFood() {
         )
         .then(({ data }) => {
           const findFood = data.data.find((el) => el.menu_uid === menu_id);
+          console.log(findFood.foods);
 
           if (findFood) {
             setMenu(findFood.menu_category);
+            setItem1(findFood.foods[0].name);
+            setItem2(findFood.foods[1].name);
+            setItem3(findFood.foods[2].name);
           }
         })
         .catch((err) => {
@@ -105,7 +109,11 @@ function AddFood() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post('https://aaryadewangga.cloud.okteto.net/menus', body, config)
+          .put(
+            `https://aaryadewangga.cloud.okteto.net/menus/${menu_id}`,
+            body,
+            config
+          )
           .then(({ data }) => {
             setTimeout(() => {
               router.push('../admin');
@@ -147,7 +155,7 @@ function AddFood() {
       <div className="px-10 h-screen">
         <div className="mt-10">
           <center>
-            <FeatureTitle text="Add Some Menu" />
+            <FeatureTitle text="Edit Some Menu" />
           </center>
 
           <div className="flex items-center mb-5 mt-10">
@@ -191,9 +199,10 @@ function AddFood() {
                   setCal1(e.target.value.split(',')[1]);
                 }}
               >
-                <option value="" disabled selected hidden>
+                {/* <option value="" disabled selected hidden>
                   Select one
-                </option>
+                </option> */}
+                <option value={item1}>{item1}</option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
@@ -241,9 +250,10 @@ function AddFood() {
                   setCal2(e.target.value.split(',')[1]);
                 }}
               >
-                <option value="" disabled selected hidden>
+                {/* <option value="" disabled selected hidden>
                   Select one
-                </option>
+                </option> */}
+                <option value={item2}>{item2}</option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
@@ -290,9 +300,10 @@ function AddFood() {
                   setCal3(e.target.value.split(',')[1]);
                 }}
               >
-                <option value="" disabled selected hidden>
+                {/* <option value="" disabled selected hidden>
                   Select one
-                </option>
+                </option> */}
+                <option value={item3}>{item3 ? item3 : 'Choose one'}</option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
