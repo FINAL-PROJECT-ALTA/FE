@@ -57,11 +57,11 @@ export default function Home() {
   const listFoods = useSelector(({ listFoods }) => listFoods)
   const goals = useSelector(({ listGoal }) => listGoal)
 
-  const [weight, setWeight] = useState('')
-  const [height, setHeight] = useState('')
-  const [age, setAge] = useState('')
+  const [weight, setWeight] = useState(0)
+  const [height, setHeight] = useState(0)
+  const [age, setAge] = useState(0)
   const [target, setTarget] = useState('')
-  // const [time, setTime] = useState(0)
+  const [time, setTime] = useState(0)
   const [status, setStatus] = useState('')
   const [idGoal, setIdGoal] = useState('')
 
@@ -82,16 +82,21 @@ export default function Home() {
   //     headers: { Authorization: `Bearer ${getToken}` }
   //   })
   //     .then(({ data }) => {
-  //       // console.log(data.data);
+  //       console.log(data.data);
   //       if (data.data) {
-
+  //         setTarget(data.data.target)
+  //         setWeight(data.data.weight)
+  //         setHeight(data.data.height)
+  //         setAge(data.data.age)
+  //         setStatus(data.data.status)
+  //         setTime(data.data.count)
   //       }
   //     })
   //     .catch((err) => {
   //       console.log(err.message);
   //     })
   //     .finally(() => { });
-  // }, [axios]);
+  // }, []);
 
 
   useEffect(() => {
@@ -107,9 +112,9 @@ export default function Home() {
       // setTime(findGoal.count)
       // console.log(findGoal.cretedAt);
     }
-    dispatch(allStore.fetchAllGoal())
+    // dispatch(allStore.fetchAllGoal())
 
-  }, [goals, dispatch]);
+  }, [goals]);
 
 
   // Get Current Page
