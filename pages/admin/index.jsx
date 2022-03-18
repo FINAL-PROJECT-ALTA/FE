@@ -5,6 +5,10 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { Pie } from 'react-chartjs-2';
+import React from 'react';
+import { ArcElement } from 'chart.js';
+import Chart from 'chart.js/auto';
 
 function AdminPage() {
   const [data, setData] = useState([]);
@@ -16,7 +20,7 @@ function AdminPage() {
   const router = useRouter();
 
   const getToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -103,24 +107,23 @@ function AdminPage() {
 
   function handleLogout() {
     if (getToken) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('token_admin');
       router.push('/user');
     }
   }
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      router.push('/user');
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/profile');
     }
   }, []);
 
   return (
     <div>
       <NavbarApp />
-      <div className="px-10 my-10">
-        {/* <FeatureTitle text="My Profile" /> */}
-        <div className="w-full sm:w-full md:w-full lg:w-full h-[26.5rem] sm:h-[27rem] md:h-[27rem] lg:h-[27rem] my-3 p-6 rounded-md bg-floor">
-          <div className=" flex justify-end right-3 top-3">
+      <div className="px-10 my-10 ">
+        <div className="w-full sm:w-full md:w-full lg:w-full h-vh sm:h-[27rem] md:h-[27rem] lg:h-[27rem] my-3 p-6 rounded-md bg-floor">
+          <div className="flex justify-end">
             <button
               onClick={handleLogout}
               className="text-lg text-lime-700 font-semibold inline-flex items-center py-2 px-3 bg-light-green/80 hover:bg-lime-200 hover:text-dark-green rounded-md"
@@ -140,42 +143,89 @@ function AdminPage() {
               </svg>
             </button>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="pb-3">
-              <h3 className="text-2xl font-semibold text-[#013542]">
-                Welcome, {data.name}
-              </h3>
-            </div>
-            <img
-              src="https://1.bp.blogspot.com/-PIo-ijjIyUo/X4Vy1VGXQRI/AAAAAAAAAUo/OnkVUaEtqwARAp205jhtyC-_FRvKBSPuQCLcBGAsYHQ/s348/images-17.jpeg"
-              className="rounded-full border border-gray-100 shadow-sm"
-              width={150}
-            />
-
-            <div className="mt-5 h-px bg-gray-400 w-80 sm:w-[30rem] md:w-[30rem] lg:w-[30rem]" />
-            <p className="mt-2 text-[18px] text-[#013542] font-regular sm:text-2xl md:text-2xl lg:text-2xl">
-              Report Items :
-            </p>
+          <div className="flex justify-center text-xl font-bold mt-5">
+            Our Report
           </div>
 
-          <div className="flex justify-around mt-5">
-            <div>
-              <h3 className="font-semibold  text-[#013542]">
-                Fruits: <span className="font-normal">{sumFruit} item</span>
-              </h3>
-              <h3 className="font-semibold  text-[#013542]">
-                Snack: <span className="font-normal">{sumSnack} item</span>
-              </h3>
-              <h3 className="font-semibold  text-[#013542]">
-                Drink: <span className="font-normal">{sumDrink} item</span>
-              </h3>
+          <div className="mt-2 h-px bg-gray-400 w-[120px] sm:w-[150px] md:w-[150px] lg:w-[150px] mx-auto" />
+
+          <div className="flex mt-4 sm:mt-5">
+            {/* <div className="mt-5 h-px bg-gray-400 w-80 sm:w-[30rem] md:w-[30rem] lg:w-[30rem]" /> */}
+            <div className="w-[200px] sm:w-64 md:w-64 lg:w-64 h-20 overlay-hidden">
+              <Pie
+                cx="50%"
+                cy="50%"
+                outerRadius={80}
+                data={{
+                  labels: ['Fruits', 'Food', 'Junk Food', 'Snacks', 'Drink'],
+                  datasets: [
+                    {
+                      data: [sumFruit, sumFood, sumJunk, sumSnack, sumDrink],
+                      backgroundColor: [
+                        '#6DFF59',
+                        '#FFC859',
+                        '#FF7B59',
+                        '#FFF359',
+                        '#36A2EB',
+                      ],
+                      hoverBackgroundColor: [
+                        '#6DFF59',
+                        '#FFC859',
+                        '#FF7B59',
+                        '#FFF359',
+                        '#36A2EB',
+                      ],
+                    },
+                  ],
+                }}
+                options={{
+                  legend: {
+                    display: false,
+                  },
+                  tooltips: {
+                    callbacks: {
+                      label: function (tooltipItem) {
+                        return tooltipItem.yLabel;
+                      },
+                    },
+                  },
+                }}
+              />
             </div>
-            <div className="ml-5">
-              <h3 className="font-semibold  text-[#013542]">
-                Food: <span className="font-normal">{sumFood} item</span>
+
+            <div className="flex flex-col ml-2 sm:ml-10 md:ml-10 lg:ml-10 ">
+              <p className="mt-2 text-[12px] text-[#013542] sm:text-2xl md:text-2xl lg:text-2xl font-bold mb-3">
+                Detail Items :
+              </p>
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                Fruits:{' '}
+                <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                  {sumFruit} item
+                </span>
               </h3>
-              <h3 className="font-semibold  text-[#013542]">
-                Junk Food: <span className="font-normal">{sumJunk} item</span>
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                Snack:{' '}
+                <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                  {sumSnack} item
+                </span>
+              </h3>
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                Drink:{' '}
+                <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                  {sumDrink} item
+                </span>
+              </h3>
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                Food:{' '}
+                <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                  {sumFood} item
+                </span>
+              </h3>
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                Junk Food:{' '}
+                <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                  {sumJunk} item
+                </span>
               </h3>
             </div>
           </div>
