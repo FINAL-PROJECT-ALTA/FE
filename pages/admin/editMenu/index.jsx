@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 function AddFood() {
   const router = useRouter();
+  const menu_id = router.query.menuId;
   const [data, setData] = useState([]);
   const [menu, setMenu] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,15 +19,13 @@ function AddFood() {
   const [cal2, setCal2] = useState(0);
   const [cal3, setCal3] = useState(0);
 
-  const food_categories = router.query.category;
-
   const sumCal = () => {
     const total = parseInt(cal1) + parseInt(cal2) + parseInt(cal3);
     return total;
   };
 
   useEffect(() => {
-    if (food_categories) {
+    if (menu_id) {
       const token = localStorage.getItem('token_admin');
       setLoading(true);
       setTimeout(() => {
@@ -38,13 +37,11 @@ function AddFood() {
       };
       axios
         .get(
-          `https://aaryadewangga.cloud.okteto.net/menus?category=${food_categories}`,
+          `https://aaryadewangga.cloud.okteto.net/menus?menu_uid=${menu_id}`,
           config
         )
         .then(({ data }) => {
-          const findFood = data.data.find(
-            (el) => el.menu_category === food_categories
-          );
+          const findFood = data.data.find((el) => el.menu_uid === menu_id);
 
           if (findFood) {
             setMenu(findFood.menu_category);
@@ -77,7 +74,7 @@ function AddFood() {
       });
   }, []);
 
-  const handleAddMenu = () => {
+  const handleEditMenu = () => {
     const body = {
       menu_category: menu,
       foods: [
@@ -326,10 +323,10 @@ function AddFood() {
         </div>
         <div className="w-96 mt-10 mb-10 ml-8 sm:ml-20 md:ml-20 lg:ml-20">
           <button
-            onClick={handleAddMenu}
+            onClick={handleEditMenu}
             className="focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
           >
-            <span className="mr-2">Add Menu</span>
+            <span className="mr-2">Edit Menu</span>
           </button>
         </div>
       </div>

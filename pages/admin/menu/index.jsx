@@ -61,7 +61,7 @@ function RecommenPage() {
   return (
     <>
       <NavbarApp />
-      <div className="px-10 h-screen">
+      <div className="px-10 h-screen ">
         <FeatureTitle />
         <div className="mt-10">
           <div className="flex ">

@@ -8,15 +8,35 @@ function NavbarApp() {
   const router = useRouter();
   return (
     <>
-      <div className="max-w-screen bg-white shadow-md">
-        <div className="px-5 py-5 flex justify-between items-center">
-          <button
-            onClick={() => {
-              router.push('../admin');
-            }}
-          >
-            <AiOutlineLeft size={28} />
-          </button>
+      <div className="bg-white/30 py-12 ">
+        <div className="inset-x-0 bg-white rounded-b-md fixed top-0 xl:inset-x-80 z-30">
+          <div className="flex justify-between items-center px-10 h-24">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <button
+                  onClick={
+                    () => {
+                      if (router.pathname === '/admin/addMenu') {
+                        router.push('/admin/menu');
+                      }
+                      if (router.pathname === '/admin/editMenu') {
+                        router.push('/admin/menu');
+                      }
+                      if (router.pathname === '/admin/listMenu') {
+                        router.push('/admin/menu');
+                      } else {
+                        router.push('/admin');
+                      }
+                    }
+                    //   router.push('../admin');
+                    // }}
+                  }
+                >
+                  <AiOutlineLeft size={28} />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

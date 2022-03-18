@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { data } from 'browserslist';
+import Swal from 'sweetalert2';
 
 function AddFood() {
   const router = useRouter();
@@ -18,6 +19,7 @@ function AddFood() {
   const [protein, setProtein] = useState(0);
   const [unit, setUnit] = useState('');
   const [unitValue, setUnitValue] = useState(0);
+  const [vPhoto, setVPhoto] = useState(null);
   const [category, setCategory] = useState([
     'Fruit',
     'Drink',
@@ -29,67 +31,97 @@ function AddFood() {
   const [createObjectURL, setCreateObjectURL] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token_admin');
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(
-        `https://aaryadewangga.cloud.okteto.net/foods?food_uid=${food_id}`,
-        config
-      )
-      .then(({ data }) => {
-        const findFood = data.data.find((el) => el.food_uid === food_id);
+    if (food_id) {
+      const token = localStorage.getItem('token_admin');
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      axios
+        .get(
+          `https://aaryadewangga.cloud.okteto.net/foods?food_uid=${food_id}`,
+          config
+        )
+        .then(({ data }) => {
+          const findFood = data.data.find((el) => el.food_uid === food_id);
 
-        if (findFood) {
-          setFood(findFood.name);
-          setCalories(findFood.calories);
-          setEnergy(findFood.energy);
-          setCarbohidrate(findFood.carbohidrate);
-          setProtein(findFood.protein);
-          setUnit(findFood.unit);
-          setUnitValue(findFood.unit_value);
-          setCategory(findFood.food_categories);
-          // console.log(data.data);
-        }
+          if (findFood) {
+            setFood(findFood.name);
+            setCalories(findFood.calories);
+            setEnergy(findFood.energy);
+            setCarbohidrate(findFood.carbohidrate);
+            setProtein(findFood.protein);
+            setUnit(findFood.unit);
+            setUnitValue(findFood.unit_value);
+            setCategory(findFood.food_categories);
+            setImage(findFood.image);
+            // console.log(data.data);
+          }
 
-        setData(data.data);
-      })
-      .catch((err) => {
-        console.log(err, 'error');
-      });
-  }, []);
+          setData(data.data);
+        })
+        .catch((err) => {
+          console.log(err, 'error');
+        });
+    }
+  }, [router]);
 
   function handleEdit() {
     const token = localStorage.getItem('token_admin');
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     };
 
-    const body = {
-      name: food,
-      calories: calories,
-      energy: energy,
-      carbohidrate: carbohidrate,
-      protein: protein,
-      unit: unit,
-      unit_value: unitValue,
-      food_categories: category,
-      // image: image
-    };
-    axios
-      .put(
-        `https://aaryadewangga.cloud.okteto.net/foods/${food_id}`,
-        body,
-        config
-      )
-      .then(({ data }) => {
-        console.log(data, 'data');
-        // setData(data.data);
-      })
-      .catch((err) => {
-        console.log(err, 'error');
-      });
+    const formData = new FormData();
+    formData.append('name', food);
+    formData.append('calories', parseInt(calories));
+    formData.append('energy', parseInt(energy));
+    formData.append('carbohidrate', parseInt(carbohidrate));
+    formData.append('protein', parseInt(protein));
+    formData.append('unit', unit);
+    formData.append('unit_value', parseInt(unitValue));
+    formData.append('food_categories', category);
+    formData.append('image', image);
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Please check again the required field',
+      icon: 'question',
+      confirmButtonText: 'Yes, edit it!',
+      confirmButtonColor: '#3085d6',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .put(
+            `https://aaryadewangga.cloud.okteto.net/foods/${food_id}`,
+            formData,
+            config
+          )
+          .then(({ data }) => {
+            setTimeout(() => {
+              router.push('../admin');
+            }, 1500);
+            Swal.fire(
+              'Edit Successfully',
+              'Your food has been edited',
+              'success'
+            );
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          })
+          .finally(() => {});
+      } else if (result.isDismissed) {
+        Swal.fire('Check again ?', 'We are waiting you inside', 'question');
+      }
+    });
   }
 
   const uploadToClient = (event) => {
@@ -111,7 +143,7 @@ function AddFood() {
         <section className="flex flex-col w-full h-full p-1 overflow-auto mt-5">
           <header className="flex flex-col items-center justify-center py-12 text-base text-blueGray-500 transition duration-500 ease-in-out transform bg-white border border-dashed rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
             <img
-              src={createObjectURL}
+              src={createObjectURL ? createObjectURL : image}
               width={255}
               height={170}
               alt="preview photo"
@@ -155,7 +187,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={food}
+            value={food}
             onChange={(e) => setFood(e.target.value)}
           />
         </div>
@@ -173,7 +205,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={calories}
+            value={calories}
             onChange={(e) => setCalories(e.target.value)}
           />
         </div>
@@ -191,7 +223,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={energy}
+            value={energy}
           />
         </div>
 
@@ -208,7 +240,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={carbohidrate}
+            value={carbohidrate}
             onChange={(e) => setCarbohidrate(e.target.value)}
           />
         </div>
@@ -226,7 +258,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={protein}
+            value={protein}
             onChange={(e) => setProtein(e.target.value)}
           />
         </div>
@@ -244,7 +276,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={unit}
+            value={unit}
             onChange={(e) => setUnit(e.target.value)}
           />
         </div>
@@ -262,7 +294,7 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
-            placeholder={unitValue}
+            value={unitValue}
             onChange={(e) => setUnitValue(e.target.value)}
           />
         </div>
@@ -279,13 +311,14 @@ function AddFood() {
             className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none"
-          >
             onChange={(e) => setCategory(e.target.value)}
-            <option>{category}</option>)<option>Fruit</option>
-            <option>Drink</option>
-            <option>Junk Food</option>
-            <option>Food</option>
-            <option>Snack</option>
+          >
+            <option value={category}>{category}</option>
+            <option value="fruit">Fruit</option>
+            <option value="drink">Drink</option>
+            <option value="junk food">Junk Food</option>
+            <option value="food">Food</option>
+            <option value="snack">Snack</option>
           </select>
         </div>
         <div className="flex w-96 mt-10 mb-10 ml-36">

@@ -28,17 +28,28 @@ function AddFood() {
   ]);
 
   const handleAddFood = () => {
-    const body = {
-      name: food,
-      calories: parseInt(calories),
-      energy: parseInt(energy),
-      carbohidrate: parseInt(carbohidrate),
-      protein: parseInt(protein),
-      unit: unit,
-      unit_value: parseInt(unitValue),
-      food_categories: category,
-      // image: image
-    };
+    // const body = {
+    //   name: food,
+    //   calories: parseInt(calories),
+    //   energy: parseInt(energy),
+    //   carbohidrate: parseInt(carbohidrate),
+    //   protein: parseInt(protein),
+    //   unit: unit,
+    //   unit_value: parseInt(unitValue),
+    //   food_categories: category,
+    //   image: image,
+    // };
+
+    const formData = new FormData();
+    formData.append('name', food);
+    formData.append('calories', parseInt(calories));
+    formData.append('energy', parseInt(energy));
+    formData.append('carbohidrate', parseInt(carbohidrate));
+    formData.append('protein', parseInt(protein));
+    formData.append('unit', unit);
+    formData.append('unit_value', parseInt(unitValue));
+    formData.append('food_categories', category);
+    formData.append('image', image);
 
     const token = localStorage.getItem('token_admin');
     const config = {
@@ -55,7 +66,11 @@ function AddFood() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post('https://aaryadewangga.cloud.okteto.net/foods', body, config)
+          .post(
+            'https://aaryadewangga.cloud.okteto.net/foods',
+            formData,
+            config
+          )
           .then(({ data }) => {
             setTimeout(() => {
               router.push('../admin');

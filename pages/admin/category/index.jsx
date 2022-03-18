@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import ReactLoading from 'react-loading';
 import Swal from 'sweetalert2';
+import Pagnination from '../../../components/pagination';
 
 function Category() {
   const [data, setData] = useState([]);
@@ -17,6 +18,15 @@ function Category() {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [idFood, setIdFood] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(12);
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change Page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // console.log(idFood);
 
@@ -50,7 +60,6 @@ function Category() {
           if (findFood) {
             setCategory(findFood.food_categories);
             setName(findFood.name);
-            setIdFood(findFood.food_uid);
             console.log(idFood);
           }
 
@@ -69,14 +78,40 @@ function Category() {
       headers: { Authorization: `Bearer ${token}` },
     };
 
-    axios
-      .delete(`https://aaryadewangga.cloud.okteto.net/foods/${idFood}`, config)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err, 'error');
-      });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Once the menu deleted you will not be able to recover it!',
+      icon: 'question',
+      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: '#3085d6',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `https://aaryadewangga.cloud.okteto.net/foods/${idFood}`,
+            config
+          )
+          .then(({ data }) => {
+            setTimeout(() => {
+              router.push('../admin');
+            }, 1500);
+            Swal.fire('Delete Successfully', 'The menu has gone', 'success');
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+            console.log(error);
+          })
+          .finally(() => {});
+      } else if (result.isDismissed) {
+        Swal.fire('Check again ?', 'We are waiting you inside', 'question');
+      }
+    });
   }
 
   if (loading) {
@@ -92,24 +127,25 @@ function Category() {
   return (
     <div>
       <NavbarApp />
-      <div className="flex mt-[70px] ml-10">
-        <FeatureTitle text={category} />
+      <div className="px-10 h-vh w-full bg-white">
+        <div className="flex py-10 px-2 justify-between">
+          <FeatureTitle text={category} />
 
-        <button
-          onClick={() => {
-            router.push('../admin/addFood');
-          }}
-          className="flex ml-[16rem] sm:ml-[24rem] md:ml-[24rem] lg:ml-[24rem] items-center justify-end focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-lime-500 rounded py-2 w-[7rem] sm:w-[8rem] md:w-[8rem] lg:w-[8rem]  transition duration-150 ease-in"
-        >
-          <AiOutlinePlus size={20} className="ml-2" />
-          <span className="ml-1 mr-2">Add {category}</span>
-        </button>
-      </div>
-      <div className="px-10 my-10">
-        <div className="mt-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-5 mt-3 w-[30rem] sm:w-[37rem] md:w-[37rem] lg:w-[37rem] h-vh">
-            {data != 0 ? (
-              data.map((el, i) => (
+          <button
+            onClick={() => {
+              router.push('../admin/addFood');
+            }}
+            className="inline-flex text-right justify-end focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-lime-500 rounded py-2 w-[7rem] sm:w-[8rem] md:w-[8rem] lg:w-[8rem]  transition duration-150 ease-in"
+          >
+            <AiOutlinePlus size={20} className="ml-2" />
+            <span className="ml-1 mr-2">Add {category}</span>
+          </button>
+        </div>
+
+        <div className=" my-10 ">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10 sm:gap-5 md:gap-5 mt-3 h-vh">
+            {currentPost ? (
+              currentPost.map((el, i) => (
                 <div
                   className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm cursor-pointer"
                   key={i}
@@ -119,10 +155,13 @@ function Category() {
                       src={el.image}
                       alt=""
                       className="bg-red-400 h-28 object-cover rounded-t-md"
+                      width="100%"
                     />
                   </div>
                   <div className="px-3 py-3 text-dark-green">
-                    <p className="text-md font-medium text-center">{el.name}</p>
+                    <p className="text-md font-medium text-center truncate ">
+                      {el.name}
+                    </p>
                     {/* <p>{el.food_uid}</p> */}
                   </div>
                   <form>
@@ -131,7 +170,7 @@ function Category() {
                         href={`/admin/editFood?foodsId=${el.food_uid}`}
                         key={el.name}
                       >
-                        <button className="w-[55px] hover:w-[500px] bg-yellow-400 hover:bg-orange-500 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mr-5">
+                        <button className="w-[55px] hover:w-[500px] bg-yellow-400 hover:bg-orange-500 text-white font-semibold py-2 px-4 border  rounded shadow mr-5">
                           <center>
                             <MdOutlineEdit size={20} />
                           </center>
@@ -139,11 +178,10 @@ function Category() {
                       </Link>
 
                       <button
-                        className="w-[55px] hover:w-[500px] bg-red-500 hover:bg-red-700 text-gray-800 font-bold py-2 px-4 border border-blue-700 rounded"
+                        className="w-[55px] hover:w-[500px] bg-red-500/70 hover:bg-red-700 text-white font-bold py-2 px-4 border  rounded"
                         onClick={() => {
                           setIdFood(el.food_uid);
                           handleDelete();
-                          router.push('/admin');
                         }}
                       >
                         <center>
@@ -163,8 +201,14 @@ function Category() {
             )}
           </div>
         </div>
+        <div className="mx-auto">
+          <Pagnination
+            postPerPage={postPerPage}
+            totalPosts={data.length}
+            paginate={paginate}
+          />
+        </div>
       </div>
-      {/* <NavAdmin /> */}
     </div>
   );
 }
