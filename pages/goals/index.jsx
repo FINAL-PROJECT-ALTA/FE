@@ -76,13 +76,12 @@ export default function Goals() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center content-center">
+      <div className="flex items-center h-screen justify-center content-center">
         <br />
         <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
       </div>
     );
   }
-
   return (
     <>
       <NavbarApp />
@@ -184,8 +183,7 @@ export default function Goals() {
             <div className="mb-4">
               <label
                 htmlFor="target"
-                className="block text-sm font-bold text-mexican-pink mb-2"
-              >
+                className="block text-sm font-bold text-mexican-pink mb-2">
                 Target
               </label>
               <div>

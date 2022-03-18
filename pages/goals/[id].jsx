@@ -37,7 +37,7 @@ export default function UpdateGoals() {
         setTarget(data.data.target);
         setWeightTarget(data.data.weight_target);
         setDailyActive(data.data.daily_active);
-        // console.log(data.data.weight);
+        // console.log(data.data.count);
       })
       .catch((err) => {
         console.log(err.message);

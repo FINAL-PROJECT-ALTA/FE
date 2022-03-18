@@ -68,6 +68,7 @@ export default function Profile() {
   function handleLogout() {
     if (getToken) {
       localStorage.removeItem("token");
+      localStorage.removeItem("goal_exspired");
       router.push("/");
     }
   }

@@ -52,6 +52,7 @@ function LoginForm() {
       .then(({ data }) => {
         // console.log(data.data.token);
         localStorage.setItem('token', data.data.token);
+        localStorage.setItem('goal_exspired', data.data.goal_exspired);
         if (data.data.roles === true) {
           setTimeout(() => {
             router.push('/admin');
@@ -68,13 +69,13 @@ function LoginForm() {
           padding: '4em',
           color: '#141E27',
           background:
-            '#fff url(https://cdn.wallpapersafari.com/20/93/7qZlO9.jpg)',
-          backdrop: `
-          rgba(0,0,123,0.4)
-          url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
-          left top
-          no-repeat
-        `,
+            '#fff',
+          //   backdrop: `
+          //   rgba(0,0,123,0.4)
+          //   url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
+          //   left top
+          //   no-repeat
+          // `,
           html: 'Redirecting to home page in <b></b> milliseconds.',
           timer: 4000,
           timerProgressBar: true,

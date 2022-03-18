@@ -91,7 +91,7 @@ function RegisterForm() {
             // console.log(data.data.token);
             localStorage.setItem('token', data.data.token);
             setTimeout(() => {
-              router.push('/user');
+              router.push('/user/login');
             }, 1500);
             Swal.fire(
               'Account Created!',

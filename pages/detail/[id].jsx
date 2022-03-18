@@ -41,7 +41,7 @@ function Detail() {
         <>
             <MidNavbar />
             <div className='max-w-full h-full'>
-                <img src={imageUrl} className='rounded-b-xl object-cover  h-72 w-full' />
+                <img src={imageUrl.length != 0 ? `${imageUrl}` : `../images/logo-white.png`} className='rounded-b-xl object-cover  h-72 w-full' />
                 <div className='my-10 px-5 z-50'>
                     <h1 className='text-3xl font-semibold'>{name}</h1>
                     <p className='text-gray-600 text-lg font-normal italic leading-8'>{unitValue + " " + unit}</p>

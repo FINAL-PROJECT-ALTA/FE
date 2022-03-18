@@ -42,7 +42,7 @@ export default function Category() {
                     {foods != 0 ? foods.map(el => (
                         <div key={el.food_uid} className='group relative cursor-pointer my-2'>
                             <div className="relative w-40 h-full mb-3 rounded-md overflow-hidden group-hover:opacity-70 bg-lime-200/20 drop-shadow-sm" onClick={() => { router.push(`/detail/${el.food_uid}`) }}>
-                                <img src={el.image} alt={el.name} className=" h-28 w-full object-cover" />
+                                <img src={el.image.length != 0 ? `${el.image}` : `./images/logo-white.png`} alt={el.name} className=" h-28 w-full object-cover" />
                                 <div className="px-3 py-3 text-dark-green">
                                     <h3 className="text-md font-medium">{el.name}</h3>
                                     <p className="text-md font-mono text-gray-500">{el.calories} KCAL</p>

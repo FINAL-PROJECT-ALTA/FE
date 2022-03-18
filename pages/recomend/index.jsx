@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import ReactLoading from "react-loading";
 
 import { useDispatch } from 'react-redux';
 import allStore from "../../store/actions";
@@ -40,6 +41,7 @@ function RecommenPage() {
   const [dinnerTemp, setDinnerTemp] = useState('')
   const [snackTemp, setSnackTemp] = useState('')
   const [total, setTotal] = React.useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const calorieTotal = total.reduce((totalCalories, meal) => totalCalories + meal, 0);
@@ -70,6 +72,7 @@ function RecommenPage() {
   }
 
   function handleAddToBreakfast() {
+    setIsLoading(true)
     const data = { menu_uid: temp, goal_uid: idGoal }
     axios.post('https://aaryadewangga.cloud.okteto.net/userhistories', data, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -83,10 +86,15 @@ function RecommenPage() {
       .catch((err) => {
         console.log(err);
         // setError(err.response.data.message)
+        Swal.fire('Sorry', 'Failed add menu', 'error');
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
   function handleAddToLunch() {
+    setIsLoading(true)
     const data = { menu_uid: lunchTemp, goal_uid: idGoal }
     axios.post('https://aaryadewangga.cloud.okteto.net/userhistories', data, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -100,9 +108,15 @@ function RecommenPage() {
       .catch((err) => {
         console.log(err);
         // setError(err.response.data.message)
+        Swal.fire('Sorry', 'Failed add menu', 'error');
+
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
   function handleAddToDinner() {
+    setIsLoading(true)
     const data = { menu_uid: dinnerTemp, goal_uid: idGoal }
     axios.post('https://aaryadewangga.cloud.okteto.net/userhistories', data, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -116,9 +130,15 @@ function RecommenPage() {
       .catch((err) => {
         console.log(err);
         // setError(err.response.data.message)
+        Swal.fire('Sorry', 'Failed add menu', 'error');
+
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
   function handleAddToSnack() {
+    setIsLoading(true)
     const data = { menu_uid: snackTemp, goal_uid: idGoal }
     axios.post('https://aaryadewangga.cloud.okteto.net/userhistories', data, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -132,6 +152,11 @@ function RecommenPage() {
       .catch((err) => {
         console.log(err);
         // setError(err.response.data.message)
+        Swal.fire('Sorry', 'Failed add menu', 'error');
+
+      })
+      .finally(() => {
+        setIsLoading(false)
       })
   }
 
@@ -139,6 +164,14 @@ function RecommenPage() {
     total.splice(-1, 1);
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center h-screen justify-center content-center">
+        <br />
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
+  }
   return (
     <>
       <NavbarApp />
