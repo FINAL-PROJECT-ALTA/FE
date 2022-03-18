@@ -52,6 +52,7 @@ function LoginForm() {
       .then(({ data }) => {
         // console.log(data.data.token);
         localStorage.setItem('token', data.data.token);
+        localStorage.setItem('goal_exspired', data.data.goal_exspired);
         if (data.data.roles === true) {
           setTimeout(() => {
             router.push('/admin');
@@ -68,13 +69,13 @@ function LoginForm() {
           padding: '4em',
           color: '#141E27',
           background:
-            '#fff url(https://cdn.wallpapersafari.com/20/93/7qZlO9.jpg)',
-          backdrop: `
-          rgba(0,0,123,0.4)
-          url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
-          left top
-          no-repeat
-        `,
+            '#fff',
+          //   backdrop: `
+          //   rgba(0,0,123,0.4)
+          //   url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
+          //   left top
+          //   no-repeat
+          // `,
           html: 'Redirecting to home page in <b></b> milliseconds.',
           timer: 4000,
           timerProgressBar: true,
@@ -190,7 +191,8 @@ function LoginForm() {
                     invalid:text-pink-600
                     focus:invalid:border-pink-500 
                     focus:invalid:ring-pink-500
-                    peer ..."
+                    peer ... placeholder:text-md"
+                    placeholder="Your email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 invisible peer-invalid:visible">
@@ -217,7 +219,7 @@ function LoginForm() {
                     border-b 
                     border-gray-300 
                     focus:outline-none 
-                    focus:border-lime-500
+                    focus:border-lime-500 placeholder:text-md
                    "
                     placeholder="Password"
                     type={showPassword ? 'text' : 'password'}

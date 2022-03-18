@@ -91,7 +91,7 @@ function RegisterForm() {
             // console.log(data.data.token);
             localStorage.setItem('token', data.data.token);
             setTimeout(() => {
-              router.push('/user');
+              router.push('/user/login');
             }, 1500);
             Swal.fire(
               'Account Created!',
@@ -142,7 +142,7 @@ function RegisterForm() {
               </p>
               <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
                 Already have account ?{' '}
-                <Link href="../user">
+                <Link href="../user/login">
                   <a className="hover:text-rose-500 focus:text-rose-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
                     Sign in here
                   </a>
