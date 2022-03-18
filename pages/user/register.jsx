@@ -13,10 +13,14 @@ function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+<<<<<<< HEAD
+  const [gender, setGender] = useState(['Male', 'Female']);
+=======
   const [gender, setGender] = useState([]);
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
   const [showPassword, setShowPassword] = useState(false)
+>>>>>>> d657a625a6e28cb785a077403f9be3f3f23cdc36
 
   const router = useRouter();
 
@@ -64,7 +68,7 @@ function RegisterForm() {
     formData.append('email', email);
     formData.append('password', password);
     formData.append('gender', gender);
-    formData.append('image', image);
+    // formData.append('image', image);
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -142,8 +146,14 @@ function RegisterForm() {
               </p>
               <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
                 Already have account ?{' '}
+<<<<<<< HEAD
+                <Link href="../user">
+                  <a className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">
+                    {' '}
+=======
                 <Link href="../user/login">
                   <a className="hover:text-rose-500 focus:text-rose-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
+>>>>>>> d657a625a6e28cb785a077403f9be3f3f23cdc36
                     Sign in here
                   </a>
                 </Link>
@@ -284,6 +294,9 @@ function RegisterForm() {
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
+
+=======
               {/* <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
                   Photo Profile:
@@ -314,6 +327,7 @@ function RegisterForm() {
                   </label>
                 </div>
               </div> */}
+>>>>>>> d657a625a6e28cb785a077403f9be3f3f23cdc36
               <div className="flex w-full mt-3">
                 <button
                   onClick={validateSignUp}

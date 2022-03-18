@@ -21,7 +21,7 @@ function Navigation() {
             </button>
             <button
               onClick={() => {
-                router.push('/admin/menu');
+                router.push('/admin/menu/');
               }}
               className="text-dark-green text-sm hover:text-amber-400 focus:text-amber-500"
             >

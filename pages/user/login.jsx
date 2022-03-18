@@ -13,7 +13,7 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
@@ -51,13 +51,17 @@ function LoginForm() {
       .post('https://aaryadewangga.cloud.okteto.net/users/login', body)
       .then(({ data }) => {
         // console.log(data.data.token);
+
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('goal_exspired', data.data.goal_exspired);
+
         if (data.data.roles === true) {
+          localStorage.setItem('token_admin', data.data.token);
           setTimeout(() => {
             router.push('/admin');
           }, 4000);
         } else {
+          localStorage.setItem('token', data.data.token);
           setTimeout(() => {
             router.push('/profile');
           }, 4000);
@@ -68,8 +72,7 @@ function LoginForm() {
           width: 600,
           padding: '4em',
           color: '#141E27',
-          background:
-            '#fff',
+          background: '#fff',
           //   backdrop: `
           //   rgba(0,0,123,0.4)
           //   url("https://i.gifer.com/origin/04/04dd45b257d177a2894578b8dcf61e2b_w200.gif")
@@ -98,7 +101,7 @@ function LoginForm() {
           text: 'Something went wrong!',
         });
       })
-      .finally(() => { });
+      .finally(() => {});
   };
 
   if (loading) {
@@ -164,7 +167,9 @@ function LoginForm() {
             <form action="#">
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">E-Mail Address:</span>
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    E-Mail Address:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -202,13 +207,20 @@ function LoginForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Password:</span>
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    Password:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
-                  <span onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none cursor-pointer'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</span>
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute block right-5 top-4 text-gray-600 select-none cursor-pointer"
+                  >
+                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </span>
                   <input
                     className="
                     w-full 
@@ -245,8 +257,9 @@ function LoginForm() {
             <p className="flex flex-col items-center justify-center text-center text-md text-gray-500">
               <span>Dont have an account?</span>
               <Link href="../user/register">
-                <a className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"
-                > Sign up
+                <a className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300">
+                  {' '}
+                  Sign up
                 </a>
               </Link>
             </p>

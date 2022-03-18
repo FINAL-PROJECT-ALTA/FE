@@ -23,6 +23,10 @@ module.exports = {
       fontFamily: {
         poppins: ["Inter", "sans-serif"],
       },
+      screens: {
+        'phone': '375px',
+         // => @media (min-width: 375px) { ... }
+      },
     },
   },
   plugins: [],
