@@ -141,7 +141,7 @@ function ListMenu() {
           {currentPost ? (
             currentPost.map((el, i) => (
               <div
-                className="flex px-5 py-2 my-3 bg-transparent max-w-lg mx-auto drop-shadow-lg rounded-xl"
+                className="flex px-5 py-2 my-3 border shadow-lg bg-transparent max-w-lg mx-auto drop-shadow-lg rounded-xl"
                 key={i}
               >
                 <div className="">
