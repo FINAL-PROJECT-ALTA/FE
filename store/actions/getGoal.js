@@ -7,7 +7,7 @@ export const fetchAllGoal = () => {
             headers: { Authorization: `Bearer ${getToken}` }
         })
             .then(({ data }) => {
-                // console.log(data.data);
+                // console.log(data.data.find(el => el.status === 'active'));
                 dispatch(setGoal(data.data))
             })
             .catch(err => {
