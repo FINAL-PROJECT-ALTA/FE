@@ -19,13 +19,8 @@ function AddFood() {
   const [unitValue, setUnitValue] = useState(0);
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
-  const [category, setCategory] = useState([
-    'fruit',
-    'drink',
-    'junk Food',
-    'food',
-    'snack',
-  ]);
+  const [category, setCategory] = useState([]);
+
 
   const handleAddFood = () => {
     // const body = {
@@ -88,7 +83,7 @@ function AddFood() {
               text: 'Something went wrong!',
             });
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }

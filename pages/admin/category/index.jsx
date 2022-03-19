@@ -21,6 +21,7 @@ function Category() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(12);
 
+  console.log(data);
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
@@ -107,7 +108,7 @@ function Category() {
             });
             console.log(error);
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }

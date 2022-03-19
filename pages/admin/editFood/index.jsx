@@ -70,6 +70,7 @@ function AddFood() {
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${localStorage.getItem("token_admin")}`
       },
     };
 
@@ -111,13 +112,14 @@ function AddFood() {
             );
           })
           .catch((error) => {
+            console.log(error);
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Something went wrong!',
             });
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
