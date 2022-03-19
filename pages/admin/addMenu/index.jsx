@@ -20,6 +20,14 @@ function AddFood() {
 
   const food_categories = router.query.category;
 
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
+
   const sumCal = () => {
     const total = parseInt(cal1) + parseInt(cal2) + parseInt(cal3);
     return total;

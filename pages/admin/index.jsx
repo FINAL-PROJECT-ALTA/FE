@@ -114,7 +114,7 @@ function AdminPage() {
 
   useEffect(() => {
     if (!localStorage.getItem('token_admin')) {
-      router.push('/profile');
+      router.push('/user/login');
     }
   }, []);
   return (

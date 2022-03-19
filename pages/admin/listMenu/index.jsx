@@ -29,6 +29,14 @@ function ListMenu() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
+
   useEffect(() => {
     if (food_categories) {
       const token = localStorage.getItem('token_admin');
@@ -105,6 +113,12 @@ function ListMenu() {
     });
   }
 
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center content-center h-screen">
@@ -173,6 +187,7 @@ function ListMenu() {
                       className="w-[55px] bg-red-500/60 hover:bg-red-700/80 text-white font-bold py-2 px-4 border  rounded"
                       onClick={() => {
                         setIdFood(el.menu_uid);
+                        // setIdFood === el.food_uid;
                         handleDelete();
                         //   router.push('/admin')
                       }}
