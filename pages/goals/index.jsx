@@ -51,27 +51,26 @@ export default function Goals() {
       },
     })
       .then(({ data }) => {
-        console.log(data.message);
-        setTimeout(() => {
+        if (data) {
           setLoading(false);
-        }, 2000);
-        Swal.fire(
-          "Create Successfully",
-          "Your Goals has been Created",
-          "success"
-        );
+          Swal.fire(
+            "Create Successfully",
+            "Your Goals has been Created",
+            "success"
+          );
+          router.push("/profile");
+        }
       })
       .catch((err) => {
-        console.log(err, "error");
+        console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: `${err.message}`,
+          title: "Your Goal is Impossible",
+          text: `Please check for weight target(cut or bulk) and range time`,
         });
+        setLoading(false);
       })
-      .finally(() => {
-        router.push("/profile");
-      });
+      .finally(() => {});
   }
 
   if (loading) {
@@ -183,7 +182,8 @@ export default function Goals() {
             <div className="mb-4">
               <label
                 htmlFor="target"
-                className="block text-sm font-bold text-mexican-pink mb-2">
+                className="block text-sm font-bold text-mexican-pink mb-2"
+              >
                 Target
               </label>
               <div>
@@ -228,7 +228,7 @@ export default function Goals() {
                 id="weightTarget"
                 autoComplete="off"
                 required
-                placeholder="5"
+                placeholder="2"
                 className="mt-1 border focus:border-light-orange focus:outline-none focus:ring-1 focus:ring-light-orange block w-full shadow-sm sm:text-sm border-secondary px-3 py-2"
                 onChange={(e) => {
                   setWeightTarget(parseInt(e.target.value));
