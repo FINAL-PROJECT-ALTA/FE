@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import NavbarApp from "../../components/navbar";
 import Navigation from "../../components/navigation";
 import FeatureTitle from "../../components/featureTitle";
 import { useRouter } from "next/router";
-
-const eatenMeals = [
-  { title: "title", cal: 319 },
-  { title: "title", cal: 319 },
-  { title: "title", cal: 319 },
-];
+import axios from "axios";
+import ReactLoading from "react-loading";
 
 export default function Reports() {
   const getToken =
@@ -17,75 +13,79 @@ export default function Reports() {
 
   useEffect(() => {
     if (!getToken) {
-      router.push("/user/login");
+      router.push("/user");
     }
   }, [getToken]);
+
+  const [loading, setLoading] = useState(false);
+  const [dataHistory, setDataHistory] = useState([]);
+  const [listFoods, setListFoods] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    axios({
+      method: "get",
+      url: `https://aaryadewangga.cloud.okteto.net/userhistories`,
+      headers: {
+        Authorization: `Bearer ${getToken}`,
+      },
+    })
+      .then(({ data }) => {
+        setDataHistory(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    setListFoods(
+      dataHistory.reduce((prev, curr) => prev.concat(curr.menu.foods), [])
+    );
+  }, [dataHistory]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center h-screen md:h-screen justify-center content-center">
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
+  }
 
   return (
     <>
       <NavbarApp />
       <div className="px-5 my-10">
-        <FeatureTitle text="Eaten Meals" />
-
+        <FeatureTitle text="History Menu" />
         <div className="mt-5">
-          <h2 className="font-semibold text-rose-500 text-center">Day 1</h2>
-          <h5 className="font-semibold text-dark-green">Breakfast</h5>
           <div className="flex justify-between flex-wrap mt-3 mb-10">
-            {eatenMeals.map((data, i) => (
+            {listFoods.map((data, i) => (
               <div
-                className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm"
+                className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm cursor-pointer"
+                onClick={() => {
+                  data.food_uid != ""
+                    ? router.push(`/detail/${data.food_uid}`)
+                    : "";
+                }}
                 key={i}
               >
                 <div className="shrink-0">
                   <img
-                    src=""
+                    src={
+                      data.image != "" ? data.image : `./images/logo-white.png`
+                    }
                     alt=""
                     className="bg-red-400 h-28 object-cover rounded-t-md"
                   />
                 </div>
                 <div className="px-3 py-3 text-dark-green ">
-                  <h3 className="text-lg font-medium">{data.title}</h3>
-                  <p className="text-md font-mono">{data.cal} KCAL</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-5">
-          <h5 className="font-semibold text-dark-green">Lunch</h5>
-          <div className="flex justify-between flex-wrap mt-3 mb-10">
-            {eatenMeals.map((data, i) => (
-              <div key={i} className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-                <div className="shrink-0">
-                  <img
-                    src=""
-                    alt=""
-                    className="bg-red-400 h-28 object-cover rounded-t-md"
-                  />
-                </div>
-                <div className="px-3 py-3 text-dark-green ">
-                  <h3 className="text-lg font-medium">{data.title}</h3>
-                  <p className="text-md font-mono">{data.cal} KCAL</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-5">
-          <h5 className="font-semibold text-dark-green">Dinner</h5>
-          <div className="flex justify-between flex-wrap mt-3 mb-10">
-            {eatenMeals.map((data, i) => (
-              <div key={i} className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm">
-                <div className="shrink-0">
-                  <img
-                    src=""
-                    alt=""
-                    className="bg-red-400 h-28 object-cover rounded-t-md"
-                  />
-                </div>
-                <div className="px-3 py-3 text-dark-green ">
-                  <h3 className="text-lg font-medium">{data.title}</h3>
-                  <p className="text-md font-mono">{data.cal} KCAL</p>
+                  <h3 className="text-lg font-medium capitalize">
+                    {data.name}
+                  </h3>
+                  <p className="text-md font-mono">{data.calories} CAL</p>
                 </div>
               </div>
             ))}
