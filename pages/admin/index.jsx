@@ -108,7 +108,7 @@ function AdminPage() {
   function handleLogout() {
     if (getToken) {
       localStorage.removeItem('token_admin');
-      router.push('/user');
+      router.push('/user/login');
     }
   }
 
@@ -117,7 +117,6 @@ function AdminPage() {
       router.push('/profile');
     }
   }, []);
-
   return (
     <div>
       <NavbarApp />

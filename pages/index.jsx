@@ -8,8 +8,8 @@ import Pagnination from '../components/pagination'
 import Link from "next/link"
 import { useSelector } from 'react-redux'
 import { HiOutlineClock } from "react-icons/hi";
-import allStore from '../store/actions';
-import { useDispatch } from 'react-redux'
+// import allStore from '../store/actions';
+// import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
 const callouts = [
@@ -53,9 +53,10 @@ const callouts = [
 
 export default function Home() {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const listFoods = useSelector(({ listFoods }) => listFoods)
   const goals = useSelector(({ listGoal }) => listGoal)
+  // console.log(goals.listGoal);
 
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
@@ -78,19 +79,11 @@ export default function Home() {
 
   // console.log(time);
   // useEffect(() => {
-  //   axios.get(`https://aaryadewangga.cloud.okteto.net/users/goals/${idGoal}`, {
+  //   axios.get(`https://aaryadewangga.cloud.okteto.net/userhistories/`, {
   //     headers: { Authorization: `Bearer ${getToken}` }
   //   })
   //     .then(({ data }) => {
-  //       console.log(data.data);
-  //       if (data.data) {
-  //         setTarget(data.data.target)
-  //         setWeight(data.data.weight)
-  //         setHeight(data.data.height)
-  //         setAge(data.data.age)
-  //         setStatus(data.data.status)
-  //         setTime(data.data.count)
-  //       }
+  //       console.log(data.data[0].menu.foods[0]);
   //     })
   //     .catch((err) => {
   //       console.log(err.message);
