@@ -66,10 +66,10 @@ function AddFood() {
 
   useEffect(() => {
     const token = localStorage.getItem('token_admin');
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 2000);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
     const config = {
       headers: { Authorization: `Bearer ${token}` },

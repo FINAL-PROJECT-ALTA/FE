@@ -29,8 +29,6 @@ function Category() {
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // console.log(idFood);
-
   const router = useRouter();
 
   const food_categories = router.query.foodsCategory;
@@ -50,7 +48,7 @@ function Category() {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
-      // console.log(router.query);
+
       axios
         .get(
           `https://aaryadewangga.cloud.okteto.net/foods?category=${food_categories}`,
