@@ -66,7 +66,7 @@ export default function Reports() {
               <div className="text-xl xl:text-2xl  font-semibold text-dark-green text-center">
                 <h1>Data Empty</h1>
                 <p className="text-sm font-normal text-gray-700">
-                  You've never made a menu
+                  You have never made a menu
                 </p>
               </div>
             </div>
