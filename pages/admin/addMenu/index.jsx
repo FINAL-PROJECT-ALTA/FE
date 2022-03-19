@@ -20,6 +20,14 @@ function AddFood() {
 
   const food_categories = router.query.category;
 
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
+
   const sumCal = () => {
     const total = parseInt(cal1) + parseInt(cal2) + parseInt(cal3);
     return total;
@@ -58,10 +66,10 @@ function AddFood() {
 
   useEffect(() => {
     const token = localStorage.getItem('token_admin');
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 2000);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -117,6 +125,10 @@ function AddFood() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .post('https://aaryadewangga.cloud.okteto.net/menus', body, config)
           .then(({ data }) => {

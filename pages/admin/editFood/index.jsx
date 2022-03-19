@@ -12,6 +12,7 @@ function AddFood() {
   // const { food_id } = router.query;
   const food_id = router.query.foodsId;
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [food, setFood] = useState('');
   const [calories, setCalories] = useState(0);
   const [energy, setEnergy] = useState(0);
@@ -30,8 +31,20 @@ function AddFood() {
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
 
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
+
   useEffect(() => {
     if (food_id) {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       const token = localStorage.getItem('token_admin');
       const config = {
         headers: { Authorization: `Bearer ${token}` },
@@ -53,7 +66,7 @@ function AddFood() {
             setUnit(findFood.unit);
             setUnitValue(findFood.unit_value);
             setCategory(findFood.food_categories);
-            setImage(findFood.image);
+            setVPhoto(findFood.image);
             // console.log(data.data);
           }
 
@@ -70,7 +83,7 @@ function AddFood() {
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${localStorage.getItem("token_admin")}`
+        Authorization: `Bearer ${localStorage.getItem('token_admin')}`,
       },
     };
 
@@ -95,6 +108,10 @@ function AddFood() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .put(
             `https://aaryadewangga.cloud.okteto.net/foods/${food_id}`,
@@ -119,7 +136,7 @@ function AddFood() {
               text: 'Something went wrong!',
             });
           })
-          .finally(() => { });
+          .finally(() => {});
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -145,7 +162,7 @@ function AddFood() {
         <section className="flex flex-col w-full h-full p-1 overflow-auto mt-5">
           <header className="flex flex-col items-center justify-center py-12 text-base text-blueGray-500 transition duration-500 ease-in-out transform bg-white border border-dashed rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
             <img
-              src={createObjectURL ? createObjectURL : image}
+              src={createObjectURL ? createObjectURL : vPhoto}
               width={255}
               height={170}
               alt="preview photo"
@@ -226,6 +243,7 @@ function AddFood() {
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={energy}
+            onChange={(e) => setEnergy(e.target.value)}
           />
         </div>
 

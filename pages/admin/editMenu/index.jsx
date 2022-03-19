@@ -24,6 +24,14 @@ function AddFood() {
     return total;
   };
 
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
+
   useEffect(() => {
     if (menu_id) {
       const token = localStorage.getItem('token_admin');
@@ -59,10 +67,10 @@ function AddFood() {
 
   useEffect(() => {
     const token = localStorage.getItem('token_admin');
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 2000);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -108,6 +116,10 @@ function AddFood() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .put(
             `https://aaryadewangga.cloud.okteto.net/menus/${menu_id}`,
@@ -132,7 +144,7 @@ function AddFood() {
             });
             console.log(error);
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -183,7 +195,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -234,7 +245,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -284,7 +294,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 

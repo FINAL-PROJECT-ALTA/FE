@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { ReactLoading } from 'react-loading';
 
 function AddFood() {
   const router = useRouter();
@@ -20,21 +21,17 @@ function AddFood() {
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
   const [category, setCategory] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
 
   const handleAddFood = () => {
-    // const body = {
-    //   name: food,
-    //   calories: parseInt(calories),
-    //   energy: parseInt(energy),
-    //   carbohidrate: parseInt(carbohidrate),
-    //   protein: parseInt(protein),
-    //   unit: unit,
-    //   unit_value: parseInt(unitValue),
-    //   food_categories: category,
-    //   image: image,
-    // };
-
     const formData = new FormData();
     formData.append('name', food);
     formData.append('calories', parseInt(calories));
@@ -60,6 +57,10 @@ function AddFood() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .post(
             'https://aaryadewangga.cloud.okteto.net/foods',
@@ -83,7 +84,7 @@ function AddFood() {
               text: 'Something went wrong!',
             });
           })
-          .finally(() => { });
+          .finally(() => {});
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -98,6 +99,16 @@ function AddFood() {
       setCreateObjectURL(URL.createObjectURL(i));
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center content-center h-screen">
+        <br />
+
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
+  }
 
   return (
     <div>

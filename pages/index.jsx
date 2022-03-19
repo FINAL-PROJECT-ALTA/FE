@@ -10,7 +10,9 @@ import { useSelector } from 'react-redux'
 import { HiOutlineClock } from "react-icons/hi";
 // import allStore from '../store/actions';
 // import { useDispatch } from 'react-redux'
-import axios from 'axios'
+// import axios from 'axios'
+import ReactLoading from "react-loading";
+
 
 const callouts = [
   {
@@ -56,7 +58,7 @@ export default function Home() {
   // const dispatch = useDispatch()
   const listFoods = useSelector(({ listFoods }) => listFoods)
   const goals = useSelector(({ listGoal }) => listGoal)
-  // console.log(goals.listGoal);
+  // console.log(goals);
 
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
@@ -65,6 +67,7 @@ export default function Home() {
   const [time, setTime] = useState(0)
   const [status, setStatus] = useState('')
   const [idGoal, setIdGoal] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage] = useState(12)
@@ -93,6 +96,7 @@ export default function Home() {
 
 
   useEffect(() => {
+    // dispatch(allStore.fetchAllGoal())
     const findGoal = goals.find((el) => el.status === 'active')
     // console.log(findGoal);
     if (findGoal) {
@@ -105,7 +109,7 @@ export default function Home() {
       // setTime(findGoal.count)
       // console.log(findGoal.cretedAt);
     }
-    // dispatch(allStore.fetchAllGoal())
+
 
   }, [goals]);
 
@@ -118,6 +122,13 @@ export default function Home() {
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+  if (loading) {
+    return (
+      <div className="flex items-center h-screen md:h-screen justify-center content-center">
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
+  }
   return (
     <>
       <NavbarApp />
