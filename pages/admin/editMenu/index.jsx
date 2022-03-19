@@ -144,7 +144,7 @@ function AddFood() {
             });
             console.log(error);
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -195,7 +195,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -246,7 +245,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -296,7 +294,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
