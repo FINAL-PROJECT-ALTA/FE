@@ -71,7 +71,7 @@ function ListMenu() {
     }
   }, [router]);
 
-  function handleDelete() {
+  const handleDelete = (id) => {
     const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -79,24 +79,21 @@ function ListMenu() {
 
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Once the menu deleted you will not be able to recover it!',
-      icon: 'question',
-      confirmButtonText: 'Yes, delete it!',
-      confirmButtonColor: '#3085d6',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
       showCancelButton: true,
+      confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            `https://aaryadewangga.cloud.okteto.net/menus/${idFood}`,
-            config
-          )
+          .delete(`https://aaryadewangga.cloud.okteto.net/foods/${id}`, config)
           .then(({ data }) => {
             setTimeout(() => {
-              router.push('../admin/menu');
+              router.push('../admin');
             }, 1500);
-            Swal.fire('Delete Successfully', 'The menu has gone', 'success');
+            Swal.fire('Delete Successfully', 'The food has gone', 'success');
           })
           .catch((error) => {
             Swal.fire({
@@ -111,7 +108,7 @@ function ListMenu() {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
     });
-  }
+  };
 
   useEffect(() => {
     if (!localStorage.getItem('token_admin')) {
@@ -186,10 +183,7 @@ function ListMenu() {
                     <button
                       className="w-[55px] bg-red-500/60 hover:bg-red-700/80 text-white font-bold py-2 px-4 border  rounded"
                       onClick={() => {
-                        setIdFood(el.menu_uid);
-                        // setIdFood === el.food_uid;
-                        handleDelete();
-                        //   router.push('/admin')
+                        handleDelete(el.menu_uid);
                       }}
                     >
                       <GoTrashcan size={20} />
