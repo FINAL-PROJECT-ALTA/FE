@@ -98,7 +98,7 @@ function Category() {
             setTimeout(() => {
               router.push('../admin');
             }, 1500);
-            Swal.fire('Delete Successfully', 'The menu has gone', 'success');
+            Swal.fire('Delete Successfully', 'The food has gone', 'success');
           })
           .catch((error) => {
             Swal.fire({
@@ -108,7 +108,7 @@ function Category() {
             });
             console.log(error);
           })
-          .finally(() => { });
+          .finally(() => {});
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }

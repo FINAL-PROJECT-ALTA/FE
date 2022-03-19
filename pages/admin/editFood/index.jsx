@@ -53,7 +53,7 @@ function AddFood() {
             setUnit(findFood.unit);
             setUnitValue(findFood.unit_value);
             setCategory(findFood.food_categories);
-            setImage(findFood.image);
+            setVPhoto(findFood.image);
             // console.log(data.data);
           }
 
@@ -70,7 +70,7 @@ function AddFood() {
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${localStorage.getItem("token_admin")}`
+        Authorization: `Bearer ${localStorage.getItem('token_admin')}`,
       },
     };
 
@@ -119,7 +119,7 @@ function AddFood() {
               text: 'Something went wrong!',
             });
           })
-          .finally(() => { });
+          .finally(() => {});
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -145,7 +145,7 @@ function AddFood() {
         <section className="flex flex-col w-full h-full p-1 overflow-auto mt-5">
           <header className="flex flex-col items-center justify-center py-12 text-base text-blueGray-500 transition duration-500 ease-in-out transform bg-white border border-dashed rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
             <img
-              src={createObjectURL ? createObjectURL : image}
+              src={createObjectURL ? createObjectURL : vPhoto}
               width={255}
               height={170}
               alt="preview photo"
@@ -226,6 +226,7 @@ function AddFood() {
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={energy}
+            onChange={(e) => setEnergy(e.target.value)}
           />
         </div>
 
