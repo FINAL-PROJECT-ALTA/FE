@@ -29,11 +29,12 @@ function Category() {
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // console.log(idFood);
-
   const router = useRouter();
 
   const food_categories = router.query.foodsCategory;
+
+  const getToken =
+    typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
 
   useEffect(() => {
     if (food_categories) {
@@ -47,7 +48,7 @@ function Category() {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
-      // console.log(router.query);
+
       axios
         .get(
           `https://aaryadewangga.cloud.okteto.net/foods?category=${food_categories}`,
@@ -61,11 +62,9 @@ function Category() {
           if (findFood) {
             setCategory(findFood.food_categories);
             setName(findFood.name);
-            console.log(idFood);
           }
 
           setData(data.data);
-          console.log(idFood);
         })
         .catch((err) => {
           console.log(err, 'error');
@@ -73,7 +72,7 @@ function Category() {
     }
   }, [router]);
 
-  function handleDelete() {
+  const handleDelete = (id) => {
     const token = localStorage.getItem('token_admin');
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -81,24 +80,25 @@ function Category() {
 
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Once the menu deleted you will not be able to recover it!',
-      icon: 'question',
-      confirmButtonText: 'Yes, delete it!',
-      confirmButtonColor: '#3085d6',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
       showCancelButton: true,
+      confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
-          .delete(
-            `https://aaryadewangga.cloud.okteto.net/foods/${idFood}`,
-            config
-          )
+          .delete(`https://aaryadewangga.cloud.okteto.net/foods/${id}`, config)
           .then(({ data }) => {
             setTimeout(() => {
               router.push('../admin');
             }, 1500);
-            Swal.fire('Delete Successfully', 'The menu has gone', 'success');
+            Swal.fire('Delete Successfully', 'The food has gone', 'success');
           })
           .catch((error) => {
             Swal.fire({
@@ -108,12 +108,18 @@ function Category() {
             });
             console.log(error);
           })
-          .finally(() => { });
+          .finally(() => {});
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
     });
-  }
+  };
+
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -162,18 +168,10 @@ function Category() {
                     <p className="-translate-y-6 text-md bg-lime-700/40 font-medium  bg-blend-darken text-white text-center truncate ">
                       {el.name}
                     </p>
-                  </div>
-                  {/* <div className=" text-dark-green">
-                    <p className="text-md font-medium text-center truncate ">
-                      {el.name}
-                    </p>
-                    <p>{el.food_uid}</p>
-                  </div> */}
-                  <form>
                     <div className="flex justify-around -translate-y-6">
                       <Link
                         href={`/admin/editFood?foodsId=${el.food_uid}`}
-                        key={el.name}
+                        key={el.food_uid}
                       >
                         <button className="w-full   hover:bg-orange-500 text-gray-600 font-semibold py-2 px-4 border  rounded shadow mr-5">
                           <MdOutlineEdit size={20} className="ml-3" />
@@ -183,8 +181,8 @@ function Category() {
                       <button
                         className="w-full  hover:bg-red-700 text-red-400 font-bold py-2 px-4 border  rounded"
                         onClick={() => {
-                          setIdFood(el.food_uid);
-                          handleDelete();
+                          handleDelete(el.food_uid);
+                          // handleDelete();
                         }}
                       >
                         <center>
@@ -192,7 +190,7 @@ function Category() {
                         </center>
                       </button>
                     </div>
-                  </form>
+                  </div>
                 </div>
               ))
             ) : (

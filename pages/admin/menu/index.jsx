@@ -42,6 +42,11 @@ function RecommenPage() {
 
   const getToken =
     typeof window !== 'undefined' ? localStorage.getItem('token_admin') : null;
+  useEffect(() => {
+    if (!localStorage.getItem('token_admin')) {
+      router.push('/user/login');
+    }
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('token_admin');
