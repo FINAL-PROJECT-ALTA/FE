@@ -12,6 +12,7 @@ function AddFood() {
   // const { food_id } = router.query;
   const food_id = router.query.foodsId;
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [food, setFood] = useState('');
   const [calories, setCalories] = useState(0);
   const [energy, setEnergy] = useState(0);
@@ -40,6 +41,10 @@ function AddFood() {
 
   useEffect(() => {
     if (food_id) {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       const token = localStorage.getItem('token_admin');
       const config = {
         headers: { Authorization: `Bearer ${token}` },
@@ -103,6 +108,10 @@ function AddFood() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .put(
             `https://aaryadewangga.cloud.okteto.net/foods/${food_id}`,

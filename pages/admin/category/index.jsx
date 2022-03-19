@@ -90,6 +90,10 @@ function Category() {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .delete(`https://aaryadewangga.cloud.okteto.net/foods/${id}`, config)
           .then(({ data }) => {
@@ -112,48 +116,6 @@ function Category() {
       }
     });
   };
-
-  // function handleDelete() {
-  //   const token = localStorage.getItem('token_admin');
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   };
-
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: 'Once the food deleted you will not be able to recover it!',
-  //     icon: 'question',
-  //     confirmButtonText: 'Yes, delete it!',
-  //     confirmButtonColor: '#3085d6',
-  //     showCancelButton: true,
-  //     cancelButtonColor: '#d33',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       axios
-  //         .delete(
-  //           `https://aaryadewangga.cloud.okteto.net/foods/${idFood}`,
-  //           config
-  //         )
-  //         .then(({ data }) => {
-  //           setTimeout(() => {
-  //             router.push('../admin');
-  //           }, 1500);
-  //           Swal.fire('Delete Successfully', 'The food has gone', 'success');
-  //         })
-  //         .catch((error) => {
-  //           Swal.fire({
-  //             icon: 'error',
-  //             title: 'Oops...',
-  //             text: 'Something went wrong!',
-  //           });
-  //           console.log(error);
-  //         })
-  //         .finally(() => {});
-  //     } else if (result.isDismissed) {
-  //       Swal.fire('Check again ?', 'We are waiting you inside', 'question');
-  //     }
-  //   });
-  // }
 
   useEffect(() => {
     if (!localStorage.getItem('token_admin')) {

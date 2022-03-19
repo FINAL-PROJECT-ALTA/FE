@@ -125,6 +125,10 @@ function AddFood() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
           .post('https://aaryadewangga.cloud.okteto.net/menus', body, config)
           .then(({ data }) => {

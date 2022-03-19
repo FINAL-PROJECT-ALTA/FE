@@ -87,13 +87,17 @@ function ListMenu() {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
         axios
-          .delete(`https://aaryadewangga.cloud.okteto.net/foods/${id}`, config)
+          .delete(`https://aaryadewangga.cloud.okteto.net/menus/${id}`, config)
           .then(({ data }) => {
             setTimeout(() => {
               router.push('../admin');
             }, 1500);
-            Swal.fire('Delete Successfully', 'The food has gone', 'success');
+            Swal.fire('Delete Successfully', 'The menu has gone', 'success');
           })
           .catch((error) => {
             Swal.fire({
@@ -131,7 +135,7 @@ function ListMenu() {
       <NavbarApp />
       <div className="px-10 h-vh">
         <FeatureTitle />
-        <div className="mt-10">
+        <div className="mt-3">
           <div className="flex  justify-between">
             <FeatureTitle text={menu} />
             <Link
