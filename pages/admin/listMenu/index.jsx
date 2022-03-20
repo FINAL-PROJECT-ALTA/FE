@@ -204,6 +204,7 @@ function ListMenu() {
             </>
           )}
         </div>
+        <br />
         <div className="mx-auto">
           <Pagnination
             postPerPage={postPerPage}

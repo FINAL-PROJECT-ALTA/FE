@@ -199,11 +199,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Name of Food
+            <span className="float-left px-5">Food Name</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={food}
@@ -217,11 +217,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Calories
+            <span className="float-left px-5">Calories</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={calories}
@@ -235,11 +235,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Energy
+            <span className="float-left px-5">Energy</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={energy}
@@ -253,11 +253,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Carbohydrate
+            <span className="float-left px-5">Carbohydrate</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={carbohidrate}
@@ -271,11 +271,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Protein
+            <span className="float-left px-5">Protein</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={protein}
@@ -289,11 +289,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Unit
+            <span className="float-left px-5">Unit</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={unit}
@@ -307,11 +307,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Value of Unit
+            <span className="float-left px-5">Value of Unit</span>
           </label>
           <input
             type="number"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             value={unitValue}
@@ -325,10 +325,10 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Category of Food
+            <span className="float-left px-5">Category</span>
           </label>
           <select
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none"
             onChange={(e) => setCategory(e.target.value)}
@@ -341,7 +341,7 @@ function AddFood() {
             <option value="snack">Snack</option>
           </select>
         </div>
-        <div className="flex w-96 mt-10 mb-10 ml-36">
+        <div className="w-80 mx-auto mt-10 mb-10">
           <button
             onClick={handleEdit}
             className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-orange-700 hover:bg-orange-500 rounded py-2 w-full transition duration-150 ease-in"
