@@ -17,7 +17,7 @@ function ListMenu() {
   const [loading, setLoading] = useState(false);
   const [idFood, setIdFood] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(5);
+  const [postPerPage] = useState(6);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -63,7 +63,6 @@ function ListMenu() {
           }
 
           setData(data.data);
-          console.log(data.data);
         })
         .catch((err) => {
           console.log(err, 'error');
@@ -157,10 +156,10 @@ function ListMenu() {
             currentPost.map((el, i) => (
               <div
                 className="flex px-5 py-2 my-3 border mb-5 shadow-lg bg-transparent max-w-lg mx-auto drop-shadow-lg rounded-xl"
-                key={i}
+                key={i.menu_uid}
               >
-                <div className="">
-                  {data[i].foods.map((el, i) => (
+                <div>
+                  {currentPost[i].foods.map((el, i) => (
                     <div className="flex text-gray-600" key={i}>
                       <span className="text-md md:text-lg w-24 sm:w-40 md:w-40 lg:w-40 font-sans mt-1.5 truncate ">
                         {el.name}
@@ -204,14 +203,13 @@ function ListMenu() {
             </>
           )}
         </div>
-        <br />
-        <div className="mx-auto">
-          <Pagnination
-            postPerPage={postPerPage}
-            totalPosts={data.length}
-            paginate={paginate}
-          />
-        </div>
+      </div>
+      <div className="mx-auto">
+        <Pagnination
+          postPerPage={postPerPage}
+          totalPosts={data.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );
