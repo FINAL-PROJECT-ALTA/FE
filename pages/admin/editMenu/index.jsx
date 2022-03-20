@@ -342,14 +342,6 @@ function AddFood() {
           </div>
         </div>
 
-        <div className="flex justify-center mt-10">
-          <h1>
-            Total calories :{' '}
-            <span className="text-lime-500">
-              {sumCal() > 2400 ? 'to much calories' : sumCal()}
-            </span>
-          </h1>
-        </div>
         <div className="w-64 mx-auto mt-10 mb-10 ">
           <button
             onClick={handleEditMenu}
