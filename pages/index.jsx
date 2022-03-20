@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import { HiOutlineClock } from "react-icons/hi";
 // import allStore from '../store/actions';
 // import { useDispatch } from 'react-redux'
-// import axios from 'axios'
+import axios from 'axios'
 import ReactLoading from "react-loading";
 
 
