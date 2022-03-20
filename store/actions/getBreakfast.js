@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Swal from 'sweetalert2';
 
 export const fetchAllBreakfast = () => {
     return (dispatch) => {
@@ -13,6 +14,8 @@ export const fetchAllBreakfast = () => {
             .catch(err => {
                 console.log(err.response);
                 // localStorage.removeItem("token");
+                Swal.fire('Your Goal Empty', 'Please input your goal', 'warning');
+
             })
     }
 }
