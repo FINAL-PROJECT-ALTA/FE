@@ -10,7 +10,9 @@ import { useSelector } from 'react-redux'
 import { HiOutlineClock } from "react-icons/hi";
 // import allStore from '../store/actions';
 // import { useDispatch } from 'react-redux'
-import axios from 'axios'
+// import axios from 'axios'
+import ReactLoading from "react-loading";
+
 
 const callouts = [
   {
@@ -58,6 +60,8 @@ export default function Home() {
   const router = useRouter()
   const listFoods = useSelector(({ listFoods }) => listFoods)
 
+
+
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
   const [age, setAge] = useState(0)
@@ -65,6 +69,7 @@ export default function Home() {
   const [status, setStatus] = useState('')
   const [time, setTime] = useState(0)
   const [idGoal, setIdGoal] = useState('')
+  const [loading, setLoading] = useState(false)
 
   // state pagination
   const [currentPage, setCurrentPage] = useState(1)
@@ -77,6 +82,7 @@ export default function Home() {
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
 
   // modal action
   let [isOpen, setIsOpen] = useState(false)

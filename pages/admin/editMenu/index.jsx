@@ -15,6 +15,9 @@ function AddFood() {
   const [item1, setItem1] = useState('');
   const [item2, setItem2] = useState('');
   const [item3, setItem3] = useState('');
+  const [name1, setName1] = useState('');
+  const [name2, setName2] = useState('');
+  const [name3, setName3] = useState('');
   const [cal1, setCal1] = useState(0);
   const [cal2, setCal2] = useState(0);
   const [cal3, setCal3] = useState(0);
@@ -54,10 +57,17 @@ function AddFood() {
 
           if (findFood) {
             setMenu(findFood.menu_category);
-            setItem1(findFood.foods[0].name);
-            setItem2(findFood.foods[1].name);
-            setItem3(findFood.foods[2].name);
+
+            setItem1(findFood.foods[0].food_uid);
+            setName1(findFood.foods[0].name);
+
+            setItem2(findFood.foods[1].food_uid);
+            setName2(findFood.foods[1].name);
+
+            setItem3(findFood.foods[2].food_uid);
+            setName3(findFood.foods[2].name);
           }
+          // value={[el.food_uid, el.calories]}
         })
         .catch((err) => {
           // console.log(err, 'error');
@@ -110,7 +120,7 @@ function AddFood() {
       title: 'Are you sure?',
       text: 'Please check again the required field',
       icon: 'question',
-      confirmButtonText: 'Yes, create it!',
+      confirmButtonText: 'Yes, edit it!',
       confirmButtonColor: '#3085d6',
       showCancelButton: true,
       cancelButtonColor: '#d33',
@@ -131,8 +141,8 @@ function AddFood() {
               router.push('../admin');
             }, 1500);
             Swal.fire(
-              'Added Successfully',
-              'Your menu has been added',
+              'Edit Successfully',
+              'Your menu has been edited',
               'success'
             );
           })
@@ -195,7 +205,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -214,7 +223,7 @@ function AddFood() {
                 {/* <option value="" disabled selected hidden>
                   Select one
                 </option> */}
-                <option value={item1}>{item1}</option>
+                <option value={item1}>{name1 ? name1 : 'Choose one'}</option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
@@ -246,7 +255,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -265,7 +273,7 @@ function AddFood() {
                 {/* <option value="" disabled selected hidden>
                   Select one
                 </option> */}
-                <option value={item2}>{item2}</option>
+                <option value={item2}>{name2 ? name2 : 'Choose one'}</option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
@@ -296,7 +304,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -315,7 +322,7 @@ function AddFood() {
                 {/* <option value="" disabled selected hidden>
                   Select one
                 </option> */}
-                <option value={item3}>{item3 ? item3 : 'Choose one'}</option>
+                <option value={item3}>{name3 ? name3 : 'Choose one'}</option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
                     {el.name} - {el.calories} cal
@@ -335,15 +342,7 @@ function AddFood() {
           </div>
         </div>
 
-        <div className="flex justify-center mt-10">
-          <h1>
-            Total calories :{' '}
-            <span className="text-lime-500">
-              {sumCal() > 2400 ? 'to much calories' : sumCal()}
-            </span>
-          </h1>
-        </div>
-        <div className="w-96 mt-10 mb-10 ml-8 sm:ml-20 md:ml-20 lg:ml-20">
+        <div className="w-64 mx-auto mt-10 mb-10 ">
           <button
             onClick={handleEditMenu}
             className="focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
