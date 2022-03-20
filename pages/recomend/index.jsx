@@ -7,7 +7,7 @@ import NavbarApp from '../../components/navbar';
 import Navigation from '../../components/navigation';
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+// import Link from 'next/link';
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import ReactLoading from "react-loading";
@@ -255,19 +255,19 @@ function RecommenPage() {
                     </Disclosure.Button>
                   </div>
                 </div>
-                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                <Disclosure.Panel as='ul' className="px-2 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
                   {Object.keys(breakFast).map(key => (
-                    <div key={key} className='flex flex-row py-1 items-center'>
+                    <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{breakFast[key].total_calories}KCAL</span>
                       {breakFast[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center relative">
-                        <button onClick={handleAddToBreakfast} className={classNames(temp === breakFast[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 absolute right-20 top-1 text-lime-500`)}>Confirm</button>
-                        <button onClick={() => { setTemp(breakFast[key].menu_uid), setTotal(total => [...total, breakFast[key].total_calories]) }} disabled={temp} className={classNames(temp != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 bg-slate-100/70 rounded-md `)}><HiOutlinePlusSm size={25} /></button>
-                        <button onClick={() => { setTemp(''), removeTotal() }} className="mx-1 p-1 bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
+                        <button onClick={handleAddToBreakfast} className={classNames(temp === breakFast[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 inline-block text-lime-500`)}>Confirm</button>
+                        <button onClick={() => { setTemp(breakFast[key].menu_uid), setTotal(total => [...total, breakFast[key].total_calories]) }} disabled={temp} className={classNames(temp != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 inline-block bg-slate-100/70 rounded-md `)}><HiOutlinePlusSm size={25} /></button>
+                        <button onClick={() => { setTemp(''), removeTotal() }} className="mx-1 p-1 inline-block bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
                       </div>
                     </div>
                   ))}
@@ -301,19 +301,19 @@ function RecommenPage() {
                     </Disclosure.Button>
                   </div>
                 </div>
-                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                <Disclosure.Panel as='ul' className="px-2 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
                   {Object.keys(lunch).map(key => (
-                    <div key={key} className='flex flex-row py-1 items-center'>
+                    <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{lunch[key].total_calories}KCAL</span>
                       {lunch[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center relative">
-                        <button onClick={handleAddToLunch} className={classNames(lunchTemp === lunch[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 absolute right-20 top-1 text-lime-500`)}>Confirm</button>
-                        <button onClick={() => { setLunchTemp(lunch[key].menu_uid), setTotal(total => [...total, lunch[key].total_calories]) }} disabled={lunchTemp} className={classNames(lunchTemp.length != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 bg-slate-100/70 rounded-md`)}><HiOutlinePlusSm size={25} /></button>
-                        <button onClick={() => { setLunchTemp(''), removeTotal() }} className="mx-1 p-1 bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
+                        <button onClick={handleAddToLunch} className={classNames(lunchTemp === lunch[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 inline-block text-lime-500`)}>Confirm</button>
+                        <button onClick={() => { setLunchTemp(lunch[key].menu_uid), setTotal(total => [...total, lunch[key].total_calories]) }} disabled={lunchTemp} className={classNames(lunchTemp.length != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 bg-slate-100/70 inline-block rounded-md`)}><HiOutlinePlusSm size={25} /></button>
+                        <button onClick={() => { setLunchTemp(''), removeTotal() }} className="mx-1 p-1 inline-block bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
                       </div>
                     </div>
                   ))}
@@ -349,17 +349,17 @@ function RecommenPage() {
                 </div>
                 <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
                   {Object.keys(dinner).map(key => (
-                    <div key={key} className='flex flex-row py-1 items-center'>
+                    <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{dinner[key].total_calories}KCAL</span>
                       {dinner[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center relative">
-                        <button onClick={handleAddToDinner} className={classNames(dinnerTemp === dinner[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 absolute right-20 top-1 text-lime-500`)}>Confirm</button>
-                        <button onClick={() => { setDinnerTemp(dinner[key].menu_uid), setTotal(total => [...total, dinner[key].total_calories]) }} disabled={dinnerTemp} className={classNames(dinnerTemp.length != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 bg-slate-100/70 rounded-md`)}><HiOutlinePlusSm size={25} /></button>
-                        <button onClick={() => { setDinnerTemp(''), removeTotal() }} className="mx-1 p-1 bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
+                        <button onClick={handleAddToDinner} className={classNames(dinnerTemp === dinner[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 inline-block text-lime-500`)}>Confirm</button>
+                        <button onClick={() => { setDinnerTemp(dinner[key].menu_uid), setTotal(total => [...total, dinner[key].total_calories]) }} disabled={dinnerTemp} className={classNames(dinnerTemp.length != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 inline-block bg-slate-100/70 rounded-md`)}><HiOutlinePlusSm size={25} /></button>
+                        <button onClick={() => { setDinnerTemp(''), removeTotal() }} className="mx-1 p-1 inline-block bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
                       </div>
                     </div>
                   ))}
@@ -395,17 +395,17 @@ function RecommenPage() {
                 </div>
                 <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
                   {Object.keys(snack).map(key => (
-                    <div key={key} className='flex flex-row py-1 items-center'>
+                    <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{snack[key].total_calories}KCAL</span>
                       {snack[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
                       <div className="flex-1 text-right items-center relative">
-                        <button onClick={handleAddToSnack} className={classNames(snackTemp === snack[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 absolute right-20 top-1 text-lime-500`)}>Confirm</button>
-                        <button onClick={() => { setSnackTemp(snack[key].menu_uid), setTotal(total => [...total, snack[key].total_calories]) }} disabled={snackTemp} className={classNames(snackTemp.length != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 bg-slate-100/70 rounded-md`)}><HiOutlinePlusSm size={25} /></button>
-                        <button onClick={() => { setSnackTemp(''), removeTotal() }} className="mx-1 p-1 bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
+                        <button onClick={handleAddToSnack} className={classNames(snackTemp === snack[key].menu_uid ? 'visible' : 'invisible', `mx-1 p-1 inline-block text-lime-500`)}>Confirm</button>
+                        <button onClick={() => { setSnackTemp(snack[key].menu_uid), setTotal(total => [...total, snack[key].total_calories]) }} disabled={snackTemp} className={classNames(snackTemp.length != 0 ? 'text-slate-400' : 'text-green-400', `mx-1 p-1 inline-block bg-slate-100/70 rounded-md`)}><HiOutlinePlusSm size={25} /></button>
+                        <button onClick={() => { setSnackTemp(''), removeTotal() }} className="mx-1 p-1 inline-block bg-slate-100/70 rounded-md text-rose-400"><HiBan size={25} /></button>
                       </div>
                     </div>
                   ))}
@@ -415,7 +415,6 @@ function RecommenPage() {
           </Disclosure>
         </div>
       </div>
-
       <Navigation />
     </>
   );

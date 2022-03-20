@@ -60,9 +60,9 @@ export default function Reports() {
       <NavbarApp />
       <div className="w-full px-5 my-10">
         <FeatureTitle text="History Menu" />
-        <div className="mt-5">
+        <div className="mt-5 h-screen">
           {dataHistory <= 0 ? (
-            <div className="container max-w-xl mx-auto my-3 p-3 rounded-md bg-light-green">
+            <div className="container  max-w-xl mx-auto my-3 p-3 rounded-md bg-light-green">
               <div className="text-xl xl:text-2xl  font-semibold text-dark-green text-center">
                 <h1>Data Empty</h1>
                 <p className="text-sm font-normal text-gray-700">
