@@ -16,13 +16,13 @@ function NavbarApp() {
                 <button
                   onClick={
                     () => {
-                      if (router.pathname === '/admin/addMenu') {
+                      if (location.pathname === '/admin/addMenu') {
                         router.push('/admin/menu');
                       }
-                      if (router.pathname === '/admin/editMenu') {
+                      if (location.pathname === '/admin/editMenu') {
                         router.push('/admin/menu');
                       }
-                      if (router.pathname === '/admin/listMenu') {
+                      if (location.pathname === '/admin/listMenu') {
                         router.push('/admin/menu');
                       } else {
                         router.push('/admin');
