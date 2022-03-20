@@ -133,7 +133,7 @@ function ListMenu() {
   return (
     <div>
       <NavbarApp />
-      <div className="px-10 h-vh">
+      <div className="px-10 h-screen">
         <FeatureTitle />
         <div className="mt-3">
           <div className="flex  justify-between">
@@ -204,6 +204,7 @@ function ListMenu() {
             </>
           )}
         </div>
+        <br />
         <div className="mx-auto">
           <Pagnination
             postPerPage={postPerPage}

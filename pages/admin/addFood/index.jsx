@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { ReactLoading } from 'react-loading';
+import ReactLoading from 'react-loading';
 
 function AddFood() {
   const router = useRouter();
@@ -162,7 +162,7 @@ function AddFood() {
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[12rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setFood(e.target.value)}
@@ -173,13 +173,13 @@ function AddFood() {
         <div className="flex items-center mb-5 mt-10">
           <label
             className="inline-block w-40 mr-6 text-right 
-                                 font-bold text-gray-600"
+                                 font-bold text-gray-600 "
           >
-            Calories
+            <span className="text-left">Calories</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[12rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setCalories(e.target.value)}
@@ -293,7 +293,7 @@ function AddFood() {
             <option>snack</option>
           </select>
         </div>
-        <div className="flex w-96 mt-10 mb-10 ml-36">
+        <div className="w-80 mx-auto mt-10 mb-10">
           <button
             onClick={handleAddFood}
             className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
