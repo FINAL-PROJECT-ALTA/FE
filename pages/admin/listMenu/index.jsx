@@ -17,7 +17,7 @@ function ListMenu() {
   const [loading, setLoading] = useState(false);
   const [idFood, setIdFood] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(12);
+  const [postPerPage] = useState(5);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -133,7 +133,7 @@ function ListMenu() {
   return (
     <div>
       <NavbarApp />
-      <div className="px-10 h-vh">
+      <div className="px-10 h-screen">
         <FeatureTitle />
         <div className="mt-3">
           <div className="flex  justify-between">
@@ -156,13 +156,13 @@ function ListMenu() {
           {currentPost ? (
             currentPost.map((el, i) => (
               <div
-                className="flex px-5 py-2 my-3 border shadow-lg bg-transparent max-w-lg mx-auto drop-shadow-lg rounded-xl"
+                className="flex px-5 py-2 my-3 border mb-5 shadow-lg bg-transparent max-w-lg mx-auto drop-shadow-lg rounded-xl"
                 key={i}
               >
                 <div className="">
                   {data[i].foods.map((el, i) => (
                     <div className="flex text-gray-600" key={i}>
-                      <span className="text-md md:text-lg font-sans mt-1.5 ">
+                      <span className="text-md md:text-lg w-24 sm:w-40 md:w-40 lg:w-40 font-sans mt-1.5 truncate ">
                         {el.name}
                       </span>
                     </div>
@@ -204,6 +204,7 @@ function ListMenu() {
             </>
           )}
         </div>
+        <br />
         <div className="mx-auto">
           <Pagnination
             postPerPage={postPerPage}

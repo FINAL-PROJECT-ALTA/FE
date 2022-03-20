@@ -56,63 +56,24 @@ const callouts = [
 export default function Home() {
 
   // const dispatch = useDispatch()
+  const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const router = useRouter()
   const listFoods = useSelector(({ listFoods }) => listFoods)
-  const goals = useSelector(({ listGoal }) => listGoal)
-  // console.log(goals);
+
+
 
   const [weight, setWeight] = useState(0)
   const [height, setHeight] = useState(0)
   const [age, setAge] = useState(0)
   const [target, setTarget] = useState('')
-  const [time, setTime] = useState(0)
   const [status, setStatus] = useState('')
+  const [time, setTime] = useState(0)
   const [idGoal, setIdGoal] = useState('')
   const [loading, setLoading] = useState(false)
 
+  // state pagination
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage] = useState(12)
-
-  const getToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-  const router = useRouter()
-  let [isOpen, setIsOpen] = useState(false)
-
-  function openModal() {
-    setIsOpen(true)
-  }
-
-  // console.log(time);
-  // useEffect(() => {
-  //   axios.get(`https://aaryadewangga.cloud.okteto.net/userhistories/`, {
-  //     headers: { Authorization: `Bearer ${getToken}` }
-  //   })
-  //     .then(({ data }) => {
-  //       console.log(data.data[0].menu.foods[0]);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     })
-  //     .finally(() => { });
-  // }, []);
-
-
-  useEffect(() => {
-    // dispatch(allStore.fetchAllGoal())
-    const findGoal = goals.find((el) => el.status === 'active')
-    // console.log(findGoal);
-    if (findGoal) {
-      setTarget(findGoal.target)
-      setWeight(findGoal.weight)
-      setHeight(findGoal.height)
-      setAge(findGoal.age)
-      setStatus(findGoal.status)
-      setIdGoal(findGoal.goal_uid)
-      // setTime(findGoal.count)
-      // console.log(findGoal.cretedAt);
-    }
-
-
-  }, [goals]);
-
 
   // Get Current Page
   const indexOfLastPost = currentPage * postPerPage
@@ -122,13 +83,37 @@ export default function Home() {
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
-  if (loading) {
-    return (
-      <div className="flex items-center h-screen md:h-screen justify-center content-center">
-        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
-      </div>
-    );
+
+  // modal action
+  let [isOpen, setIsOpen] = useState(false)
+  function openModal() {
+    setIsOpen(true)
   }
+
+
+  useEffect(() => {
+    axios.get('https://aaryadewangga.cloud.okteto.net/users/goals', {
+      headers: { Authorization: `Bearer ${getToken}` }
+    })
+      .then(({ data }) => {
+        // console.log(data.data.find(el => el.status === 'active'));
+        const findGoal = data.data.find(el => el.status === 'active')
+        if (findGoal) {
+          setTarget(findGoal.target)
+          setWeight(findGoal.weight)
+          setHeight(findGoal.height)
+          setAge(findGoal.age)
+          setStatus(findGoal.status)
+          setTime(findGoal.count)
+          setIdGoal(findGoal.goal_uid)
+        }
+      })
+      .catch(err => {
+        // console.log(err.response);
+      })
+
+  }, []);
+
   return (
     <>
       <NavbarApp />
@@ -178,7 +163,7 @@ export default function Home() {
                     <h2 className="text-xl xl:text-2xl font-bold text-rose-500">Goals:</h2>
                     <h2 className="text-md xl:text-xl uppercase font-semibold text-lime-700 ml-3">{target}</h2>
                   </div>
-                  {/* <span className='text-lg font-medium text-gray-600 flex items-center'><HiOutlineClock className='mx-1 w-5 h-5' /> {time} day</span> */}
+                  <span className='text-lg font-medium text-gray-600 flex items-center'><HiOutlineClock className='mx-1 w-5 h-5' /> {time} day</span>
                 </div>
               </>
             )}

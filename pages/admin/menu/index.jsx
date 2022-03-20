@@ -33,10 +33,10 @@ function RecommenPage() {
       href: 'dinner',
     },
     {
-      name: 'Snacks',
+      name: 'Over Time',
       colorbg: 'bg-midnight/50',
       time: '4.00 PM - 4.30 PM',
-      href: 'snack',
+      href: 'overtime',
     },
   ];
 

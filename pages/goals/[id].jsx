@@ -42,7 +42,7 @@ export default function UpdateGoals() {
       .catch((err) => {
         console.log(err.message);
       })
-      .finally(() => {});
+      .finally(() => { });
   }, []);
 
   const [loading, setLoading] = useState(false);
@@ -97,7 +97,7 @@ export default function UpdateGoals() {
         });
         setLoading(false);
       })
-      .finally(() => {});
+      .finally(() => { });
   }
 
   if (loading) {
