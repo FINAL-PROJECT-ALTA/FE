@@ -174,7 +174,7 @@ function Category() {
                         key={el.food_uid}
                       >
                         <button className="w-full   hover:bg-orange-500 text-gray-600 font-semibold py-2 px-4 border  rounded shadow mr-5">
-                          <MdOutlineEdit size={20} className="ml-3" />
+                          <MdOutlineEdit size={20} />
                         </button>
                       </Link>
 

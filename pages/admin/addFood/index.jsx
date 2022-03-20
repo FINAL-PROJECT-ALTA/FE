@@ -158,11 +158,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Name of Food
+            <span className="float-left px-5">Name of Food</span>
           </label>
           <input
             type="text"
-            className="w-[12rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setFood(e.target.value)}
@@ -170,16 +170,16 @@ function AddFood() {
         </div>
 
         {/* calories */}
-        <div className="flex items-center mb-5 mt-10">
+        <div className="flex items-center   mb-5 mt-10">
           <label
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600 "
           >
-            <span className="text-left">Calories</span>
+            <span className="float-left px-5">Calories </span>
           </label>
           <input
             type="text"
-            className="w-[12rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setCalories(e.target.value)}
@@ -192,11 +192,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Energy
+            <span className="float-left px-5">Energy</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setEnergy(e.target.value)}
@@ -209,11 +209,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Carbohydrate
+            <span className="float-left px-5">Carbohydrate</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setCarbohidrate(e.target.value)}
@@ -226,11 +226,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Protein
+            <span className="float-left px-5">Protein</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setProtein(e.target.value)}
@@ -243,11 +243,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Unit
+            <span className="float-left px-5">Unit</span>
           </label>
           <input
             type="text"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setUnit(e.target.value)}
@@ -260,11 +260,11 @@ function AddFood() {
             className="inline-block w-40 mr-6 text-right 
                                  font-bold text-gray-600"
           >
-            Value of Unit
+            <span className="float-left px-5">Value of Unit</span>
           </label>
           <input
             type="number"
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none "
             onChange={(e) => setUnitValue(e.target.value)}
@@ -278,19 +278,22 @@ function AddFood() {
                                  font-bold text-gray-600"
             onChange={(e) => setCategory(e.target.value)}
           >
-            Category of Food
+            <span className="float-left px-5">Category </span>
           </label>
           <select
-            className="w-[18rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
+            className="w-[11rem] sm:w-96 md:w-96 lg:w-96 py-2 border-b-2 border-gray-400 focus:border-green-400 
                       text-gray-600 placeholder-gray-400
                       outline-none"
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option>fruit</option>
-            <option>drink</option>
-            <option>junk food</option>
-            <option>food</option>
-            <option>snack</option>
+            <option value="none" disabled selected hidden>
+              Select one
+            </option>
+            <option value="fruit">fruit</option>
+            <option value="drink">drink</option>
+            <option value="junk food">junk food</option>
+            <option value="food">food</option>
+            <option value="snack">snack</option>
           </select>
         </div>
         <div className="w-80 mx-auto mt-10 mb-10">

@@ -121,7 +121,7 @@ function AdminPage() {
     <div>
       <NavbarApp />
       <div className="px-10 my-10 ">
-        <div className="w-full sm:w-full md:w-full lg:w-full h-vh sm:h-[27rem] md:h-[27rem] lg:h-[27rem] my-3 p-6 rounded-md bg-floor">
+        <div className="w-full sm:w-full md:w-full lg:w-full h-[28rem] sm:h-[34rem] md:h-[34rem] lg:h-[34rem] my-3 p-6 rounded-md bg-floor">
           <div className="flex justify-end">
             <button
               onClick={handleLogout}
@@ -150,7 +150,7 @@ function AdminPage() {
 
           <div className="flex mt-4 sm:mt-5">
             {/* <div className="mt-5 h-px bg-gray-400 w-80 sm:w-[30rem] md:w-[30rem] lg:w-[30rem]" /> */}
-            <div className="w-[200px] sm:w-64 md:w-64 lg:w-64 h-20 overlay-hidden">
+            <div className="mx-auto w-[200px] sm:w-64 md:w-64 lg:w-64 h-20 overlay-hidden">
               <Pie
                 cx="50%"
                 cy="50%"
@@ -191,36 +191,40 @@ function AdminPage() {
                 }}
               />
             </div>
-
-            <div className="flex flex-col ml-2 sm:ml-10 md:ml-10 lg:ml-10 ">
-              <p className="mt-2 text-[12px] text-[#013542] sm:text-2xl md:text-2xl lg:text-2xl font-bold mb-3">
-                Detail Items :
-              </p>
+          </div>
+          <div className="flex flex-col ml-2 sm:ml-10 md:ml-10 lg:ml-10 mt-32 lg:mt-[12rem]">
+            <p className="mt-2 mx-auto text-[12px] text-[#013542] sm:text-2xl md:text-2xl lg:text-2xl font-bold mb-3">
+              Detail Items :
+            </p>
+            <div className="flex">
               <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
                 Fruits:{' '}
                 <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
                   {sumFruit} item
                 </span>
               </h3>
-              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl ml-4">
                 Snack:{' '}
                 <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
                   {sumSnack} item
                 </span>
               </h3>
-              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl ml-4">
                 Drink:{' '}
                 <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
                   {sumDrink} item
                 </span>
               </h3>
+            </div>
+            <div className="flex">
               <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+                {' '}
                 Food:{' '}
                 <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
                   {sumFood} item
                 </span>
               </h3>
-              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl">
+              <h3 className="font-semibold  text-[#013542] text-[12px] sm:text-xl md:text-xl lg:text-xl ml-3">
                 Junk Food:{' '}
                 <span className="font-normal text-[12px] sm:text-xl md:text-xl lg:text-xl">
                   {sumJunk} item

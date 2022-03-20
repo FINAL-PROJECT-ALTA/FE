@@ -345,7 +345,7 @@ function AddFood() {
             </span>
           </h1>
         </div>
-        <div className="w-96 mt-10 mb-10 ml-8 sm:ml-20 md:ml-20 lg:ml-20">
+        <div className="w-64 mx-auto mt-10 mb-10">
           <button
             onClick={handleAddMenu}
             className="focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
