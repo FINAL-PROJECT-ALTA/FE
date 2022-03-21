@@ -34,7 +34,7 @@ function RecommenPage() {
     },
     {
       name: 'Over Time',
-      colorbg: 'bg-midnight/50',
+      colorbg: 'bg-zinc-200/50',
       time: '4.00 PM - 4.30 PM',
       href: 'overtime',
     },
@@ -68,7 +68,7 @@ function RecommenPage() {
       <NavbarApp />
       <div className="px-10 h-screen ">
         <FeatureTitle />
-        <div className="mt-10">
+        <div className="mt-1">
           <div className="flex ">
             <FeatureTitle text="Menu for" />
           </div>
