@@ -59,12 +59,12 @@ function LoginForm() {
           localStorage.setItem('token_admin', data.data.token);
           setTimeout(() => {
             router.push('/admin');
-          }, 4000);
+          }, 500);
         } else {
           localStorage.setItem('token', data.data.token);
           setTimeout(() => {
             router.push('/profile');
-          }, 4000);
+          }, 500);
         }
 
         Swal.fire({
@@ -79,8 +79,8 @@ function LoginForm() {
           //   left top
           //   no-repeat
           // `,
-          html: 'Redirecting to home page in <b></b> milliseconds.',
-          timer: 4000,
+          html: 'Redirecting to home page in <b></b> seconds.',
+          timer: 1000,
           timerProgressBar: true,
           didOpen: () => {
             Swal.showLoading();
@@ -101,7 +101,7 @@ function LoginForm() {
           text: 'Something went wrong!',
         });
       })
-      .finally(() => {});
+      .finally(() => { });
   };
 
   if (loading) {
@@ -119,7 +119,7 @@ function LoginForm() {
       <div
         className="flex justify-center items-center bg-gray-300 min-h-screen"
         style={{
-          backgroundImage: 'url(https://wallpaperaccess.com/full/5193008.jpg)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80)',
           width: '100%',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -245,7 +245,7 @@ function LoginForm() {
               <div className="flex w-full">
                 <button
                   onClick={validateSign}
-                  className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
+                  className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-500 hover:bg-lime-400 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span className="mr-2 uppercase">Login</span>
                   <RiLoginCircleFill />

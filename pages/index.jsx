@@ -8,10 +8,9 @@ import Pagnination from '../components/pagination'
 import Link from "next/link"
 import { useSelector } from 'react-redux'
 import { HiOutlineClock } from "react-icons/hi";
+import axios from 'axios'
 // import allStore from '../store/actions';
 // import { useDispatch } from 'react-redux'
-import axios from 'axios'
-import ReactLoading from "react-loading";
 
 
 const callouts = [
