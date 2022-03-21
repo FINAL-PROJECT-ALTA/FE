@@ -58,7 +58,7 @@ export default function Reports() {
   return (
     <>
       <NavbarApp />
-      <div className="w-full px-5 my-10">
+      <div className="w-full px-5 my-5">
         <FeatureTitle text="History Menu" />
         <div className="mt-5 h-screen">
           {dataHistory <= 0 ? (
@@ -75,27 +75,14 @@ export default function Reports() {
               {listFoods.map((data, i) =>
                 data ? (
                   <div
-                    className="w-40 h-48 mb-3 rounded-md bg-floor/20 drop-shadow-sm cursor-pointer"
-                    onClick={() => {
-                      data.food_uid != ""
-                        ? router.push(`/detail/${data.food_uid}`)
-                        : "";
-                    }}
-                    key={i}
-                  >
+                    className="w-40 h-48 mb-3 rounded-md overflow-hidden bg-slate-50 drop-shadow-sm cursor-pointer"
+                    onClick={() => { data.food_uid != "" ? router.push(`/detail/${data.food_uid}`) : ""; }}
+                    key={i} >
                     <div className="shrink-0">
-                      <img
-                        src={
-                          data.image != ""
-                            ? data.image
-                            : `./images/logo-white.png`
-                        }
-                        alt=""
-                        className="bg-red-400 h-28 object-cover rounded-t-md"
-                      />
+                      <img src={data.image != "" ? data.image : `./images/logo-white.png`} alt={data.name} className="w-full h-28 object-center object-cover " />
                     </div>
                     <div className="px-3 py-3 text-dark-green ">
-                      <h3 className="text-lg font-medium capitalize">
+                      <h3 className="text-md xl:text-lg font-medium capitalize truncate xl:text-ellipsis overflow-hidden">
                         {data.name}
                       </h3>
                       <p className="text-md font-mono">{data.calories} CAL</p>
