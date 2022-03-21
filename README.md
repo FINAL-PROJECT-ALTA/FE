@@ -1,4 +1,11 @@
 <div id="top"></div>
+<div align="left">
+   <a href="https://nextjs.org/"><img src = https://img.shields.io/badge/Next.js-12.1-blue></a>
+   <a href= "https://redux.js.org/"><img src = https://img.shields.io/badge/State%20Container-Redux-blueviolet></a>
+  <a href= "https://firebase.google.com//"><img src = https://img.shields.io/badge/Deploy-Firebase-orange></a>
+    <a href= "https://tailwindcss.com/docs/installation"><img src =https://img.shields.io/badge/CSS-Tailwind-blue></a>
+
+</div>
 
 # Healthy Fit 🥗🍖🥛
 
