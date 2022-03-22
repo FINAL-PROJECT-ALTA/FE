@@ -269,7 +269,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{breakFast[key].total_calories}KCAL</span>
                       {breakFast[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-36 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
@@ -315,7 +315,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{lunch[key].total_calories}KCAL</span>
                       {lunch[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-36 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
@@ -361,7 +361,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{dinner[key].total_calories}KCAL</span>
                       {dinner[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-36 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
@@ -402,13 +402,13 @@ function RecommenPage() {
                     </Disclosure.Button>
                   </div>
                 </div>
-                <Disclosure.Panel as='ul' className="px-3 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
+                <Disclosure.Panel as='ul' className="px-1 py-2 max-w-lg mx-auto text-sm rounded-sm text-gray-500 bg-gray-50/50">
 
                   {snack != 0 ? Object.keys(snack).map(key => (
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{snack[key].total_calories}KCAL</span>
                       {snack[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-36 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
