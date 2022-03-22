@@ -81,7 +81,7 @@ function RecommenPage() {
               key={item.name}
             >
               <div
-                className={`flex flex-col px-10 py-5 my-3 ${item.colorbg} max-w-lg mx-auto drop-shadow-lg rounded-xl`}
+                className={`flex flex-col px-10 py-5 my-3 ${item.colorbg} cursor-pointer max-w-lg mx-auto drop-shadow-lg rounded-xl`}
               >
                 <div className="flex justify-between">
                   <div>
