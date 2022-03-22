@@ -149,7 +149,7 @@ function AddFood() {
             });
             console.log(error);
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -200,7 +200,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -221,7 +220,7 @@ function AddFood() {
                 </option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
-                    {el.name} - {el.calories} cal
+                    {el.name} - {el.calories} cal - {el.food_categories}
                   </option>
                 ))}
               </select>
@@ -250,7 +249,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
@@ -299,7 +297,6 @@ function AddFood() {
                 sm:w-40
                 wd:w-40
                 lg:w-40
-                py-2
                 border-b 
                 border-gray-300
                 200 text-gray-700 
