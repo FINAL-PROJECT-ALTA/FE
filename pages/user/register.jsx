@@ -144,7 +144,8 @@ function RegisterForm() {
               <p className="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">
                 Already have account ?{' '}
                 <Link href="../user/login">
-                  <a className="hover:text-rose-500 focus:text-rose-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">{' '}
+                  <a className="hover:text-rose-500 focus:text-rose-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer">
+                    {' '}
                     Sign in here
                   </a>
                 </Link>
@@ -165,7 +166,9 @@ function RegisterForm() {
               </div> */}
               <div className="flex flex-col mt-5 mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3 ">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Name:</span>
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    Name:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -189,7 +192,9 @@ function RegisterForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">E-Mail Address:</span>
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    E-Mail Address:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
@@ -227,15 +232,25 @@ function RegisterForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Password:</span>
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    Password:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     <FaLock />
                   </div>
-                  <span onClick={() => setShowPassword(!showPassword)} className='absolute block right-5 top-4 text-gray-600 select-none cursor-pointer'>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</span>
-                  <input type={showPassword ? 'text' : 'password'} className=" w-full text-base py-2 pl-10 pr-4 border-b border-gray-300 focus:outline-none focus:border-lime-500"
-                    onChange={(e) => setPassword(e.target.value)} />
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute block right-5 top-4 text-gray-600 select-none cursor-pointer"
+                  >
+                    {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  </span>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className=" w-full text-base py-2 pl-10 pr-4 border-b border-gray-300 focus:outline-none focus:border-lime-500"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                   <p className="text-[12px] text-red-400 ml-10 sm:ml-10 md:ml-10 lg:ml-10 ">
                     * min. 3 character and max. 8 character
                   </p>
@@ -243,13 +258,16 @@ function RegisterForm() {
               </div>
               <div className="flex flex-col mb-6">
                 <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600 ml-3">
-                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">Gender:</span>
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    Gender:
+                  </span>
                 </label>
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                     {/* <BsGenderAmbiguous /> */}
                   </div>
-                  <select id='gender'
+                  <select
+                    id="gender"
                     className="
                     block 
                     appearance-none 
@@ -317,6 +335,7 @@ function RegisterForm() {
               </div> */}
               <div className="flex w-full mt-3">
                 <button
+                  id="btn_register"
                   onClick={validateSignUp}
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-500 hover:bg-lime-400 rounded py-2 w-full transition duration-150 ease-in"
                 >
