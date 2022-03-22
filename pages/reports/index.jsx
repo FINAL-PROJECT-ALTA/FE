@@ -58,9 +58,9 @@ export default function Reports() {
   return (
     <>
       <NavbarApp />
-      <div className="w-full px-5 my-5">
+      <div className="w-full px-5 my-2">
         <FeatureTitle text="History Menu" />
-        <div className="mt-5 h-screen">
+        <div className="min-h-screen">
           {dataHistory <= 0 ? (
             <div className="container  max-w-xl mx-auto my-3 p-3 rounded-md bg-light-green">
               <div className="text-xl xl:text-2xl  font-semibold text-dark-green text-center">
@@ -75,7 +75,7 @@ export default function Reports() {
               {listFoods.map((data, i) =>
                 data ? (
                   <div
-                    className="w-40 h-48 mb-3 rounded-md overflow-hidden bg-slate-50 drop-shadow-sm cursor-pointer"
+                    className="w-40 h-48 mb-3 rounded-md overflow-hidden bg-slate-50 drop-shadow-sm hover:drop-shadow-md cursor-pointer"
                     onClick={() => { data.food_uid != "" ? router.push(`/detail/${data.food_uid}`) : ""; }}
                     key={i} >
                     <div className="shrink-0">
