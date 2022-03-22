@@ -7,7 +7,7 @@ export const fetchAllSnack = () => {
             headers: { Authorization: `Bearer ${getToken}` }
         })
             .then(({ data }) => {
-                // console.log(data.data);
+                // console.log(data);
                 dispatch(setSnack(data.data))
             })
             .catch(err => {
