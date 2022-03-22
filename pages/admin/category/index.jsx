@@ -108,7 +108,7 @@ function Category() {
             });
             console.log(error);
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -132,10 +132,10 @@ function Category() {
   }
 
   return (
-    <div>
+    <>
       <NavbarApp />
-      <div className="px-10 h-vh w-full bg-white">
-        <div className="flex py-10 px-2 justify-between">
+      <div className="px-10 py-2 min-h-screen w-full bg-white">
+        <div className="flex px-2 justify-between">
           <FeatureTitle text={category} />
 
           <button
@@ -149,28 +149,20 @@ function Category() {
           </button>
         </div>
 
-        <div className=" my-10 ">
+        <div className=" my-5 ">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-10 sm:gap-5 md:gap-5 mt-3 h-vh">
             {currentPost ? (
               currentPost.map((el, i) => (
-                <div
-                  className="w-30 h-30 mb-3  rounded-md drop-shadow-sm cursor-pointer"
-                  key={i}
-                >
+                <div className="w-30 h-30 mb-3  rounded-md drop-shadow-sm cursor-pointer" key={i}>
                   <div className="">
-                    <img
-                      src={el.image}
-                      alt=""
-                      className="bg-red-400 h-28 object-cover rounded-t-md"
-                      width="100%"
+                    <img src={el.image} alt="" className="bg-slate-50 h-28 object-cover rounded-t-md" width="100%"
                     />
 
                     <p className="-translate-y-6 text-md bg-lime-700/40 font-medium  bg-blend-darken text-white text-center truncate ">
                       {el.name}
                     </p>
                     <div className="flex justify-around -translate-y-6">
-                      <Link
-                        href={`/admin/editFood?foodsId=${el.food_uid}`}
+                      <Link href={`/admin/editFood?foodsId=${el.food_uid}`}
                         key={el.food_uid}
                       >
                         <button className="w-full   hover:bg-orange-500 text-gray-600 font-semibold py-2 px-4 border  rounded shadow mr-5">
@@ -201,8 +193,6 @@ function Category() {
               </>
             )}
           </div>
-        </div>
-        <div className="mx-auto">
           <Pagnination
             postPerPage={postPerPage}
             totalPosts={data.length}
@@ -210,7 +200,7 @@ function Category() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

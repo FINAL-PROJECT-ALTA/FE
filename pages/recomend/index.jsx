@@ -33,7 +33,7 @@ function RecommenPage() {
   const lunch = useSelector(({ listLunch }) => listLunch)
   const dinner = useSelector(({ listDinner }) => listDinner)
   const snack = useSelector(({ listSnack }) => listSnack)
-  const goal = useSelector(({ listGoal }) => listGoal)
+  // const goal = useSelector(({ listGoal }) => listGoal)
 
   const [idGoal, setIdGoal] = useState('')
   const [temp, setTemp] = useState('')
@@ -53,12 +53,22 @@ function RecommenPage() {
     if (!getToken) {
       router.push("/user/login");
     }
-    const findIdGoal = goal.find((el) => el.status === 'active')
-    if (findIdGoal) {
-      setIdGoal(findIdGoal.goal_uid);
-    }
 
-  }, [getToken, goal]);
+    axios.get('https://aaryadewangga.cloud.okteto.net/users/goals', {
+      headers: { Authorization: `Bearer ${getToken}` }
+    })
+      .then(({ data }) => {
+        // console.log(data.data.find(el => el.status === 'active'));
+        const findGoal = data.data.find(el => el.status === 'active')
+        if (findGoal) {
+          setIdGoal(findGoal.goal_uid)
+        }
+      })
+      .catch(err => {
+        // console.log(err.response);
+      })
+
+  }, [getToken]);
 
   useEffect(() => {
     dispatch(allStore.fetchAllBreakfast())
@@ -260,7 +270,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{breakFast[key].total_calories}KCAL</span>
                       {breakFast[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
@@ -306,7 +316,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{lunch[key].total_calories}KCAL</span>
                       {lunch[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
@@ -352,7 +362,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{dinner[key].total_calories}KCAL</span>
                       {dinner[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}
@@ -398,7 +408,7 @@ function RecommenPage() {
                     <div key={key} className='flex flex-row py-1 items-center text-center'>
                       <span className='w-16 text-right font-mono text-rose-500'>{snack[key].total_calories}KCAL</span>
                       {snack[key].foods.map(el => (
-                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-24 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
+                        <div key={el.food_uid} className='px-1 py-1 mx-1 w-28 truncate xl:text-ellipsis xl:overflow-hidden rounded-md bg-light-green '>
                           {el.name}
                         </div>
                       ))}

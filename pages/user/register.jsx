@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import Link from 'next/link';
+import ReactLoading from "react-loading";
+
 
 function RegisterForm() {
   const [name, setName] = useState('');
@@ -16,7 +18,8 @@ function RegisterForm() {
   const [gender, setGender] = useState([]);
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter();
 
@@ -59,6 +62,7 @@ function RegisterForm() {
     //   password: password,
     //   gender: gender,
     // };
+    setIsLoading(true)
     const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
@@ -71,46 +75,34 @@ function RegisterForm() {
       },
     };
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Please check again the required field',
-      icon: 'question',
-      confirmButtonText: 'Yes, create it!',
-      confirmButtonColor: '#3085d6',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios
-          .post(
-            'https://aaryadewangga.cloud.okteto.net/users/register',
-            formData,
-            config
-          )
-          .then(({ data }) => {
-            // console.log(data.data.token);
-            localStorage.setItem('token', data.data.token);
-            setTimeout(() => {
-              router.push('/user/login');
-            }, 1500);
-            Swal.fire(
-              'Account Created!',
-              'Login to accsess full experience.',
-              'success'
-            );
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            });
-          })
-          .finally(() => {});
-      } else if (result.isDismissed) {
-        Swal.fire('Check again ?', 'We are waiting you inside', 'question');
-      }
-    });
+    axios
+      .post(
+        'https://aaryadewangga.cloud.okteto.net/users/register',
+        formData,
+        config
+      )
+      .then(({ data }) => {
+        // console.log(data.data.token);
+        localStorage.setItem('token', data.data.token);
+        setTimeout(() => {
+          router.push('/user/login');
+        }, 1500);
+        Swal.fire(
+          'Account Created!',
+          'Login to accsess full experience.',
+          'success'
+        );
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   };
 
   const uploadToClient = (event) => {
@@ -122,12 +114,21 @@ function RegisterForm() {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center h-screen justify-center content-center">
+        <br />
+        <ReactLoading type="cylon" color="#0000FF" height={100} width={50} />
+      </div>
+    );
+  }
+
   return (
     <div>
       <div
         className="flex justify-center items-center bg-gray-300 min-h-screen"
         style={{
-          backgroundImage: 'url(https://wallpaperaccess.com/full/5193008.jpg)',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80)',
           width: '100%',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -336,7 +337,7 @@ function RegisterForm() {
                 <button
                   id="btn_register"
                   onClick={validateSignUp}
-                  className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-700 hover:bg-lime-500 rounded py-2 w-full transition duration-150 ease-in"
+                  className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-lime-500 hover:bg-lime-400 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span className="mr-2">Create My Account</span>
                 </button>
