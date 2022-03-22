@@ -149,7 +149,7 @@ function AddFood() {
             });
             console.log(error);
           })
-          .finally(() => {});
+          .finally(() => { });
       } else if (result.isDismissed) {
         Swal.fire('Check again ?', 'We are waiting you inside', 'question');
       }
@@ -221,7 +221,7 @@ function AddFood() {
                 </option>
                 {data.map((el, i) => (
                   <option key={i.food_uid} value={[el.food_uid, el.calories]}>
-                    {el.name} - {el.calories} cal
+                    {el.name} - {el.calories} cal - {el.food_categories}
                   </option>
                 ))}
               </select>
